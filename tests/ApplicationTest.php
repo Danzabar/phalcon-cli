@@ -43,7 +43,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->console = m::mock('Console');
-		$this->di = m::mock('Phalcon\DI\FactoryDefault\CLI');
+		$this->di = m::mock('CLI');
 
 		$this->application = new Application($this->console);
 	}
@@ -57,10 +57,51 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	public function test_vars()
 	{
 		$this->console->shouldReceive('setDI')->once();
-		
 		$this->application->setDI($this->di);		
 
-		$this->assertInstanceOf('Phalcon\DI\FactoryDefault\CLI', $this->application->getDI());
+		$this->assertInstanceOf('CLI', $this->application->getDI());
+		$this->assertInstanceOf('Console', $this->application->getConsole());
+	}
+
+	/**
+	 * Test the args come out in right way when we provide all the info it needs
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_sortArgsWithAll()
+	{
+		$test = $this->application->formatArgs(Array(
+			'cli',
+			'command:action',
+			'param1',
+			'param2'
+		));
+
+		$this->assertEquals(
+			Array('task' => 'command', 'action' => 'action', 'params' => Array('param1', 'param2')),
+			$test
+		);
+	}
+
+	/**
+	 * Test similiar to above but without providing an action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_sortArgsWithoutAction()
+	{
+		$test = $this->application->formatArgs(Array(
+			'cli',
+			'command',
+			'param1'
+		));
+
+		$this->assertEquals(
+			Array('task' => 'command', 'action' => 'main', 'params' => Array('param1')),
+			$test
+		);
 	}
 	
 

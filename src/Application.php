@@ -91,8 +91,8 @@ class Application extends Console
 		// Anything that remains are params
 		return Array(
 			'task'		=> $command[0],
-			'action'	=> (!isset($command[1]) ? $command[1] : 'main'),
-			'params'	=> $args
+			'action'	=> (isset($command[1]) ? $command[1] : 'main'),
+			'params'	=> array_values($args)
 		);		
 	}
 

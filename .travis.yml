@@ -15,7 +15,6 @@ install:
     - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-    - sudo chmod -R 0777 app/cache
     - mkdir -p build/logs
     - phpunit --coverage-clover build/logs/clover.xml
 
