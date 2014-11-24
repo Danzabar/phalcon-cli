@@ -1,6 +1,8 @@
 <?php
 
 use Danzabar\CLI\Application,
+	Phalcon\DI\FactoryDefault\CLI,
+	Phalcon\Loader,
 	\Mockery as m;
 
 /**
@@ -102,6 +104,37 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 			Array('task' => 'command', 'action' => 'main', 'params' => Array('param1')),
 			$test
 		);
+	}
+
+	/**
+	 * Test firing a command
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_fireCommand()
+	{
+		// Register a loader for the commands
+		$loader = new Loader;
+		$loader->registerDirs(Array(__DIR__.'/Commands'));
+		$loader->register();		
+
+		$di = new CLI; 
+		
+		$app = new Application;
+		$app->setDI($di);
+
+		$di->setShared('console', $app);
+	
+		ob_start();
+			
+			$app->start(Array('cli', 'Fake'));
+			
+			$content = ob_get_contents();
+
+		ob_end_clean();
+
+		$this->assertEquals('main action', $content);
 	}
 	
 
