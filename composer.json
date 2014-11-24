@@ -1,0 +1,24 @@
+{
+	"name":"danzabar/phalcon-cli",
+	"description": "Tools that extend the functionality of the Phalcon frameworks CLI",
+	"license":"MIT",
+	"authors": [
+		{
+			"name":"Daniel Cox",
+			"email":"danzabian@gmail.com",
+			"homepage":"http://www.valeska.co.uk"
+		}
+	],
+	"require": {
+	},
+	"require-dev": {
+		"satooshi/php-coveralls": "dev-master",
+		"mockery/mockery": "dev-master"
+	},
+	"minimum-stability": "dev",
+	"autoload": {
+		"psr-4": {
+			"Danzabar\\CLI\\": "src/"
+		}
+	}
+}

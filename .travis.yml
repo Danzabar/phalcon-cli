@@ -1,0 +1,23 @@
+language: php
+
+php:
+   - 5.4
+   - 5.5
+   - 5.6
+
+before_install:
+    - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b master
+    - cd cphalcon/ext; export CFLAGS="-g3 -O1 -fno-delete-null-pointer-checks -Wall"; phpize && ./configure --enable-phalcon && make -j4 && sudo make install && phpenv config-add ../unit-tests/ci/phalcon.ini
+
+install:
+    - cd ../../
+    - travis_retry composer self-update
+    - travis_retry composer install --no-interaction --prefer-source --dev
+
+script:
+    - sudo chmod -R 0777 app/cache
+    - mkdir -p build/logs
+    - phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+    - php vendor/bin/coveralls -v
