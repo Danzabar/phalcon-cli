@@ -34,7 +34,7 @@ class UtilityTask extends Command
 	 */
 	public function mainAction()
 	{
-
+		echo 'The main action of the utility task';
 	}
 	
 } // END class UtilityTask extends Command

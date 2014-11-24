@@ -35,7 +35,7 @@ class Command extends Task
 	 */
 	public function helpTask()
 	{
-
+		printf("%s \n %s", $this->name, $this->description);
 	}
 	
 

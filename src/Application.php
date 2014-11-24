@@ -73,6 +73,7 @@ class Application extends Console
 		$this->console->handle($arguments);		
 	}
 
+
 	/**
 	 * Format the arguments into a useable state
 	 *

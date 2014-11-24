@@ -114,11 +114,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test_fireCommand()
 	{
-		// Register a loader for the commands
-		$loader = new Loader;
-		$loader->registerDirs(Array(__DIR__.'/Commands'));
-		$loader->register();		
-
 		$di = new CLI; 
 		
 		$app = new Application;

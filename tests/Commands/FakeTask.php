@@ -24,7 +24,7 @@ class FakeTask extends Command
 	 *
 	 * @var string
 	 */
-	protected $description = 'The test commands provides no use, it has no purpose, it just exists.';
+	protected $description = 'The test command provides no use, it has no purpose, it just exists.';
 
 	/**
 	 * The main action for this command
