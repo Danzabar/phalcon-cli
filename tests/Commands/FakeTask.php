@@ -86,10 +86,15 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function choiceAction()
+	public function choiceAction(Array $params)
 	{
 		$choices = Array('one', 'two', 'three');
-		
+
+		if(!empty($params))
+		{
+			$this->setChoiceError($params[0]);
+		}
+
 		$answer = $this->choice('Select one of the following:', $choices);
 
 		if($answer)

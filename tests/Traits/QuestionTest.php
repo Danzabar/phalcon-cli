@@ -17,7 +17,6 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	 * @var Object
 	 */
 	protected $CT;
-
 	
 	/**
 	 * Setup the test environment for commands
@@ -70,6 +69,34 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute('Fake:choice');
 		
 		$this->assertContains('You have selected two', $this->CT->getOutput());
+	}
+
+	/**
+	 * Test the validation of a choice
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_choiceError()
+	{
+		$this->CT->setInput("\n");
+		$this->CT->execute('Fake:choice');
+
+		$this->assertContains('The answer you selected is invalid', $this->CT->getOutput());
+	}
+
+	/**
+	 * Test custom error
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_customError()
+	{
+		$this->CT->setInput("\n");
+		$this->CT->execute('Fake:choice', Array('error' => 'This is a custom error'));
+
+		$this->assertContains('This is a custom error', $this->CT->getOutput());
 	}
 
 } // END class QuestionTest extends \PHPUnit_Framework_TestCase
