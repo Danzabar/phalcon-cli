@@ -1,7 +1,8 @@
 <?php namespace Danzabar\CLI;
 
 use Danzabar\CLI\Application,
-	Phalcon\DI\FactoryDefault\CLI;
+	Phalcon\DI\FactoryDefault\CLI,
+	Danzabar\CLI\Input\InputMock;
 
 /**
  * The command tester class provides a base to test commands
@@ -58,6 +59,21 @@ class CommandTester
 			$this->application->setDI($di);
 		}
 	} 
+
+	/**
+	 * Sets an input for questions and confirmation
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setInput($str)
+	{
+		$di = $this->application->getDI();
+		
+		$input = new InputMock($str);
+
+		$di->setShared('input', $input);
+	}
 
 	/**
 	 * Execute the command

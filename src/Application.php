@@ -59,8 +59,8 @@ class Application extends Console
 		$this->di = $di;
 
 		// Add the output and input streams to the DI
-		$this->di->set('output', new Output);
-		$this->di->set('input', new Input);
+		$this->di->setShared('output', new Output);
+		$this->di->setShared('input', new Input);
 
 		$this->console->setDI($di);
 

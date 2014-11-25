@@ -1,13 +1,15 @@
 <?php namespace Danzabar\CLI\Input;
 
+use Danzabar\CLI\Input\InputInterface;
+
 /**
  * The input stream from the console
  *
  * @package CLI
  * @subpackage Input
  * @author Dan Cox
- */
-class Input
+ */ 
+class Input implements InputInterface
 {
 
 	/**
@@ -34,7 +36,7 @@ class Input
 	 */
 	public function __construct()
 	{
-		$this->inputStream = fopen("php://stdin", "r");
+		$this->inputStream = fopen("php://stdin", "r+", false);
 	}
 
 	/**
@@ -45,10 +47,11 @@ class Input
 	 */
 	public function read()
 	{
-		while(!feof($this->inputStream))
-		{
-			$this->input .= fgets($this->inputStream, 4064);
-		}
+		$this->input = fgets($this->inputStream);
+		
+		fclose($this->inputStream);
+
+		return true;
 	}
 
 	/**
@@ -59,6 +62,8 @@ class Input
 	 */
 	public function getInput()
 	{
+		$this->read();
+
 		return $this->input;
 	}
 

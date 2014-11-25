@@ -59,7 +59,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	public function test_vars()
 	{
 		$this->console->shouldReceive('setDI')->once();
-		$this->di->shouldReceive('set')->once();
+		$this->di->shouldReceive('setShared');
 
 		$this->application->setDI($this->di);		
 

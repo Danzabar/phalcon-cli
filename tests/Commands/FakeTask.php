@@ -1,6 +1,7 @@
 <?php
 
 use Danzabar\CLI\Command;
+use Danzabar\CLI\Traits;
 
 /**
  * A test command
@@ -11,6 +12,7 @@ use Danzabar\CLI\Command;
  */
 class FakeTask extends Command
 {
+	use Traits\Question;
 
 	/**
 	 * The name
@@ -45,6 +47,19 @@ class FakeTask extends Command
 	 */
 	public function outputAction()
 	{
+	}
+
+	/**
+	 * Task that tests basic question
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function askAction()
+	{
+		$answer = $this->ask('What is your name?');
+
+		$this->output->writeln($answer);
 	}
 
 
