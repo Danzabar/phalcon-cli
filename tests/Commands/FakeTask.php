@@ -62,5 +62,43 @@ class FakeTask extends Command
 		$this->output->writeln($answer);
 	}
 
+	/**
+	 * A double question task
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function advAskAction()
+	{
+		$prelim = $this->ask('Do you like questions?');
+
+		if($prelim == 'yes')
+		{
+			$answer = $this->ask('Great, so whats your favourite question?');
+
+			$this->output->writeln($answer);
+		}
+	}
+
+	/**
+	 * Task that asks a choice question
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function choiceAction()
+	{
+		$choices = Array('one', 'two', 'three');
+		
+		$answer = $this->choice('Select one of the following:', $choices);
+
+		if($answer)
+		{
+			$this->output->writeln("You have selected $answer");
+		}		
+	}
+
+
+
 
 } // END class TestCommand extends Command

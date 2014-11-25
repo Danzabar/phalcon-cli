@@ -21,6 +21,13 @@ class InputMock implements InputInterface
 	protected $input;
 
 	/**
+	 * The input Stream
+	 *
+	 * @var string
+	 */
+	protected $inputStream;
+
+	/**
 	 * Set up the input
 	 *
 	 * @return void
@@ -28,7 +35,11 @@ class InputMock implements InputInterface
 	 */
 	public function __construct($str)
 	{
-		$this->input = $str;
+		$this->inputStream = fopen('php://memory', 'r+', false);
+
+		fputs($this->inputStream, $str);
+
+		rewind($this->inputStream);
 	}
 
 	/**
@@ -39,7 +50,9 @@ class InputMock implements InputInterface
 	 */
 	public function getInput()
 	{
-		return $this->input;
+		$this->input = fgets($this->inputStream);
+
+		return trim($this->input);
 	}
 
 
