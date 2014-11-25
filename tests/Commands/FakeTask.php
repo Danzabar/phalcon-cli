@@ -34,7 +34,18 @@ class FakeTask extends Command
 	 */
 	public function mainAction()
 	{
-		echo 'main action';
+		$this->output->writeln("main action");
 	}
+
+	/**
+	 * Test action, no output
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function outputAction()
+	{
+	}
+
 
 } // END class TestCommand extends Command

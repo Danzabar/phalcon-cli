@@ -1,6 +1,8 @@
 <?php namespace Danzabar\CLI;
 
 use Phalcon\CLI\Console,
+	Danzabar\CLI\Output\Output,
+	Danzabar\CLI\Input\Input,
 	Phalcon\DI\FactoryDefault\CLI;
 
 
@@ -55,6 +57,11 @@ class Application extends Console
 	public function setDI($di)
 	{
 		$this->di = $di;
+
+		// Add the output and input streams to the DI
+		$this->di->set('output', new Output);
+		$this->di->set('input', new Input);
+
 		$this->console->setDI($di);
 
 		return $this;
@@ -70,7 +77,7 @@ class Application extends Console
 	{
 		$arguments = $this->formatArgs($args);
 	
-		$this->console->handle($arguments);		
+		return $this->console->handle($arguments);		
 	}
 
 

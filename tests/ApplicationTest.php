@@ -59,6 +59,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	public function test_vars()
 	{
 		$this->console->shouldReceive('setDI')->once();
+		$this->di->shouldReceive('set')->once();
+
 		$this->application->setDI($this->di);		
 
 		$this->assertInstanceOf('CLI', $this->application->getDI());
@@ -129,7 +131,26 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
 		ob_end_clean();
 
-		$this->assertEquals('main action', $content);
+		$this->assertContains('main action', $content);
+	}
+
+	/**
+	 * Test that the input and output are set properly
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_SetOutputInput()
+	{
+		$di = new CLI;
+		$app = new Application;
+		$app->setDI($di);
+
+		$di->setShared('console', $app);
+		
+		$command = $app->start(Array('cli', 'Fake:output'));
+		$this->assertInstanceOf('\Danzabar\CLI\Output\Output', $command->getOutput());
+		$this->assertInstanceOf('\Danzabar\CLI\Input\Input', $command->getInput());	
 	}
 	
 

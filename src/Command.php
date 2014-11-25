@@ -35,9 +35,31 @@ class Command extends Task
 	 */
 	public function helpTask()
 	{
-		printf("%s \n %s", $this->name, $this->description);
+		$this->output->writeln($this->name);
+		$this->output->writeln($this->description);
 	}
-	
+
+	/**
+	 * Returns the output instance
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function getOutput()
+	{
+		return $this->output;
+	}
+
+	/**
+	 * Returns the input instance
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function getInput()
+	{
+		return $this->input;
+	}
 
 
 } // END class Command extends Task
