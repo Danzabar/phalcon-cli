@@ -12,7 +12,8 @@ use Danzabar\CLI\Traits;
  */
 class FakeTask extends Command
 {
-	use Traits\Question;
+	use Traits\Question,
+		Traits\Confirmation;
 
 	/**
 	 * The name
@@ -101,6 +102,53 @@ class FakeTask extends Command
 		{
 			$this->output->writeln("You have selected $answer");
 		}		
+	}
+
+	/**
+	 * The confirmation test action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function confirmationAction()
+	{
+		$confirm = $this->confirm();
+
+		if($confirm)
+		{
+			$this->output->write("Thanks for confirming");
+		} else
+		{
+			$this->output->write("Action cancelled");
+		}
+	}
+
+	/**
+	 * A confirmation with explicit set and values changed
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function explicitConfirmAction(Array $params)
+	{	
+		$this->setConfirmationNo('no');
+		$this->setConfirmationYes('yes');
+		$this->setConfirmExplicit(TRUE);
+
+		if(!empty($params))
+		{
+			$this->setInvalidConfirmationError($params[0]);
+		}
+
+		$confirm = $this->confirm("Please confirm that you wish to continue... (Yes|No)");
+
+		if($confirm)
+		{
+			$this->output->writeln("Confirmed");
+		} else
+		{
+			$this->output->writeln("Cancelled");
+		}
 	}
 
 
