@@ -81,9 +81,14 @@ class CommandTester
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function execute($command, $params = Array())
+	public function execute($command = NULL, $params = Array())
 	{
-		$args = Array('cli', $command);
+		if(!is_null($command))
+		{
+			$this->command = $command;
+		}
+
+		$args = Array('cli', $this->command);
 	
 		foreach($params as $param)
 		{

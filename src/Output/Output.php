@@ -49,16 +49,4 @@ class Output
 		fputs($this->output, $str."\n");
 	}
 
-	/**
-	 * Close the output stream
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function close()
-	{
-		fclose($this->output);
-	}
-
-
 } // END class Output

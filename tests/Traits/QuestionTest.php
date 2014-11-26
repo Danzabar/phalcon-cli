@@ -99,4 +99,19 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains('This is a custom error', $this->CT->getOutput());
 	}
 
+	/**
+	 * Test multiple selection questions
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_multipleChoice()
+	{
+		$this->CT->setInput("one, five\n");
+		$this->CT->execute('Fake:multiChoice');
+
+		$this->assertContains("Selected one", $this->CT->getOutput());
+		$this->assertContains("Selected five", $this->CT->getOutput());	
+	}
+
 } // END class QuestionTest extends \PHPUnit_Framework_TestCase

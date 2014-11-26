@@ -44,7 +44,7 @@ Trait Question
 	 * @return String
 	 * @author Dan Cox
 	 */
-	public function choice($question, $choices = Array())
+	public function choice($question, $choices = Array(), $allowedMultiple = FALSE)
 	{
 		$this->output->writeln($question);
 
@@ -52,11 +52,11 @@ Trait Question
 
 		$answer = $this->input->getInput();
 
-		$valid = $this->validateChoices(trim($answer), $choices);
+		$valid = $this->validateChoices($answer, $choices, $allowedMultiple);
 
-		if($valid)
+		if($valid !== FALSE)
 		{
-			return $answer;
+			return $valid;
 		}
 
 		$this->output->writeln($this->wrongChoiceErrorMessage);
@@ -65,33 +65,49 @@ Trait Question
 	}
 
 	/**
+	 * A quick function to allow multiple answers on a choice question
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function multipleChoice($question, $choices = Array())
+	{
+		return $this->choice($question, $choices, TRUE);
+	}
+
+	/**
 	 * Checks that the answer is present in the list of choices
 	 *
 	 * @return Boolean
 	 * @author Dan Cox
 	 */
-	public function validateChoices($answer, $choices)
+	public function validateChoices($answer, $choices, $allowedMultiple = FALSE)
 	{
 		$answersArr = explode(',', $answer);
+		$formatedAnswers = Array();
 
-		if(count($answersArr) == 1)
+		if(count($answersArr) == 1 || $allowedMultiple === FALSE)
 		{
-			if(!in_array($answer, $choices))
+			if(!in_array(trim($answer), $choices))
 			{
 				return false;
 			}
+
+			return trim($answer);
 
 		} else
 		{
 			foreach($answersArr as $ans)
 			{
-				if(!in_array($ans, $choices))
+				if(!in_array(trim($ans), $choices))
 				{
 					return false;
 				}
-			}		
-		}	
 
-		return true;
+				$formatedAnswers[] = trim($ans);
+			}		
+
+			return $formatedAnswers;
+		}	
 	}
 }

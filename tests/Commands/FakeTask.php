@@ -105,6 +105,27 @@ class FakeTask extends Command
 	}
 
 	/**
+	 * Multiple Choice question
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function multiChoiceAction()
+	{
+		$choices = Array('one', 'five', 'six', 'eight', 'five');
+
+		$answers = $this->multipleChoice('Select two of the following:', $choices);
+
+		if($answers)
+		{
+			foreach($answers as $answer)
+			{
+				$this->output->writeln("Selected $answer");
+			}
+		}
+	}
+
+	/**
 	 * The confirmation test action
 	 *
 	 * @return void
