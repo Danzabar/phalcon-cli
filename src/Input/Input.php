@@ -49,8 +49,6 @@ class Input implements InputInterface
 	{
 		$this->input = fgets($this->inputStream);
 		
-		fclose($this->inputStream);
-
 		return true;
 	}
 

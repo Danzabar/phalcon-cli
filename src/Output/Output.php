@@ -1,5 +1,7 @@
 <?php namespace Danzabar\CLI\Output;
 
+use Danzabar\CLI\Output\OutputInterface;
+
 /**
  * The output class writes to the console.
  *
@@ -7,7 +9,7 @@
  * @subpackage Output
  * @author Dan Cox
  */
-class Output
+class Output implements OutputInterface
 {
 	/**
 	 * The STDOut
