@@ -107,10 +107,13 @@ class FormatCollection
 	public function addGeneric()
 	{
 		// Questions
-		$this->formats->add('question', Array('foreground' => '', 'background' => ''));
+		$this->add('question', Array('foreground' => 'cyan'));
 
 		// Comments
-		$this->formats->add('comment', Array('foreground' => '', 'background' => ''));
+		$this->add('comment', Array('foreground' => 'yellow'));
+
+		// Errors
+		$this->add('error', Array('foreground' => 'white', 'background' => 'red'));
 	}
 
 } // END class FormatCollection

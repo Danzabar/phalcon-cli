@@ -37,7 +37,7 @@ class FakeTask extends Command
 	 */
 	public function mainAction()
 	{
-		$this->output->writeln("main action");
+		$this->output->writeln("<Comment>main action</Comment>");
 	}
 
 	/**

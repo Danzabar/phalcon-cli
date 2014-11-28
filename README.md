@@ -67,6 +67,24 @@ The table trait gives you the ability to output a table in one function on the c
 
 	$this->drawTable($data);
 
+## Format
+
+You can add some color to output with the format class, it allows you to add a foreground and background color. To use this just `use Danzabar\CLI\Format\Format`;
+
+	// Add a new Style
+	Format::addFormat('style', Array('foreground' => 'cyan', 'background' => 'black'));
+
+	// To use this just wrap your str in a marquee with the name of your style eg.
+	$this->output->write('<Style>this str will be cyan with a black background.</Style>');
+
+There are 3 already set up styles, but you can override them, they are:
+
+	<Question></Question>
+	<Comment></Comment>
+	<Error></Error>
+
+Have a look in `Danzabar\CLI\Format\Colors` class for a list of foreground and background colors.
+
 ## Testing Commands
 
 This comes with a Command Tester class that allows you to load a fake instance of the application and command and unit test it with PHPunit or similar. To do this, simply

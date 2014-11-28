@@ -103,7 +103,7 @@ class Colors
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function populateBackgrounds()
+	public function populateBackground()
 	{
 		$this->background = Array(
 			'black'				=> 40,

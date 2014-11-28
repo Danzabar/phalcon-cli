@@ -1,6 +1,7 @@
 <?php namespace Danzabar\CLI\Output;
 
-use Danzabar\CLI\Output\OutputInterface;
+use Danzabar\CLI\Output\OutputInterface,
+	Danzabar\CLI\Format\Format;
 
 /**
  * The output class writes to the console.
@@ -26,6 +27,7 @@ class Output implements OutputInterface
 	 */
 	public function __construct()
 	{
+		new Format;
 		$this->output = fopen("php://output", "w");
 	}
 
@@ -37,7 +39,7 @@ class Output implements OutputInterface
 	 */
 	public function write($str)
 	{
-		fputs($this->output, $str);
+		fputs($this->output, Format::format($str));
 	}
 
 	/**
@@ -48,7 +50,7 @@ class Output implements OutputInterface
 	 */
 	public function writeln($str)
 	{
-		fputs($this->output, $str."\n");
+		fputs($this->output, Format::format($str)."\n");
 	}
 
 } // END class Output
