@@ -2,7 +2,7 @@
 
 use Danzabar\CLI\Application,
 	Phalcon\DI\FactoryDefault\CLI,
-	Danzabar\CLI\Input\InputMock;
+	Danzabar\CLI\Input\Input;
 
 /**
  * The command tester class provides a base to test commands
@@ -70,7 +70,8 @@ class CommandTester
 	{
 		$di = $this->application->getDI();
 		
-		$input = new InputMock($str);
+		$input = new Input('php://memory');
+		$input->mock($str);
 
 		$di->setShared('input', $input);
 	}

@@ -19,14 +19,19 @@ class Input implements InputInterface
 	 */
 	protected $inputStream;
 
-	
 	/**
 	 * The raw input captured through STDIn
 	 *
-	 * @var string
+	 * @var String
 	 */
 	protected $input;
 
+	/**
+	 * The source of the input (For input mocking)
+	 *
+	 * @var String
+	 */
+	protected $inputSource;
 
 	/**
 	 * Create the stream
@@ -34,9 +39,23 @@ class Input implements InputInterface
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function __construct()
+	public function __construct($source = 'php://stdin')
 	{
-		$this->inputStream = fopen("php://stdin", "r+", false);
+		$this->inputStream = fopen($source, "r+", false);
+	}	
+
+	/**
+	 * Mock an input string
+	 *
+	 * @return Input
+	 * @author Dan Cox
+	 */
+	public function mock($str)
+	{
+		fputs($this->inputStream, $str);
+		rewind($this->inputStream);
+
+		return $this;
 	}
 
 	/**
@@ -62,7 +81,7 @@ class Input implements InputInterface
 	{
 		$this->read();
 
-		return $this->input;
+		return trim($this->input);
 	}
 
 } // END class Input

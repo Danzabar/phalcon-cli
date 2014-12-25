@@ -36,6 +36,20 @@ class Application extends Console
 	 */
 	protected $console;
 
+	/**
+	 * The name of the CLI
+	 *
+	 * @var string
+	 */
+	protected $name;
+
+	/**
+	 * The version of the CLI
+	 *
+	 * @var string
+	 */
+	protected $version;
+
 
 	/**
 	 * The phalcon console object
@@ -124,6 +138,52 @@ class Application extends Console
 	public function getConsole()
 	{
 		return $this->console;
+	}
+
+	/**
+	 * Gets the value of the name
+	 *
+	 * @return String
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * Sets the value of name
+	 *
+	 * @param name $name The name of the CLI
+	 *
+	 * @return Application
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+		return $this;
+	}
+
+	/**
+	 * Gets the value of version
+	 *
+	 * @return version
+	 */
+	public function getVersion()
+	{
+		return $this->version;
+	}
+
+	/**
+	 * Sets the value of version
+	 *
+	 * @param version $version The cli version
+	 *
+	 * @return Application
+	 */
+	public function setVersion($version)
+	{
+		$this->version = $version;
+		return $this;
 	}
 
 } // END class Application extends 

@@ -48,6 +48,21 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 		$this->di = m::mock('CLI');
 
 		$this->application = new Application($this->console);
+		$this->application
+					->setName('Test CLI')
+					->setVersion('1.0');
+	}
+
+	/**
+	 * Check that the name and version is correct
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_nameAndVersion()
+	{
+		$this->assertEquals('Test CLI', $this->application->getName());
+		$this->assertEquals('1.0', $this->application->getVersion());
 	}
 
 	/**
