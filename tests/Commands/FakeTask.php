@@ -122,7 +122,7 @@ class FakeTask extends Command
 			{
 				$this->output->writeln("Selected $answer");
 			}
-		}
+		} 
 	}
 
 	/**
@@ -171,8 +171,5 @@ class FakeTask extends Command
 			$this->output->writeln("Cancelled");
 		}
 	}
-
-
-
 
 } // END class TestCommand extends Command

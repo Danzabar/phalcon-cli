@@ -114,4 +114,18 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains("Selected five", $this->CT->getOutput());	
 	}
 
+	/**
+	 * Test that an exception is thrown on a mulitple choice question
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_exceptionOnFalseMultipleChoiceAnswers()
+	{
+		$this->CT->setInput("answer, fake\n");
+		$this->CT->execute("Fake:multiChoice");
+
+		$this->assertContains("The answer you selected is invalid", $this->CT->getOutput());
+	}
+
 } // END class QuestionTest extends \PHPUnit_Framework_TestCase

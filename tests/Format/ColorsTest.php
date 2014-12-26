@@ -50,4 +50,30 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(46, $bCyan);
 	}
 
+	/**
+	 * Test that returns false when the bg color name isnt found
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_returnFalseOnBackgroundColorNotFound()
+	{
+		$bg = $this->color->getBackground('fake');
+
+		$this->assertFalse($bg);
+	}
+
+	/**
+	 * Test that returns false when the fg color name isnt found
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_returnFalseOnForegroundColorNotFound()
+	{
+		$fg = $this->color->getForeground('fake');
+
+		$this->assertFalse($fg);
+	}
+
 } // END class ColorsTest extends \PHPUnit_Framework_TestCase

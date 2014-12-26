@@ -71,4 +71,30 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 
+	/**
+	 * Test that returns false when the name doesnt exist
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_returnFalseOnFakeName()
+	{
+		$this->assertFalse($this->collection->get('fake'));
+	}
+
+	/**
+	 * Test that the collection returns all on a NULL name
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_returnAllOnNullName()
+	{
+		$collections = $this->collection->get();
+
+		$this->assertTrue(array_key_exists('question', $collections));
+		$this->assertTrue(array_key_exists('comment', $collections));
+		$this->assertTrue(array_key_exists('error', $collections));
+	}
+
 } // END class CollectionTest extends \PHPUnit_Framework_TestCase

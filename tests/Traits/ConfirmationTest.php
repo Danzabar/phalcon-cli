@@ -99,6 +99,20 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains("Invalid", $this->CT->getOutput());
 	}
 
+	/**
+	 * Test the acceptance of the explicit confirmation
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_acceptedExplicitConfirmation()
+	{
+		$this->CT->setInput("yes\n");
+		$this->CT->execute('Fake:explicitConfirm');
+
+		$this->assertContains("Confirmed", $this->CT->getOutput());
+	}
+
 
 
 } // END class ConfirmationTest extends \PHPUnit_Framework_TestCase
