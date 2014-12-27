@@ -7,7 +7,7 @@ Use the following instructions to start using the CLI - Although remember, you w
 
 To install using composer add it to the list of dependencies in the composer.json file.
 
-	"danzabar/phalcon-cli": "0.1"
+	"danzabar/phalcon-cli": "0.2.x"
 
 
 ## The Application
