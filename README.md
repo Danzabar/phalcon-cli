@@ -1,7 +1,7 @@
 CLI Tools for the Phalcon Framework
 ===================================
 
-[![Build Status](https://travis-ci.org/Danzabar/phalcon-cli.svg?branch=master)](https://travis-ci.org/Danzabar/phalcon-cli) [![Coverage Status](https://coveralls.io/repos/Danzabar/phalcon-cli/badge.png?branch=master)](https://coveralls.io/r/Danzabar/phalcon-cli?branch=master)
+[![Build Status](https://travis-ci.org/Danzabar/phalcon-cli.svg?branch=master)](https://travis-ci.org/Danzabar/phalcon-cli) [![Coverage Status](https://coveralls.io/repos/Danzabar/phalcon-cli/badge.png?branch=master)](https://coveralls.io/r/Danzabar/phalcon-cli?branch=master) [![Latest Stable Version](https://poser.pugx.org/danzabar/phalcon-cli/v/stable.svg)](https://packagist.org/packages/danzabar/phalcon-cli) [![Total Downloads](https://poser.pugx.org/danzabar/phalcon-cli/downloads.svg)](https://packagist.org/packages/danzabar/phalcon-cli) [![Latest Unstable Version](https://poser.pugx.org/danzabar/phalcon-cli/v/unstable.svg)](https://packagist.org/packages/danzabar/phalcon-cli) [![License](https://poser.pugx.org/danzabar/phalcon-cli/license.svg)](https://packagist.org/packages/danzabar/phalcon-cli)
 
 An expansion to the Phalcon Frameworks CLI Classes. This includes things like Questions, Confirmation, Command test class, Input/Output Streams and Application wrapper that allows you to start a CLI with minimal Effort.
 
