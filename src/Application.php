@@ -3,6 +3,8 @@
 use Phalcon\CLI\Console,
 	Danzabar\CLI\Output\Output,
 	Danzabar\CLI\Input\Input,
+	Danzabar\CLI\Input\InputArgument,
+	Danzabar\CLI\Input\InputOption,
 	Phalcon\DI\FactoryDefault\CLI;
 
 
@@ -37,6 +39,13 @@ class Application extends Console
 	protected $console;
 
 	/**
+	 * The task Prepper instance
+	 *
+	 * @var Object
+	 */
+	protected $prepper;
+
+	/**
 	 * The name of the CLI
 	 *
 	 * @var string
@@ -63,7 +72,7 @@ class Application extends Console
 	}
 
 	/**
-	 * undocumented function
+	 * Set the dependency injector
 	 *
 	 * @return Application
 	 * @author Dan Cox
@@ -75,6 +84,8 @@ class Application extends Console
 		// Add the output and input streams to the DI
 		$this->di->setShared('output', new Output);
 		$this->di->setShared('input', new Input);
+		$this->di->setShared('argument', new InputArgument);
+		$this->di->setShared('option', new InputOption);
 
 		$this->console->setDI($di);
 
@@ -90,6 +101,7 @@ class Application extends Console
 	public function start($args = Array())
 	{
 		$arguments = $this->formatArgs($args);
+
 	
 		return $this->console->handle($arguments);		
 	}
