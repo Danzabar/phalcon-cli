@@ -37,7 +37,7 @@ class InputOptionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test_addGetExpectation()
 	{
-		$this->inputOption->addExpected('test');
+		$this->inputOption->addExpected('test', InputOption::Optional);
 		$expectations = $this->inputOption->getExpected();
 
 		$this->assertTrue(array_key_exists('test', $expectations));

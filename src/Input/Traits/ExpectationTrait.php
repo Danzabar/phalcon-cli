@@ -19,7 +19,7 @@ Trait ExpectationTrait
 	 * @return InputArgument
 	 * @author Dan Cox
 	 */
-	public function addExpected($name, $requirements = Self::Optional)
+	public function addExpected($name, $requirements)
 	{
 		$this->expected[$name] = $requirements; 
 		
