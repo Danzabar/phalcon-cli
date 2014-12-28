@@ -3,8 +3,7 @@
 use Phalcon\CLI\Console,
 	Danzabar\CLI\Output\Output,
 	Danzabar\CLI\Input\Input,
-	Danzabar\CLI\Input\InputArgument,
-	Danzabar\CLI\Input\InputOption,
+	Danzabar\CLI\Tasks\TaskPrepper,
 	Phalcon\DI\FactoryDefault\CLI;
 
 
@@ -84,8 +83,6 @@ class Application extends Console
 		// Add the output and input streams to the DI
 		$this->di->setShared('output', new Output);
 		$this->di->setShared('input', new Input);
-		$this->di->setShared('argument', new InputArgument);
-		$this->di->setShared('option', new InputOption);
 
 		$this->console->setDI($di);
 
@@ -102,6 +99,13 @@ class Application extends Console
 	{
 		$arguments = $this->formatArgs($args);
 
+		/**
+		 * Arguments and Options
+		 *
+		 */
+		$this->prepper = new TaskPrepper($arguments['task']."Task", $this->di);
+
+		$this->prepper->prep($arguments['action']."Action");
 	
 		return $this->console->handle($arguments);		
 	}

@@ -1,6 +1,7 @@
 <?php namespace Danzabar\CLI\Input;
 
-use Danzabar\CLI\Tools\ParamBag;
+use Danzabar\CLI\Tools\ParamBag,
+	Danzabar\CLI\Input\Traits\ExpectationTrait;
 
 
 /**
@@ -12,7 +13,13 @@ use Danzabar\CLI\Tools\ParamBag;
  */
 class InputArgument extends ParamBag
 {
+	use ExpectationTrait;
 
-
+	/**
+	 * Class constants for validation
+	 *
+	 */
+	const Required 		= 'required';
+	const Optional 		= 'optional';
 
 } // END class InputArgument
