@@ -104,8 +104,10 @@ class Application extends Console
 		 *
 		 */
 		$this->prepper = new TaskPrepper($arguments['task']."Task", $this->di);
+		$this->prepper
+			 ->loadParams($arguments['params'])
+			 ->prep($arguments['action']."Action");
 
-		$this->prepper->prep($arguments['action']."Action");
 	
 		return $this->console->handle($arguments);		
 	}

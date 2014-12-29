@@ -1,7 +1,8 @@
 <?php namespace Danzabar\CLI\Input;
 
 use Danzabar\CLI\Tools\ParamBag,
-	Danzabar\CLI\Input\Traits\ExpectationTrait;
+	Danzabar\CLI\Input\Traits\ExpectationTrait,
+	Danzabar\CLI\Input\Traits\ValidationTrait;
 
 
 /**
@@ -13,7 +14,7 @@ use Danzabar\CLI\Tools\ParamBag,
  */
 class InputArgument extends ParamBag
 {
-	use ExpectationTrait;
+	use ExpectationTrait, ValidationTrait;
 
 	/**
 	 * Class constants for validation
@@ -21,5 +22,19 @@ class InputArgument extends ParamBag
 	 */
 	const Required 		= 'required';
 	const Optional 		= 'optional';
+
+	/**
+	 * An array of expected arguments
+	 *
+	 * @var Array
+	 */
+	protected static $expected = Array();
+
+	/**
+	 * An array of argument positions
+	 *
+	 * @var string
+	 */
+	protected static $varPosition = Array();
 
 } // END class InputArgument

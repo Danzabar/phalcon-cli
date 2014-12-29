@@ -26,6 +26,20 @@ class Command extends Task
 	 */
 	protected $description;
 
+	/**
+	 * The DI instance of the input argument
+	 *
+	 * @var Object
+	 */
+	protected $inputArgument;
+
+	/**
+	 * The DI instance of the input option
+	 *
+	 * @var Object
+	 */
+	protected $inputOption;
+
 	
 	/**
 	 * The help task uses information based on the current child command class to output useful information.

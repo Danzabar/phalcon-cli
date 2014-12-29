@@ -14,7 +14,7 @@ class ParamBag
 	 *
 	 * @var Array
 	 */
-	protected $params;
+	protected $params = Array();
 
 	/**
 	 * Returns the param by name

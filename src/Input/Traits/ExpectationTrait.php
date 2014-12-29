@@ -7,13 +7,6 @@
 Trait ExpectationTrait
 {
 	/**
-	 * An array of expected vars
-	 *
-	 * @var Array
-	 */
-	protected $expected;
-
-	/**
 	 * Adds an expected argument to the expected array 
 	 *
 	 * @return InputArgument
@@ -21,9 +14,25 @@ Trait ExpectationTrait
 	 */
 	public function addExpected($name, $requirements)
 	{
-		$this->expected[$name] = $requirements; 
-		
+		if(!array_key_exists($name, static::$varPosition))
+		{
+			static::$expected[$name] = $requirements; 
+			static::$varPosition[] = $name;
+		}
+
 		return $this;
+	}
+
+	/**
+	 * Clear the expected array
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function clearExpected()
+	{	
+		static::$expected = Array();
+		static::$varPosition = Array();
 	}
 
 	/**
@@ -34,7 +43,18 @@ Trait ExpectationTrait
 	 */
 	public function getExpected()
 	{
-		return $this->expected;
+		return static::$expected;
+	}
+
+	/**
+	 * Returns the var position array
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function getExpectedOrder()
+	{
+		return static::$varPosition;
 	}
 }
 

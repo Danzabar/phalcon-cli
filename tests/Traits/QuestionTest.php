@@ -94,7 +94,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_customError()
 	{
 		$this->CT->setInput("\n");
-		$this->CT->execute('Fake:choice', Array('error' => 'This is a custom error'));
+		$this->CT->execute('Fake:choice', Array('This is a custom error'));
 
 		$this->assertContains('This is a custom error', $this->CT->getOutput());
 	}

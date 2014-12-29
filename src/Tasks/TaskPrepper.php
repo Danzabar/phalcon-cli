@@ -56,8 +56,12 @@ class TaskPrepper
 		$this->di = $di;
 
 		// Add input class to the di
-		$this->di->setShared('arguments', new InputArgument);
+		$this->di->setShared('argument', new InputArgument);
 	   	$this->di->setShared('option', new InputOption);
+
+		// Clear the params
+		$this->di->get('argument')->clearExpected();
+		$this->di->get('option')->clearExpected();
 	}
 
 	/**
@@ -75,6 +79,69 @@ class TaskPrepper
 			
 			$method->invokeArgs($task, Array('action' => $action));
 		}
+		
+		$this->sortParams();
+	}
+
+	/**
+	 * This function takes arguments and options and sorts them by order relating 
+	 * them to expected arguments in order to give them a key value
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function sortParams()
+	{
+		$arguments = Array();
+		$options = Array();
+
+		$expectedArguments = $this->di->get('argument')->getExpectedOrder();
+		$expectedOptions = $this->di->get('option')->getExpectedOrder();
+			
+		foreach($expectedArguments as $pos => $key)
+		{
+			if(array_key_exists($pos, $this->arguments))
+			{
+				$arguments[$key] = $this->arguments[$pos];
+			}
+		}
+
+		foreach($expectedOptions as $pos => $key)
+		{
+			if(array_key_exists($pos, $this->options))
+			{
+				$options[$key] = $this->options[$pos];
+			}
+		}		
+
+		// Load these
+		$this->di->get('argument')->load($arguments);
+		$this->di->get('option')->load($options);
+	}
+
+	/**
+	 * Loads params and splits them into arguments and options
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function loadParams(Array $params)
+	{
+		$this->arguments = Array();
+		$this->options = Array();
+
+		foreach($params as $param)
+		{
+			if(strpos($param, '--') !== false)
+			{
+				$this->options[] = $param;
+			} else
+			{
+				$this->arguments[] = $param;
+			}
+		}
+
+		return $this;
 	}
 
 

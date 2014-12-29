@@ -1,7 +1,9 @@
 <?php
 
-use Danzabar\CLI\Command;
-use Danzabar\CLI\Traits;
+use Danzabar\CLI\Command,
+	Danzabar\CLI\Traits,
+	Danzabar\CLI\Input\InputArgument,
+	Danzabar\CLI\Input\InputOption;
 
 /**
  * A test command
@@ -28,6 +30,20 @@ class FakeTask extends Command
 	 * @var string
 	 */
 	protected $description = 'The test command provides no use, it has no purpose, it just exists.';
+
+	/**
+	 * Sets expected arguments and options either by task or by action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setup($action)
+	{
+		if($action == 'choiceAction' || $action == 'explicitConfirmAction')
+		{
+			$this->argument->addExpected('error', InputArgument::Optional);
+		}
+	}
 
 	/**
 	 * The main action for this command
@@ -87,13 +103,13 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function choiceAction(Array $params)
+	public function choiceAction()
 	{
 		$choices = Array('one', 'two', 'three');
 
-		if(!empty($params))
+		if(isset($this->argument->error))
 		{
-			$this->setChoiceError($params[0]);
+			$this->setChoiceError($this->argument->error);
 		}
 
 		$answer = $this->choice('Select one of the following:', $choices);
