@@ -37,4 +37,11 @@ class InputArgument extends ParamBag
 	 */
 	protected static $varPosition = Array();
 
+	/**
+	 * For validation types
+	 *
+	 * @var string
+	 */
+	protected $v_type = 'argument';
+
 } // END class InputArgument

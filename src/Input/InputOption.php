@@ -35,5 +35,12 @@ class InputOption extends ParamBag
 	 * @var Array
 	 */
 	protected static $varPosition = Array();
+
+	/**
+	 * For validation types
+	 *
+	 * @var string
+	 */
+	protected $v_type = 'option';
 	
 } // END class InputOption extends ParamBag
