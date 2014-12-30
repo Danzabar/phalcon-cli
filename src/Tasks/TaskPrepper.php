@@ -134,7 +134,7 @@ class TaskPrepper
 		{
 			if(strpos($param, '--') !== false)
 			{
-				$this->options[] = $param;
+				$this->options[] = str_replace('--', '', $param);
 			} else
 			{
 				$this->arguments[] = $param;
