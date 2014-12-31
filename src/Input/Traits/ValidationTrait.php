@@ -19,9 +19,11 @@ Trait ValidationTrait
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function validate($key, $expected, $value)
+	public function validate($key, $value)
 	{
 		$this->v_key = $key;
+
+		$expected = static::$expected[$key];
 
 		if(!is_array($expected))
 		{
@@ -32,7 +34,7 @@ Trait ValidationTrait
 		{
 			if(method_exists($this, "validate_$rule"))
 			{
-				call_user_func_array(Array($this, "validate_$rule"), Array($value));
+				return call_user_func_array(Array($this, "validate_$rule"), Array($value));
 			} else
 			{
 				// Missing rule method exception
@@ -43,14 +45,14 @@ Trait ValidationTrait
 	}
 
 	/**
-	 * Just so theres a method for it, returns true in all cases
+	 * Just so theres a method for it, returns the value in all cases
 	 *
 	 * @return void
 	 * @author Dan Cox
 	 */
 	public function validate_optional($value)
 	{
-		return true;
+		return $value;
 	}
 
 	/**
@@ -63,7 +65,7 @@ Trait ValidationTrait
 	{
 		if(!is_null($value) && $value !== '')
 		{
-			return true;
+			return $value;
 		}
 
 		throw new Exceptions\RequiredValueMissingException($this->v_type, $this->v_key);

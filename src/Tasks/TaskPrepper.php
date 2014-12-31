@@ -102,7 +102,7 @@ class TaskPrepper
 		{
 			if(array_key_exists($pos, $this->arguments))
 			{
-				$arguments[$key] = $this->arguments[$pos];
+				$arguments[$key] = $this->di->get('argument')->validate($key, $this->arguments[$pos]);
 			}
 		}
 
@@ -110,7 +110,7 @@ class TaskPrepper
 		{
 			if(array_key_exists($pos, $this->options))
 			{
-				$options[$key] = $this->options[$pos];
+				$options[$key] = $this->di->get('option')->validate($key, $this->options[$pos]);
 			}
 		}		
 
