@@ -12,12 +12,12 @@ The `InputArgument` class allows you to set expected and get given arguments, ar
 	
 		public function setup($action)
 		{
-			$this->argument->setExpected('name', InputArgument::Required);	
+			$this->argument->addExpected('name', InputArgument::Required);	
 
 			// You can also specify via actions
 			if($action == 'listAction')
 			{
-				$this->argument->setExpected('format', InputArgument::Optional);
+				$this->argument->addExpected('format', InputArgument::Optional);
 			}
 		}
 
@@ -36,7 +36,7 @@ Very similar process to arguments, only we use `option`. An option must be prece
 	{
 		public function setup()
 		{
-			$this->option->setExpected('verbose', InputOption::Optional);
+			$this->option->addExpected('verbose', InputOption::Optional);
 		}
 
 		public function mainAction()
