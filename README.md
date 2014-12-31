@@ -11,6 +11,7 @@ This is still a work in progress at the moment, so more details including docume
 
  - [Installation](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Installation.md)
  - [Writing Tasks](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Writing%20Tasks.md)
+ - [Arguments and Options](https://github.com/Danzabar/phalcon-cli/blob/master/docs/InputArgumentInputOption.md)
  - [Input Output](https://github.com/Danzabar/phalcon-cli/blob/master/docs/InputOutput.md)
  - [Questions](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Questions.md)
  - [Confirmation](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Confirmation.md)
