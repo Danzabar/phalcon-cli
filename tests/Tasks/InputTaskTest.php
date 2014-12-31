@@ -1,6 +1,8 @@
 <?php
 
-use Danzabar\CLI\CommandTester;
+use Danzabar\CLI\CommandTester,
+	Danzabar\CLI\Application,
+	Phalcon\DI\FactoryDefault\CLI;
 
 /**
  * Test case for the input classes
@@ -53,6 +55,36 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute('Input');
 
 		$this->assertContains('...', $this->CT->getOutput());
+	}
+
+	/**
+	 * Test the required argument
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_requiredArgument()
+	{
+		$this->CT->execute('Input:required', Array('email' => 'danzabar@gmail.com'));
+
+		$this->assertContains('danzabar@gmail.com', $this->CT->getOutput());
+	}
+
+	/**
+	 * Test exception fires on missing argument
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_missingRequiredArgument()
+	{
+		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\RequiredValueMissingException');
+		
+		$app = new Application;
+		$di = new CLI;
+		
+		$app->setDI($di);
+		$app->start(Array('cli', 'Input:required'));
 	}
 
 

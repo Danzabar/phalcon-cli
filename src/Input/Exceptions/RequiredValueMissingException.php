@@ -35,7 +35,7 @@ class RequiredValueMissingException extends \Exception
 		$this->type = $type;
 		$this->key = $key;
 
-		parent::__construct("This action was expected an $type for $key", $code, $previous);
+		parent::__construct("This action was expecting an $type for $key", $code, $previous);
 	}
 
 	/**

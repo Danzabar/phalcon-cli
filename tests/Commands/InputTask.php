@@ -20,9 +20,19 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function setup($task)
+	public function setup($action)
 	{
-		$this->option->addExpected('verbose', InputOption::Optional);
+		switch($action)
+		{
+			case 'mainAction':
+				$this->option->addExpected('verbose', InputOption::Optional);
+				break;
+			case 'requiredAction':
+				$this->argument->addExpected('email', InputArgument::Required);
+				break;
+		}
+	
+
 	}
 
 	/**
@@ -40,6 +50,17 @@ class InputTask extends Command
 		{
 			$this->output->writeln('...');
 		}
+	}
+
+	/**
+	 * Another action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function requiredAction()
+	{
+		$this->output->writeln($this->argument->email);
 	}
 
 } // END class InputTask extends Command
