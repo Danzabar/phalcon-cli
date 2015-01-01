@@ -34,14 +34,16 @@ Trait ValidationTrait
 		{
 			if(method_exists($this, "validate_$rule"))
 			{
-				return call_user_func_array(Array($this, "validate_$rule"), Array($value));
+				$value = call_user_func_array(Array($this, "validate_$rule"), Array($value));
+
 			} else
 			{
 				// Missing rule method exception
 				throw new Exceptions\IncorrectValidationMethodException($rule);
 			}
 		}
-		
+
+		return $value;
 	}
 
 	/**
