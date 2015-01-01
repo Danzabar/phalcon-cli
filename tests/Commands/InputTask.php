@@ -30,6 +30,9 @@ class InputTask extends Command
 			case 'requiredAction':
 				$this->argument->addExpected('email', InputArgument::Required);
 				break;
+			case 'exceptionAction':
+				$this->argument->addExpected('value', 'string');
+				break;
 		}
 	
 
@@ -61,6 +64,16 @@ class InputTask extends Command
 	public function requiredAction()
 	{
 		$this->output->writeln($this->argument->email);
+	}
+
+	/**
+	 * Does nothing.. will throw a InvalidValidationMethod exception.
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function exceptionAction()
+	{
 	}
 
 } // END class InputTask extends Command
