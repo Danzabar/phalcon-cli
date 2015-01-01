@@ -2,7 +2,8 @@
 
 use Danzabar\CLI\Application,
 	Phalcon\DI\FactoryDefault\CLI,
-	Danzabar\CLI\Input\Input;
+	Danzabar\CLI\Input\Input,
+	Danzabar\CLI\Output\Output;
 
 /**
  * The command tester class provides a base to test commands
@@ -58,7 +59,25 @@ class CommandTester
 			$di = new CLI;
 			$this->application->setDI($di);
 		}
+
+		$this->setInputOutput();
 	} 
+
+	/**
+	 * Sets the new input and output classes
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setInputOutput()
+	{
+		$input = new Input('php://memory');
+		$output = new Output('php://memory');
+
+		$di = $this->application->getDI();
+		$di->setShared('input', $input);
+		$di->setShared('output', $output);
+	}
 
 	/**
 	 * Sets an input for questions and confirmation
@@ -68,12 +87,8 @@ class CommandTester
 	 */
 	public function setInput($str)
 	{
-		$di = $this->application->getDI();
-		
-		$input = new Input('php://memory');
+		$input = $this->application->getDI()->get('input');
 		$input->mock($str);
-
-		$di->setShared('input', $input);
 	}
 
 	/**
@@ -96,13 +111,13 @@ class CommandTester
 			$args[] = $param;
 		}
 
-		ob_start();
+		$this->application->start($args);
 
-			$this->application->start($args);
+		// Get the output
+		$di = $this->application->getDI();
 
-			$this->output = ob_get_contents();
+		$this->output = $di->get('output')->read();
 
-		ob_end_clean();
 	}
 
 	/**

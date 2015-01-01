@@ -25,10 +25,10 @@ class Output implements OutputInterface
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function __construct()
+	public function __construct($source = 'php://output')
 	{
 		new Format;
-		$this->output = fopen("php://output", "w");
+		$this->output = fopen($source, "w+");
 	}
 
 	/**
@@ -51,6 +51,18 @@ class Output implements OutputInterface
 	public function writeln($str)
 	{
 		fputs($this->output, Format::format($str)."\n");
+	}
+
+	/**
+	 * Read the output
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function read()
+	{
+		fseek($this->output, 0);
+		return stream_get_contents($this->output);
 	}
 
 } // END class Output

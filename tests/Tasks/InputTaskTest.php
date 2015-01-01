@@ -80,11 +80,7 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\RequiredValueMissingException');
 		
-		$app = new Application;
-		$di = new CLI;
-		
-		$app->setDI($di);
-		$app->start(Array('cli', 'Input:required'));
+		$this->CT->execute('Input:required');	
 	}
 
 
