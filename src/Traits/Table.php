@@ -7,6 +7,41 @@
  */
 Trait Table
 {
+
+	/**
+	 * The character used to fill a verticle bar
+	 *
+	 * @var string
+	 */
+	protected $table_barFiller = '-';
+
+	/**
+	 * The character that encloses the header.
+	 *
+	 * @var string
+	 */
+	protected $table_headerPart = '|';
+
+	/**
+	 * The left side connector
+	 *
+	 * @var string
+	 */
+	protected $table_connectorLeft = '+';
+
+	/**
+	 * The right side connector
+	 *
+	 * @var string
+	 */
+	protected $table_connectorRight = '+';
+
+	/**
+	 * The header connector
+	 *
+	 * @var string
+	 */
+	protected $table_connectorHeader = '+';
 	
 	/**
 	 * Draws a table from the array passed to it.
@@ -35,11 +70,11 @@ Trait Table
 	{
 		foreach($data as $row)
 		{
-			$rowOutput = '|';
+			$rowOutput = $this->table_headerPart;
 
 			foreach($row as $key => $value)
 			{
-				$rowOutput .= ' '.str_pad($value, $lengths[$key], ' ', STR_PAD_RIGHT).' |';
+				$rowOutput .= ' '.str_pad($value, $lengths[$key], ' ', STR_PAD_RIGHT).' '.$this->table_headerPart;
 			}
 
 			$this->output->writeln($rowOutput);
@@ -54,11 +89,11 @@ Trait Table
 	 */
 	public function writeFooter(Array $headers)
 	{
-		$bar = '+';
+		$bar = $this->table_connectorLeft;
 
 		foreach($headers as $name => $length)
 		{
-			$bar .= str_pad('', $length + 2, '-').'+';
+			$bar .= str_pad('', $length + 2, $this->table_barFiller).''.$this->table_connectorRight;
 		}
 
 		$this->output->writeln($bar);
@@ -72,14 +107,14 @@ Trait Table
 	 */
 	public function writeHeaders(Array $headers)
 	{
-		$bar = '+';
-		$header = '|';
+		$bar = $this->table_connectorHeader;
+		$header = $this->table_headerPart;
 
 		foreach($headers as $name => $length)
 		{
-			$bar .= str_pad('', $length + 2, '-').'+';	
+			$bar .= str_pad('', $length + 2, $this->table_barFiller).$this->table_connectorHeader;	
 
-			$header .= ' '.str_pad($name, $length, ' ', STR_PAD_RIGHT).' |';
+			$header .= ' '.str_pad($name, $length, ' ', STR_PAD_RIGHT).' '.$this->table_headerPart;
 		}
 
 		$this->output->writeln($bar);

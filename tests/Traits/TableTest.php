@@ -41,7 +41,7 @@ class TableTest extends \PHPUnit_Framework_TestCase
 	public function test_draw()
 	{
 		$this->CT->execute('Utility:table');
-		
+
 		// Assert that all our data is there
 		$this->assertContains('Value', $this->CT->getOutput());	
 		$this->assertContains('Value2', $this->CT->getOutput());
