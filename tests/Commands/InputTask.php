@@ -80,15 +80,6 @@ class InputTask extends Command
 		$this->output->writeln($this->argument->value);
 	}
 
-	/**
-	 * Does nothing.. will throw a InvalidValidationMethod exception.
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function exceptionAction()
-	{
-	}
 
 } // END class InputTask extends Command
 
