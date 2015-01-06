@@ -22,6 +22,7 @@ class InputArgument extends ParamBag
 	 */
 	const Required 		= 'required';
 	const Optional 		= 'optional';
+	const Alpha			= 'alpha';
 
 	/**
 	 * An array of expected arguments

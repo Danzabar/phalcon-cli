@@ -33,6 +33,9 @@ class InputTask extends Command
 			case 'exceptionAction':
 				$this->argument->addExpected('value', 'string');
 				break;
+			case 'validationAction':
+				$this->argument->addExpected('value', Array(InputArgument::Required, InputArgument::Alpha));
+				break;
 		}
 	
 
@@ -64,6 +67,17 @@ class InputTask extends Command
 	public function requiredAction()
 	{
 		$this->output->writeln($this->argument->email);
+	}
+
+	/**
+	 * Action to test validation
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function validationAction()
+	{
+		$this->output->writeln($this->argument->value);
 	}
 
 	/**

@@ -49,7 +49,7 @@ Trait ValidationTrait
 	/**
 	 * Just so theres a method for it, returns the value in all cases
 	 *
-	 * @return void
+	 * @return Mixed
 	 * @author Dan Cox
 	 */
 	public function validate_optional($value)
@@ -60,7 +60,7 @@ Trait ValidationTrait
 	/**
 	 * Validation for required elements
 	 *
-	 * @return void
+	 * @return Mixed
 	 * @author Dan Cox
 	 */
 	public function validate_required($value)
@@ -71,6 +71,22 @@ Trait ValidationTrait
 		}
 
 		throw new Exceptions\RequiredValueMissingException($this->v_type, $this->v_key);
+	}
+
+	/**
+	 * Checks that the string contains only alpha characters
+	 *
+	 * @return Mixed
+	 * @author Dan Cox
+	 */
+	public function validate_alpha($value)
+	{
+		if(ctype_alpha($value))
+		{
+			return $value;
+		}
+		
+		throw new Exceptions\ValidationFailException($value, 'Alpha');
 	}
 
 }

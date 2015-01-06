@@ -96,6 +96,32 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute('Input:required');	
 	}
 
+	/**
+	 * Test the validation action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_validationActionCorrectValue()
+	{
+		$this->CT->execute('Input:validation', Array('value' => 'abcd'));
+		
+		$this->assertContains('abcd', $this->CT->getOutput());	
+	}
+
+	/**
+	 * Test the error reporting from the validate_alpha method
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_validationActionException()
+	{
+		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\ValidationFailException');
+
+		$this->CT->execute('Input:validation', Array('value' => 'a12v'));
+	}
+
 
 
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase
