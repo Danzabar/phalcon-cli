@@ -34,7 +34,7 @@ class InputTask extends Command
 				$this->argument->addExpected('value', 'string');
 				break;
 			case 'validationAction':
-				$this->argument->addExpected('value', Array(InputArgument::Required, InputArgument::Alpha));
+				$this->argument->addExpected('value', Array(InputArgument::Optional, InputArgument::Alpha));
 				break;
 		}
 	
@@ -77,7 +77,12 @@ class InputTask extends Command
 	 */
 	public function validationAction()
 	{
-		$this->output->writeln($this->argument->value);
+		if(isset($this->argument->value))
+		{
+			$this->output->writeln($this->argument->value);
+		}
+
+		$this->output->writeln('No argument passed');
 	}
 
 

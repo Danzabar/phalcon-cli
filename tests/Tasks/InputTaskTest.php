@@ -122,6 +122,19 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute('Input:validation', Array('value' => 'a12v'));
 	}
 
+	/**
+	 * Does what it says on the tin...
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_optionalParameterThrowsNoExceptionWhenNotSet()
+	{
+		$this->CT->execute('Input:validation');	
+
+		$this->assertContains('No argument passed', $this->CT->getOutput());
+	}
+
 
 
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase

@@ -30,6 +30,11 @@ Trait ValidationTrait
 			$expected = Array($expected);
 		}
 
+		// if it has optional rule and theres no value
+		if(in_array('optional', $expected) && ($value == '' || is_null($value))) {
+			return $value;
+		}
+
 		foreach($expected as $rule)
 		{
 			if(method_exists($this, "validate_$rule"))
