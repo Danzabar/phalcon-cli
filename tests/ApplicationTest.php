@@ -75,6 +75,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->console->shouldReceive('setDI')->once();
 		$this->di->shouldReceive('setShared');
+		$this->di->shouldReceive('get')->andReturn($this->di);
+		$this->di->shouldReceive('clearExpected')->andReturn($this->di);
 
 		$this->application->setDI($this->di);		
 
@@ -166,6 +168,25 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 		$command = $app->start(Array('cli', 'Fake:output'));
 		$this->assertInstanceOf('\Danzabar\CLI\Output\Output', $command->getOutput());
 		$this->assertInstanceOf('\Danzabar\CLI\Input\Input', $command->getInput());	
+	}
+
+	/**
+	 * Test adding a fetching commands from the library
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_interactionsWithLibrary()
+	{
+		$di = new CLI;
+		$app = new Application;
+		$app->setDI($di);
+
+		$app->add(new FakeTask);
+		
+		$command = $app->find('Fake:output');
+
+		$this->assertInstanceOf('FakeTask', $command);
 	}
 	
 

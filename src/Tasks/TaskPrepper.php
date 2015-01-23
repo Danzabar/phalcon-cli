@@ -21,6 +21,13 @@ class TaskPrepper
 	protected $reflection;
 
 	/**
+	 * The Class name
+	 *
+	 * @var string
+	 */
+	protected $className;
+
+	/**
 	 * The dependency injector
 	 *
 	 * @var Object
@@ -47,11 +54,8 @@ class TaskPrepper
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function __construct($className, $di)
+	public function __construct($di)
 	{
-		// Create reflection
-		$this->reflection = new \ReflectionClass($className);
-
 		// DI
 		$this->di = $di;
 
@@ -62,6 +66,43 @@ class TaskPrepper
 		// Clear the params
 		$this->di->get('argument')->clearExpected();
 		$this->di->get('option')->clearExpected();
+	}
+
+	/**
+	 * Loads the command and creates a reflection entity for it.
+	 *
+	 * @return TaskPrepper
+	 * @author Dan Cox
+	 */
+	public function load($className)
+	{
+		// Create reflection
+		$this->reflection = new \ReflectionClass($className);
+
+		// Save the class name
+		$this->className = $className;
+
+		return $this;
+	}
+
+	/**
+	 * Describes a task for the library
+	 *
+	 * @return Array
+	 * @author Dan Cox
+	 */
+	public function describe()
+	{
+		$methods = Array();
+
+		foreach($this->reflection->getMethods() as $method)
+		{
+			$methods[] = str_replace('Action', '', $method->getName());
+		}
+
+		$name = str_replace('Task', '', $this->className);
+
+		return Array('name' => $name, 'actions'  => $methods);
 	}
 
 	/**

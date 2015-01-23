@@ -4,6 +4,7 @@ use Phalcon\CLI\Console,
 	Danzabar\CLI\Output\Output,
 	Danzabar\CLI\Input\Input,
 	Danzabar\CLI\Tasks\TaskPrepper,
+	Danzabar\CLI\Tasks\TaskLibrary,
 	Phalcon\DI\FactoryDefault\CLI;
 
 
@@ -45,6 +46,13 @@ class Application extends Console
 	protected $prepper;
 
 	/**
+	 * Instance of the task library
+	 *
+	 * @var Object
+	 */
+	protected $library;
+
+	/**
 	 * The name of the CLI
 	 *
 	 * @var string
@@ -65,9 +73,10 @@ class Application extends Console
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function __construct($console = NULL)
+	public function __construct($console = NULL, $library = NULL)
 	{
 		$this->console = (!is_null($console) ? $console : new Console);
+		$this->library = (!is_null($library) ? $library : new TaskLibrary);
 	}
 
 	/**
@@ -86,13 +95,15 @@ class Application extends Console
 
 		$this->console->setDI($di);
 
+		$this->prepper = new TaskPrepper($this->di);
+
 		return $this;
 	}
 
 	/**
 	 * Start the app
 	 *
-	 * @return void
+	 * @return Output
 	 * @author Dan Cox
 	 */
 	public function start($args = Array())
@@ -103,13 +114,41 @@ class Application extends Console
 		 * Arguments and Options
 		 *
 		 */
-		$this->prepper = new TaskPrepper($arguments['task']."Task", $this->di);
 		$this->prepper
+			 ->load($arguments['task']."Task")
 			 ->loadParams($arguments['params'])
 			 ->prep($arguments['action']."Action");
 
 	
 		return $this->console->handle($arguments);		
+	}
+
+	/**
+	 * Adds a command to the library
+	 *
+	 * @return Application
+	 * @author Dan Cox
+	 */
+	public function add($command)
+	{
+		$tasks = $this->prepper
+					  ->load(get_class($command))
+					  ->describe();
+
+		$this->library->add(['task' => $tasks, 'class' => $command]);
+
+		return $this;
+	}
+
+	/**
+	 * Find a command by name
+	 *
+	 * @return Object
+	 * @author Dan Cox
+	 */
+	public function find($name)
+	{
+		return $this->library->find($name);
 	}
 
 
