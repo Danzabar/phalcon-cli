@@ -36,3 +36,16 @@ You will first need an application to use the CLI tools with. The following is a
 Now you will have a fully setup application that you can bind Commands to. You can use this by using...
 
 	php cli Task:action params
+
+## Defining Commands
+
+Expanding on Phalcon's base CLI tools you can add your commands to the application. This allows the CLI to report on missing tasks, it also gives you the oppurtunity to specify a usable name for the task rather than having the Classname:action combination. So to add your command class, just use the apps `add` method:
+
+	$app->add(new CommandTask);
+
+Once its loaded into the apps command library you can access it by using the `find` method and giving its name, for example we named the above `command`:
+
+	// Find it with an action name appended, which also validates the action
+	$app->find('command:main');
+
+	

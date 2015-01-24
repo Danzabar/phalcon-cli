@@ -30,7 +30,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
 		ob_end_clean();
 
-		$this->assertContains('Test command', $content);
+		$this->assertContains('fake', $content);
 		$this->assertContains('The test command provides no use,', $content);
 	}
 

@@ -14,6 +14,21 @@ use Danzabar\CLI\Command,
  */
 class InputTask extends Command
 {
+	
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	protected $name = 'Input';
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	protected $description = 'Command to help test input arguments and options';
+
 	/**
 	 * Setup required arguments and options
 	 *
@@ -24,21 +39,19 @@ class InputTask extends Command
 	{
 		switch($action)
 		{
-			case 'mainAction':
+			case 'main':
 				$this->option->addExpected('verbose', InputOption::Optional);
 				break;
-			case 'requiredAction':
+			case 'required':
 				$this->argument->addExpected('email', InputArgument::Required);
 				break;
-			case 'exceptionAction':
+			case 'exceptionTest':
 				$this->argument->addExpected('value', 'string');
 				break;
-			case 'validationAction':
+			case 'validation':
 				$this->argument->addExpected('value', Array(InputArgument::Optional, InputArgument::Alpha));
 				break;
 		}
-	
-
 	}
 
 	/**
@@ -47,7 +60,7 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function mainAction()
+	public function main()
 	{
 		if(isset($this->option->verbose))
 		{
@@ -64,7 +77,7 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function requiredAction()
+	public function required()
 	{
 		$this->output->writeln($this->argument->email);
 	}
@@ -75,7 +88,7 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function validationAction()
+	public function validation()
 	{
 		if(isset($this->argument->value))
 		{
@@ -83,6 +96,17 @@ class InputTask extends Command
 		}
 
 		$this->output->writeln('No argument passed');
+	}
+
+	/**
+	 * Test for invalid validation exception
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function exceptionTest()
+	{
+		$this->output->writeln('no Exception!');
 	}
 
 

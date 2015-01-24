@@ -1,7 +1,6 @@
 <?php namespace Danzabar\CLI;
 
 use Danzabar\CLI\Application,
-	Phalcon\DI\FactoryDefault\CLI,
 	Danzabar\CLI\Input\Input,
 	Danzabar\CLI\Output\Output;
 
@@ -52,14 +51,6 @@ class CommandTester
 	public function __construct($application = Null)
 	{
 		$this->application = (!is_null($application) ? $application : new Application );
-
-		if(is_null($application))
-		{
-			// Load a DI into the app
-			$di = new CLI;
-			$this->application->setDI($di);
-		}
-
 		$this->setInputOutput();
 	} 
 
@@ -118,6 +109,17 @@ class CommandTester
 
 		$this->output = $di->get('output')->read();
 
+	}
+
+	/**
+	 * Adds a command to the app
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function add($command)
+	{
+		$this->application->add($command);
 	}
 
 	/**

@@ -19,7 +19,7 @@ class UtilityTask extends Command
 	 *
 	 * @var string
 	 */
-	protected $name = 'Utility';
+	protected $name = 'utility';
 	
 	/**
 	 * Description
@@ -34,7 +34,7 @@ class UtilityTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function mainAction()
+	public function main()
 	{
 		$this->output->writeln("The main action of the utility task");
 	}
@@ -45,7 +45,7 @@ class UtilityTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function tableAction()
+	public function table()
 	{
 		$data = Array();
 		$data[] = Array('Header1' => 'Value', 'Header2' => 'Value2');

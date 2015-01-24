@@ -11,6 +11,24 @@ use Danzabar\CLI\CommandTester;
  */
 class CommandTesterTest extends \PHPUnit_Framework_TestCase
 {
+	/**
+	 * Command tester;
+	 *
+	 * @var Object
+	 */
+	protected $CT;
+	
+	/**
+	 * Set up test vars
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setUp()
+	{
+		$this->CT = new CommandTester;
+		$this->CT->add(new UtilityTask);
+	}
 
 	/**
 	 * Test basic usage of the command tester
@@ -20,12 +38,10 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test_basic()
 	{
-		$tester = new CommandTester;
-
-		$tester->execute('Utility:main');
+		$this->CT->execute('utility:main');
 		
-		$this->assertContains('The main action', $tester->getOutput());
-		$this->assertInstanceOf('\Danzabar\CLI\Application', $tester->getApplication());
+		$this->assertContains('The main action', $this->CT->getOutput());
+		$this->assertInstanceOf('\Danzabar\CLI\Application', $this->CT->getApplication());
 	}
 
 	/**
@@ -41,12 +57,11 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
 		$tester->setCommand('Utility:main');
 		$command1 = $tester->getCommand();
 
-		$tester->execute('Fake:main');
+		$tester->setCommand('Fake:main');
 		$command2 = $tester->getCommand();
 
 		$this->assertEquals('Utility:main', $command1);
 		$this->assertEquals('Fake:main', $command2);
 	}
-	
 
 } // END class CommandTesterTest extends \PHPUnit_Framework_TestCase

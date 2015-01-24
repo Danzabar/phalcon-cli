@@ -22,7 +22,7 @@ class FakeTask extends Command
 	 *
 	 * @var string
 	 */
-	protected $name = 'Test command';
+	protected $name = 'fake';
 
 	/**
 	 * The test description
@@ -39,10 +39,7 @@ class FakeTask extends Command
 	 */
 	public function setup($action)
 	{
-		if($action == 'choiceAction' || $action == 'explicitConfirmAction')
-		{
-			$this->argument->addExpected('error', InputArgument::Optional);
-		}
+		$this->argument->addExpected('error', InputArgument::Optional);
 	}
 
 	/**
@@ -51,7 +48,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function mainAction()
+	public function main()
 	{
 		$this->output->writeln("<Comment>main action</Comment>");
 	}
@@ -62,7 +59,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function outputAction()
+	public function output()
 	{
 	}
 
@@ -72,7 +69,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function askAction()
+	public function askMe()
 	{
 		$answer = $this->ask('What is your name?');
 
@@ -85,7 +82,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function advAskAction()
+	public function advAsk()
 	{
 		$prelim = $this->ask('Do you like questions?');
 
@@ -103,7 +100,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function choiceAction()
+	public function choiceQ()
 	{
 		$choices = Array('one', 'two', 'three');
 
@@ -126,7 +123,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function multiChoiceAction()
+	public function multiChoice()
 	{
 		$choices = Array('one', 'five', 'six', 'eight', 'five');
 
@@ -147,7 +144,7 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function confirmationAction()
+	public function confirmation()
 	{
 		$confirm = $this->confirm();
 
@@ -166,16 +163,17 @@ class FakeTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function explicitConfirmAction(Array $params)
+	public function explicitConfirm()
 	{	
 		$this->setConfirmationNo('no');
 		$this->setConfirmationYes('yes');
 		$this->setConfirmExplicit(TRUE);
 
-		if(!empty($params))
+		if(isset($this->argument->error))
 		{
-			$this->setInvalidConfirmationError($params[0]);
+			$this->setInvalidConfirmationError($this->argument->error);
 		}
+
 
 		$confirm = $this->confirm("Please confirm that you wish to continue... (Yes|No)");
 

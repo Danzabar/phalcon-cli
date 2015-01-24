@@ -1,8 +1,6 @@
 <?php
 
-use Danzabar\CLI\CommandTester,
-	Danzabar\CLI\Application,
-	Phalcon\DI\FactoryDefault\CLI;
+use Danzabar\CLI\CommandTester;
 
 /**
  * Test case for the input classes
@@ -29,6 +27,7 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->CT = new CommandTester();
+		$this->CT->add(new InputTask);
 	}
 
 	/**
@@ -80,7 +79,7 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException');
 
-		$this->CT->execute('Input:exception');
+		$this->CT->execute('Input:exceptionTest');
 	}
 
 	/**

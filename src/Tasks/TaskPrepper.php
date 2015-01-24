@@ -97,12 +97,19 @@ class TaskPrepper
 
 		foreach($this->reflection->getMethods() as $method)
 		{
-			$methods[] = str_replace('Action', '', $method->getName());
+			$methods[] = $method->getName();
 		}
 
-		$name = str_replace('Task', '', $this->className);
+		$name = $this->className;
 
-		return Array('name' => $name, 'actions'  => $methods);
+		if($this->reflection->hasProperty('name'))
+		{
+			$prop = $this->reflection->getProperty('name');
+			$prop->setAccessible(TRUE);
+			$name = $prop->getValue($this->reflection->newInstance());
+		}
+
+		return Array('name' => $name, 'class' => $this->className, 'actions'  => $methods);
 	}
 
 	/**

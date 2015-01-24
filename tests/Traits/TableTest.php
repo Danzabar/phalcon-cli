@@ -30,6 +30,8 @@ class TableTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->CT = new CommandTester;
+
+		$this->CT->add(new UtilityTask);
 	}
 
 	/**
@@ -40,7 +42,7 @@ class TableTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test_draw()
 	{
-		$this->CT->execute('Utility:table');
+		$this->CT->execute('utility:table');
 
 		// Assert that all our data is there
 		$this->assertContains('Value', $this->CT->getOutput());	
@@ -67,7 +69,5 @@ class TableTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(10, $lengths['Header1']);
 		$this->assertEquals(13, $lengths['LongerHeader2']);
 	}
-
-
 	
 } // END class TableTest extends \PHPUnit_Framework_Testcase
