@@ -39,9 +39,6 @@ class InputTask extends Task
 	{
 		switch($action)
 		{
-			case 'main':
-				$this->option->addExpected('verbose', InputOption::Optional);
-				break;
 			case 'required':
 				$this->argument->addExpected('email', InputArgument::Required);
 				break;
@@ -53,6 +50,18 @@ class InputTask extends Task
 				break;
 		}
 	}
+
+	/**
+	 * Setup function specifically for the main action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setupMain()
+	{
+		$this->option->addExpected('verbose', InputOption::Optional);
+	}
+		
 
 	/**
 	 * The main action

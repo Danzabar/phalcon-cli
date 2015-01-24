@@ -120,15 +120,34 @@ class TaskPrepper
 	 */
 	public function prep($action = NULL)
 	{		
-		if($this->reflection->hasMethod('setup'))
+		$method = $this->getSetupMethod($action);
+
+		if(!is_null($method))
 		{
-			$method = $this->reflection->getMethod('setup');	
-			$task = $this->reflection->newInstance();
-			
-			$method->invokeArgs($task, Array('action' => $action));
+			$method->invokeArgs($this->reflection->newInstance(), Array('action' => $action));
 		}
-		
+
 		$this->sortParams();
+	}
+
+	/**
+	 * Gets the setup method used by the task
+	 *
+	 * @return ReflectionMethod|NULL
+	 * @author Dan Cox
+	 */
+	public function getSetupMethod($action)
+	{	
+		if($this->reflection->hasMethod('setup'.ucwords($action)))
+		{	
+			return $this->reflection->getMethod('setup'.ucwords($action));
+
+		} elseif($this->reflection->hasMethod('setup'))
+		{
+			return $this->reflection->getMethod('setup');
+		}
+
+		return NULL;
 	}
 
 	/**
