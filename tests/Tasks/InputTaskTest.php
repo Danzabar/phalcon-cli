@@ -70,19 +70,6 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test that the exception action throws an exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_throwInvalidValidationException()
-	{
-		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException');
-
-		$this->CT->execute('Input:exceptionTest');
-	}
-
-	/**
 	 * Test exception fires on missing argument
 	 *
 	 * @return void
@@ -133,7 +120,5 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertContains('No argument passed', $this->CT->getOutput());
 	}
-
-
 
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase

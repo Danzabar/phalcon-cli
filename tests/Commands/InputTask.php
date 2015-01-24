@@ -42,9 +42,6 @@ class InputTask extends Task
 			case 'required':
 				$this->argument->addExpected('email', InputArgument::Required);
 				break;
-			case 'exceptionTest':
-				$this->argument->addExpected('value', 'string');
-				break;
 			case 'validation':
 				$this->argument->addExpected('value', Array(InputArgument::Optional, InputArgument::Alpha));
 				break;
@@ -106,18 +103,6 @@ class InputTask extends Task
 
 		$this->output->writeln('No argument passed');
 	}
-
-	/**
-	 * Test for invalid validation exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function exceptionTest()
-	{
-		$this->output->writeln('no Exception!');
-	}
-
 
 } // END class InputTask extends Command
 

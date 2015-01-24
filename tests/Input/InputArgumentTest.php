@@ -46,5 +46,19 @@ class InputArgumentTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(InputArgument::Required, $expectations['name']);
 	}
 
+	/**
+	 * Test that an exception is thrown when you pass an invalid rule
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_exceptionOnInvalidRequirement()
+	{
+		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException');
+
+		$this->inputArgument->addExpected('name', 'fakerule');
+		$this->inputArgument->validate('name', '');
+	}
+
 
 } // END class InputArgumentTest extends \PHPUnit_Framework_TestCase

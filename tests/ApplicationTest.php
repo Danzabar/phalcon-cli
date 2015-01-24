@@ -71,13 +71,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	
 		ob_start();
 			
-			$app->start(Array('cli', 'fake'));
+			$command = $app->start(Array('cli', 'fake'));
 			
 			$content = ob_get_contents();
 
 		ob_end_clean();
 
 		$this->assertContains('main action', $content);
+		$this->assertInstanceOf('Danzabar\CLI\Input\Input', $command->getInput());
+		$this->assertInstanceOf('Danzabar\CLI\Output\Output', $command->getOutput());
 	}
 
 	/**
@@ -90,10 +92,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	{
 		$app = new Application;
 		$app->add(new FakeTask);
-		$app->start(Array('cli', 'fake:output'));
+		$command = $app->start(Array('cli', 'fake:output'));
 
-		#$this->assertInstanceOf('\Danzabar\CLI\Output\Output', $app->getOutput());
-		#$this->assertInstanceOf('\Danzabar\CLI\Input\Input', $app->getInput());	
+		$this->assertInstanceOf('\Danzabar\CLI\Output\Output', $command->getOutput());
+		$this->assertInstanceOf('\Danzabar\CLI\Input\Input', $command->getInput());	
 	}
 
 	/**
@@ -110,6 +112,39 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 		$command = $app->find('fake:output');
 
 		$this->assertInstanceOf('FakeTask', $command);
+	}
+
+	/**
+	 * Test that an exception is throw when trying to find a task that doesnt exist
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_fireExceptionOnNoCommandFound()
+	{
+		$this->setExpectedException('Danzabar\CLI\Tasks\Exceptions\CommandNotFoundException');
+
+		$app = new Application;
+		$app->find('task:action');
+	}
+
+	/**
+	 * Test setting the application suffixes
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_settingSuffixes()
+	{
+		// Will throw an exception because it looks for FakeTaskTask
+		$this->setExpectedException('Phalcon\CLI\Dispatcher\Exception');
+
+		$app = new Application;
+		$app->setTaskSuffix('Task');
+		$app->setActionSuffix('Action');
+
+		$app->add(new FakeTask);
+		$app->start(['cli', 'fake']);	
 	}
 	
 
