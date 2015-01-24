@@ -129,6 +129,22 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Test that an exception fires when trying to find a command with the right task name but wrong action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_fireExceptionWhenTaskFoundButNotAction()
+	{
+		$this->setExpectedException('Danzabar\CLI\Tasks\Exceptions\CommandNotFoundException');
+
+		$app = new Application;
+		$app->add(new FakeTask);
+
+		$app->find('fake:action');
+	}
+
+	/**
 	 * Test setting the application suffixes
 	 *
 	 * @return void
