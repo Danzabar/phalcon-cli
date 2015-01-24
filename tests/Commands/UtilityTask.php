@@ -1,6 +1,6 @@
 <?php
 
-use Danzabar\CLI\Command,
+use Danzabar\CLI\Tasks\Task,
 	Danzabar\CLI\Traits;
 
 /**
@@ -10,7 +10,7 @@ use Danzabar\CLI\Command,
  * @subpackage Test
  * @author Dan Cox
  */
-class UtilityTask extends Command
+class UtilityTask extends Task
 {
 	use Traits\Table;
 

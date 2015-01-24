@@ -1,6 +1,6 @@
-<?php namespace Danzabar\CLI;
+<?php namespace Danzabar\CLI\Tasks;
 
-use \Phalcon\CLI\Task;
+use \Phalcon\CLI\Task as PhalTask;
 
 /**
  * The command class deals with executing CLI based commands, through phalcon task
@@ -9,7 +9,7 @@ use \Phalcon\CLI\Task;
  * @subpackage Command
  * @author Dan Cox
  */
-class Command extends Task
+class Task extends PhalTask
 {
 	
 	/**

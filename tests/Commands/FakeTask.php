@@ -1,6 +1,6 @@
 <?php
 
-use Danzabar\CLI\Command,
+use Danzabar\CLI\Tasks\Task,
 	Danzabar\CLI\Traits,
 	Danzabar\CLI\Input\InputArgument,
 	Danzabar\CLI\Input\InputOption;
@@ -12,7 +12,7 @@ use Danzabar\CLI\Command,
  * @subpackage Tests
  * @author Dan Cox
  */
-class FakeTask extends Command
+class FakeTask extends Task
 {
 	use Traits\Question,
 		Traits\Confirmation;

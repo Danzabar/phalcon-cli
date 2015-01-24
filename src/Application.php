@@ -7,7 +7,6 @@ use Phalcon\CLI\Dispatcher,
 	Danzabar\CLI\Tasks\TaskLibrary,
 	Phalcon\DI;
 
-
 /**
  * The Application class for CLI commands
  *
