@@ -1,14 +1,16 @@
-<?php namespace Danzabar\CLI\Tasks\Traits;
+<?php namespace Danzabar\CLI\Tasks\Helpers;
 
+use Danzabar\CLI\Tasks\Helpers\Helper;
 
 /**
- * The confirmation trait, confirm an action and return a Boolean value
+ * The confirmation helper class
  *
- *
+ * @package CLI
+ * @subpackage Tasks\Helpers
+ * @author Dan Cox
  */
-Trait Confirmation
+class Confirmation extends Helper
 {
-
 	/**
 	 * The value for a a "Yes" confirmation
 	 *
@@ -119,4 +121,4 @@ Trait Confirmation
 		$this->invalidConfirmationError = $error;
 	}
 
-}
+} // END class Confirmation extends Helper

@@ -5,6 +5,7 @@ use Phalcon\CLI\Dispatcher,
 	Danzabar\CLI\Input\Input,
 	Danzabar\CLI\Tasks\TaskPrepper,
 	Danzabar\CLI\Tasks\TaskLibrary,
+	Danzabar\CLI\Tasks\Helpers,
 	Phalcon\DI;
 
 /**
@@ -29,6 +30,13 @@ class Application
 	 * @var Object
 	 */
 	protected $dispatcher;
+
+	/**
+	 * Instance of the Helpers class
+	 *
+	 * @var Object
+	 */
+	protected $helpers;
 
 	/**
 	 * The raw set of arguments from the CLI
@@ -76,7 +84,7 @@ class Application
 		$this->di = (!is_null($DI) ? $DI : new DI);
 		$this->dispatcher = (!is_null($dispatcher) ? $dispatcher : new Dispatcher);
 		$this->library = (!is_null($library) ? $library : new TaskLibrary);
-
+		
 		// Set the defaults for the dispatcher
 		$this->dispatcher->setDefaultTask('Help');
 		$this->dispatcher->setDefaultAction('list');
@@ -91,6 +99,23 @@ class Application
 		$this->di->setShared('console', $this);
 		
 		$this->prepper = new TaskPrepper($this->di);
+		$this->helpers = new Helpers($this->di);
+		$this->registerDefaultHelpers();
+
+		$this->di->setShared('helpers', $this->helpers);
+	}
+
+	/**
+	 * Registers the question, confirmation and table helpers
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function registerDefaultHelpers()
+	{
+		$this->helpers->registerHelper('question', 'Danzabar\CLI\Tasks\Helpers\Question');
+		$this->helpers->registerHelper('confirm', 'Danzabar\CLI\Tasks\Helpers\Confirmation');
+		$this->helpers->registerHelper('table', 'Danzabar\CLI\Tasks\Helpers\Table');
 	}
 
 	/**
@@ -149,7 +174,6 @@ class Application
 		return $this->library->find($name);
 	}
 
-
 	/**
 	 * Format the arguments into a useable state
 	 *
@@ -173,6 +197,17 @@ class Application
 			'action' 	=> $action,
 			'params'	=> $args
 		);
+	}
+
+	/**
+	 * Returns the helpers object
+	 *
+	 * @return Object
+	 * @author Dan Cox
+	 */
+	public function helpers()
+	{
+		return $this->helpers;
 	}
 
 	/**

@@ -1,13 +1,16 @@
-<?php namespace Danzabar\CLI\Tasks\Traits;
+<?php namespace Danzabar\CLI\Tasks\Helpers;
+
+use Danzabar\CLI\Tasks\Helpers\Helper;
 
 /**
- * The table trait lets to create tables by passing arrays
+ * The table helper class
  *
- *
+ * @package CLI
+ * @subpackage Tasks\Helpers
+ * @author Dan Cox
  */
-Trait Table
+class Table extends Helper
 {
-
 	/**
 	 * The character used to fill a verticle bar
 	 *
@@ -49,7 +52,7 @@ Trait Table
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function drawTable(Array $data)
+	public function draw(Array $data)
 	{
 		$lengths = $this->calcLength($data);
 
@@ -153,4 +156,4 @@ Trait Table
 		return $lengths;
 	}
 
-}
+} // END class Table extends Helper

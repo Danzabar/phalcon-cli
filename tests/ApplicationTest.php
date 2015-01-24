@@ -162,6 +162,23 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 		$app->add(new FakeTask);
 		$app->start(['cli', 'fake']);	
 	}
+
+	/**
+	 * Test that the helpers are correctly setup
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_helperSetUp()
+	{
+		$app = new Application;
+
+		$helpers = $app->helpers();
+
+		$this->assertInstanceOf('Danzabar\CLI\Tasks\Helpers\Question', $helpers->load('question'));
+		$this->assertInstanceOf('Danzabar\CLI\Tasks\Helpers\Confirmation', $helpers->load('confirm'));
+		$this->assertInstanceOf('Danzabar\CLI\Tasks\Helpers\Table', $helpers->load('table'));
+	}
 	
 
 } // END class ApplicationTest extends \PHPUnit_Framework_TestCase

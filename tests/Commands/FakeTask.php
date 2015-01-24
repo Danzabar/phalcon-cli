@@ -1,7 +1,6 @@
 <?php
 
 use Danzabar\CLI\Tasks\Task,
-	Danzabar\CLI\Tasks\Traits,
 	Danzabar\CLI\Input\InputArgument,
 	Danzabar\CLI\Input\InputOption;
 
@@ -14,9 +13,6 @@ use Danzabar\CLI\Tasks\Task,
  */
 class FakeTask extends Task
 {
-	use Traits\Question,
-		Traits\Confirmation;
-
 	/**
 	 * The name
 	 *
@@ -71,7 +67,8 @@ class FakeTask extends Task
 	 */
 	public function askMe()
 	{
-		$answer = $this->ask('What is your name?');
+		$question = $this->helpers->load('question');
+		$answer = $question->ask('What is your name?');
 
 		$this->output->writeln($answer);
 	}
@@ -84,11 +81,12 @@ class FakeTask extends Task
 	 */
 	public function advAsk()
 	{
-		$prelim = $this->ask('Do you like questions?');
+		$question = $this->helpers->load('question');
+		$prelim = $question->ask('Do you like questions?');
 
 		if($prelim == 'yes')
 		{
-			$answer = $this->ask('Great, so whats your favourite question?');
+			$answer = $question->ask('Great, so whats your favourite question?');
 
 			$this->output->writeln($answer);
 		}
@@ -102,14 +100,16 @@ class FakeTask extends Task
 	 */
 	public function choiceQ()
 	{
+		$question = $this->helpers->load('question');
+
 		$choices = Array('one', 'two', 'three');
 
 		if(isset($this->argument->error))
 		{
-			$this->setChoiceError($this->argument->error);
+			$question->setChoiceError($this->argument->error);
 		}
 
-		$answer = $this->choice('Select one of the following:', $choices);
+		$answer = $question->choice('Select one of the following:', $choices);
 
 		if($answer)
 		{
@@ -125,9 +125,11 @@ class FakeTask extends Task
 	 */
 	public function multiChoice()
 	{
+		$question = $this->helpers->load('question');
+
 		$choices = Array('one', 'five', 'six', 'eight', 'five');
 
-		$answers = $this->multipleChoice('Select two of the following:', $choices);
+		$answers = $question->multipleChoice('Select two of the following:', $choices);
 
 		if($answers)
 		{
@@ -146,7 +148,9 @@ class FakeTask extends Task
 	 */
 	public function confirmation()
 	{
-		$confirm = $this->confirm();
+		$confirmation = $this->helpers->load('confirm');
+
+		$confirm = $confirmation->confirm();
 
 		if($confirm)
 		{
@@ -165,17 +169,18 @@ class FakeTask extends Task
 	 */
 	public function explicitConfirm()
 	{	
-		$this->setConfirmationNo('no');
-		$this->setConfirmationYes('yes');
-		$this->setConfirmExplicit(TRUE);
+		$confirmation = $this->helpers->load('confirm');
+
+		$confirmation->setConfirmationNo('no');
+		$confirmation->setConfirmationYes('yes');
+		$confirmation->setConfirmExplicit(TRUE);
 
 		if(isset($this->argument->error))
 		{
-			$this->setInvalidConfirmationError($this->argument->error);
+			$confirmation->setInvalidConfirmationError($this->argument->error);
 		}
 
-
-		$confirm = $this->confirm("Please confirm that you wish to continue... (Yes|No)");
+		$confirm = $confirmation->confirm("Please confirm that you wish to continue... (Yes|No)");
 
 		if($confirm)
 		{

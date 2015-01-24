@@ -1,12 +1,16 @@
-<?php namespace Danzabar\CLI\Tasks\Traits;
+<?php namespace Danzabar\CLI\Tasks\Helpers;
+
+use Danzabar\CLI\Tasks\Helpers\Helper;
 
 /**
- * The question trait allows you to ask a selection of questions.
+ * The Question helper class
  *
+ * @package CLI
+ * @subpackage Tasks\Helpers
+ * @author Dan Cox
  */
-Trait Question
+class Question extends Helper
 {
-
 	/**
 	 * The error message displayed when the user selects the wrong choices. 
 	 *
@@ -83,31 +87,52 @@ Trait Question
 	 */
 	public function validateChoices($answer, $choices, $allowedMultiple = FALSE)
 	{
-		$answersArr = explode(',', $answer);
-		$formatedAnswers = Array();
-
-		if(count($answersArr) == 1 || $allowedMultiple === FALSE)
+		if($allowedMultiple)
 		{
-			if(!in_array(trim($answer), $choices))
+			return $this->validateMultipleChoice($answer, $choices);
+		} else
+		{
+			return $this->validateSingleChoice($answer, $choices);
+		}
+	}
+
+	/**
+	 * Validates a single answer
+	 *
+	 * @return Boolean|String
+	 * @author Dan Cox
+	 */
+	public function validateSingleChoice($answer, $choice)
+	{
+		if(!in_array(trim($answer), $choice))
+		{
+			return false;
+		}
+
+		return $answer;
+	}
+
+	/**
+	 * Validates multiple answers
+	 *
+	 * @return Boolean|String
+	 * @author Dan Cox
+	 */
+	public function validateMultipleChoice($answer, $choice)
+	{
+		$answers = explode(',', $answer);
+		
+		foreach($answers as $ans)
+		{
+			if(!in_array(trim($ans), $choice))
 			{
 				return false;
 			}
 
-			return trim($answer);
+			$formatedAnswers[] = trim($ans);
+		}		
 
-		} else
-		{
-			foreach($answersArr as $ans)
-			{
-				if(!in_array(trim($ans), $choices))
-				{
-					return false;
-				}
-
-				$formatedAnswers[] = trim($ans);
-			}		
-
-			return $formatedAnswers;
-		}	
+		return $formatedAnswers;
 	}
-}
+
+} // END class Question extends Helper

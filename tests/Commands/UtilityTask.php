@@ -1,7 +1,6 @@
 <?php
 
-use Danzabar\CLI\Tasks\Task,
-	Danzabar\CLI\Tasks\Traits;
+use Danzabar\CLI\Tasks\Task;
 
 /**
  * The utility task
@@ -12,8 +11,6 @@ use Danzabar\CLI\Tasks\Task,
  */
 class UtilityTask extends Task
 {
-	use Traits\Table;
-
 	/**
 	 * The task name
 	 *
@@ -47,11 +44,13 @@ class UtilityTask extends Task
 	 */
 	public function table()
 	{
+		$table = $this->helpers->load('table');
+
 		$data = Array();
 		$data[] = Array('Header1' => 'Value', 'Header2' => 'Value2');
 		$data[] = Array('Header1' => 'Longer value', 'Header2' => '');	
 
-		$this->drawTable($data);
+		$table->draw($data);
 	}
 	
 } // END class UtilityTask extends Command
