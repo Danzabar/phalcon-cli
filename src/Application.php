@@ -88,6 +88,7 @@ class Application
 		// Add the output and input streams to the DI
 		$this->di->setShared('output', new Output);
 		$this->di->setShared('input', new Input);
+		$this->di->setShared('console', $this);
 		
 		$this->prepper = new TaskPrepper($this->di);
 	}
@@ -129,8 +130,8 @@ class Application
 	public function add($command)
 	{
 		$tasks = $this->prepper
-					  ->load(get_class($command))
-					  ->describe();
+					->load(get_class($command))
+					->describe();
 
 		$this->library->add(['task' => $tasks, 'class' => $command]);
 

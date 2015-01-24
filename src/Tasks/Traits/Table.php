@@ -1,4 +1,4 @@
-<?php namespace Danzabar\CLI\Traits;
+<?php namespace Danzabar\CLI\Tasks\Traits;
 
 /**
  * The table trait lets to create tables by passing arrays

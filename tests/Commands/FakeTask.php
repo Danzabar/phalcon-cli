@@ -1,7 +1,7 @@
 <?php
 
 use Danzabar\CLI\Tasks\Task,
-	Danzabar\CLI\Traits,
+	Danzabar\CLI\Tasks\Traits,
 	Danzabar\CLI\Input\InputArgument,
 	Danzabar\CLI\Input\InputOption;
 

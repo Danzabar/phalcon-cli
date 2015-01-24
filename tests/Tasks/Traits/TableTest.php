@@ -1,7 +1,7 @@
 <?php
 
 use Danzabar\CLI\CommandTester,
-	Danzabar\CLI\Traits\Table;
+	Danzabar\CLI\Tasks\Traits\Table;
 
 /**
  * Test case for the table trait

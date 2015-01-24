@@ -1,4 +1,4 @@
-<?php namespace Danzabar\CLI\Traits;
+<?php namespace Danzabar\CLI\Tasks\Traits;
 
 
 /**
