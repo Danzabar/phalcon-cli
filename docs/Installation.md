@@ -7,7 +7,7 @@ Use the following instructions to start using the CLI - Although remember, you w
 
 To install using composer add it to the list of dependencies in the composer.json file.
 
-	"danzabar/phalcon-cli": "0.2.x"
+	"danzabar/phalcon-cli": "1.x"
 
 
 ## The Application
@@ -15,12 +15,16 @@ To install using composer add it to the list of dependencies in the composer.jso
 You will first need an application to use the CLI tools with. The following is a basic instruction of how to set up a basic app, but you are free to expand on this as there might be configurations or specific DI elements you want to add onto it.
 
 	#!/usr/bin/env php
+	<?php
 
 	$di = ''; // Set your phalcon DI up
 
 
 	$app = new Danzabar\CLI\Application;
 	$app->setDI($di);
+
+	// Add your commands!
+	$app->add(new Task);
 
 	try {
 		
@@ -48,4 +52,10 @@ Once its loaded into the apps command library you can access it by using the `fi
 	// Find it with an action name appended, which also validates the action
 	$app->find('command:main');
 
+## Adding a suffix onto tasks or actions
+
+By default there is no longer any suffix for tasks or actions, so if your calling the main action it will look for the method `main` - Although if you prefered the old way, or even a different way, then you can change it:
+
+	$app->setActionSuffix('Action');
 	
+Bare in mind with tasks, you are specifically adding that class.. So there is no need to edit the suffix.  
