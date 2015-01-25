@@ -97,9 +97,9 @@ class CommandTester
 
 		$args = Array('cli', $this->command);
 	
-		foreach($params as $param)
+		foreach($params as $key => $param)
 		{
-			$args[] = $param;
+			$args[] = $this->formatArgument($key, $param);
 		}
 
 		$this->application->start($args);
@@ -109,6 +109,22 @@ class CommandTester
 
 		$this->output = $di->get('output')->read();
 
+	}
+
+	/**
+	 * Formats arguments and options
+	 *
+	 * @return String
+	 * @author Dan Cox
+	 */
+	public function formatArgument($key, $param)
+	{
+		if(strpos($key, '-') !== false)
+		{
+			return $key.'="'.$param.'"';
+		}
+
+		return $param;
 	}
 
 	/**

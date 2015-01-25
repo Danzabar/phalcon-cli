@@ -121,4 +121,17 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains('No argument passed', $this->CT->getOutput());
 	}
 
+	/**
+	 * Test that option values are correctly extracted
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_optionValues()
+	{
+		$this->CT->execute('Input:options', Array('--name' => 'myname'));
+
+		$this->assertContains('myname', $this->CT->getOutput());
+	}
+
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase

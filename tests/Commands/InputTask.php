@@ -103,5 +103,27 @@ class InputTask extends Task
 		$this->output->writeln('No argument passed');
 	}
 
+	/**
+	 * Setup function specific to options action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setupOptions()
+	{
+		$this->option->addExpected('name', InputOption::ValueRequired);
+	}
+
+	/**
+	 * Action to test options
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function options()
+	{
+		$this->output->writeln($this->option->name);
+	}
+
 } // END class InputTask extends Command
 

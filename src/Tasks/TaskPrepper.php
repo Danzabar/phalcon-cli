@@ -159,12 +159,22 @@ class TaskPrepper
 	 */
 	public function sortParams()
 	{
+		$this->sortArguments();
+		$this->sortOptions();
+	}
+
+	/**
+	 * Sorts out arguments into their correct orders
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function sortArguments()
+	{
 		$arguments = Array();
-		$options = Array();
 
 		$expectedArguments = $this->di->get('argument')->getExpectedOrder();
-		$expectedOptions = $this->di->get('option')->getExpectedOrder();
-			
+
 		foreach($expectedArguments as $pos => $key)
 		{
 			if(array_key_exists($pos, $this->arguments))
@@ -176,6 +186,21 @@ class TaskPrepper
 			}
 		}
 
+		$this->di->get('argument')->load($arguments);
+	}
+
+	/**
+	 * Sorts out options into correct orders
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function sortOptions()
+	{
+		$options = Array();
+		
+		$expectedOptions = $this->di->get('option')->getExpectedOrder();
+
 		foreach($expectedOptions as $pos => $key)
 		{
 			if(array_key_exists($pos, $this->options))
@@ -185,10 +210,8 @@ class TaskPrepper
 			{
 				$this->di->get('option')->validate($key, NULL);
 			}
-		}		
+		}	
 
-		// Load these
-		$this->di->get('argument')->load($arguments);
 		$this->di->get('option')->load($options);
 	}
 
@@ -205,9 +228,9 @@ class TaskPrepper
 
 		foreach($params as $param)
 		{
-			if(strpos($param, '--') !== false)
+			if(strpos($param, '-') !== false)
 			{
-				$this->options[] = str_replace('--', '', $param);
+				$this->options[] = $this->extractOption($param);
 			} else
 			{
 				$this->arguments[] = $param;
@@ -215,6 +238,25 @@ class TaskPrepper
 		}
 
 		return $this;
+	}
+
+	/**
+	 * extracts the option value from an option, or boolean
+	 *
+	 * @return String|Boolean
+	 * @author Dan Cox
+	 */
+	public function extractOption($str)
+	{
+		// If this has an = it has a value, else its a flag.
+		if(strpos($str, '='))
+		{
+			$extraction = explode('=', $str);
+			
+			return trim(str_replace(Array('\'', '"'), '', $extraction[1]));
+		}
+
+		return true;	
 	}
 
 

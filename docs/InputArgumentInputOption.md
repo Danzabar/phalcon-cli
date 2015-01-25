@@ -24,16 +24,16 @@ The `InputArgument` class allows you to set expected and get given arguments, ar
 
 ## Options
 
-Very similar process to arguments, only we use `option`. An option must be preceeded with -- for example `--verbose` is an option, currently they can have no values and are used only as flags or switches:
+Very similar process to arguments, only we use `option`. An option must be preceeded with -- or - for example `--verbose or -verbose` is an option, Options can also contain values, for example --name="my name" or -name="my name" 
 
 	Class Option extends Task
 	{
-		public function setup()
+		public function setupMain()
 		{
 			$this->option->addExpected('verbose', InputOption::Optional);
 		}
 
-		public function mainAction()
+		public function main()
 		{
 			if(isset($this->option->verbose))
 			{
@@ -59,3 +59,6 @@ Current validation rules are;-
 #### Options
 
  - Optional
+ - Required, this means that the option must be set, whether value or flag
+ - ValueRequired, this means that the option must contain a value
+

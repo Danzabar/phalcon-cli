@@ -79,6 +79,22 @@ Trait ValidationTrait
 	}
 
 	/**
+	 * Validation for options to specify that a value is required and not just flag
+	 *
+	 * @return Mixed
+	 * @author Dan Cox
+	 */
+	public function validate_valueRequired($value)
+	{
+		if(is_string($value) || is_numeric($value))
+		{
+			return $value;
+		}
+
+		throw new Exceptions\RequiredValueMissingException($this->v_type, $this->v_key);
+	}
+
+	/**
 	 * Checks that the string contains only alpha characters
 	 *
 	 * @return Mixed

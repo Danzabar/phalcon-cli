@@ -21,6 +21,7 @@ class InputOption extends ParamBag
 	 */
 	const Required	= 'required';
 	const Optional	= 'optional';
+	const ValueRequired = 'valueRequired';
 
 	/**
 	 * An array of expected options
