@@ -5,7 +5,41 @@ CLI Tools for the Phalcon Framework
 
 An expansion to the Phalcon Frameworks CLI Classes. This includes things like Questions, Confirmation, Command test class, Input/Output Streams and Application wrapper that allows you to start a CLI with minimal Effort.
 
-This is still a work in progress at the moment, so more details including documentation and examples will follow.
+## Setting up your application
+
+Setting up your CLI app is easy, heres a little example:
+
+	#!/usr/bin/env php
+	<?php 
+
+	$app = new Danzabar\CLI\Application;
+
+	// Add your Tasks
+	$app->add(new MyTask);
+
+	try {
+		
+		$app->start($argv);
+
+	} catch(\Exception $e) {
+		
+		echo $e->getMessage();
+		exit(255);
+	}
+	
+Want to use your own DI instance? cool:
+
+	#!/usr/bin/env php
+	<?php 
+
+	$di = new Phalcon\DI;
+	$app = new Danzabar\CLI\Application($di);
+
+	$app->add(new Task);
+
+	$app->start($argv);
+
+See the documentation below for more details, how to create task classes, setup argument and option variables and more...
 
 ## Documentation
 
