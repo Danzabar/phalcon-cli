@@ -5,14 +5,50 @@ CLI Tools for the Phalcon Framework
 
 An expansion to the Phalcon Frameworks CLI Classes. This includes things like Questions, Confirmation, Command test class, Input/Output Streams and Application wrapper that allows you to start a CLI with minimal Effort.
 
-This is still a work in progress at the moment, so more details including documentation and examples will follow.
+## Setting up your application
+
+Setting up your CLI app is easy, heres a little example:
+
+	#!/usr/bin/env php
+	<?php 
+
+	$app = new Danzabar\CLI\Application;
+
+	// Add your Tasks
+	$app->add(new MyTask);
+
+	try {
+		
+		$app->start($argv);
+
+	} catch(\Exception $e) {
+		
+		echo $e->getMessage();
+		exit(255);
+	}
+	
+Want to use your own DI instance? cool:
+
+	#!/usr/bin/env php
+	<?php 
+
+	$di = new Phalcon\DI;
+	$app = new Danzabar\CLI\Application($di);
+
+	$app->add(new Task);
+
+	$app->start($argv);
+
+See the documentation below for more details, how to create task classes, setup argument and option variables and more...
 
 ## Documentation
 
  - [Installation](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Installation.md)
  - [Writing Tasks](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Writing%20Tasks.md)
+ - [Working with params](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Working%20With%20Params.md)
  - [Arguments and Options](https://github.com/Danzabar/phalcon-cli/blob/master/docs/InputArgumentInputOption.md)
  - [Input Output](https://github.com/Danzabar/phalcon-cli/blob/master/docs/InputOutput.md)
+ - [Helpers](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Helpers.md)
  - [Questions](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Questions.md)
  - [Confirmation](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Confirmation.md)
  - [Tables](https://github.com/Danzabar/phalcon-cli/blob/master/docs/Tables.md)

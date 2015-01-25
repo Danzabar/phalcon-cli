@@ -27,6 +27,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->CT = new CommandTester();	
+		$this->CT->add(new FakeTask);
 	}
 
 	/**
@@ -38,7 +39,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_askQuestion()
 	{
 		$this->CT->setInput("answer \n");
-		$this->CT->execute('Fake:ask');
+		$this->CT->execute('fake:askMe');
 
 		$this->assertContains('answer', $this->CT->getOutput());
 	}
@@ -52,7 +53,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_advQuestion()
 	{
 		$this->CT->setInput("yes\nAnswer\n");
-		$this->CT->execute('Fake:advAsk');
+		$this->CT->execute('fake:advAsk');
 
 		$this->assertContains('Answer', $this->CT->getOutput());	
 	}
@@ -66,7 +67,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_choiceQuestion()
 	{
 		$this->CT->setInput("two\n");
-		$this->CT->execute('Fake:choice');
+		$this->CT->execute('fake:choiceQ');
 		
 		$this->assertContains('You have selected two', $this->CT->getOutput());
 	}
@@ -80,7 +81,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_choiceError()
 	{
 		$this->CT->setInput("\n");
-		$this->CT->execute('Fake:choice');
+		$this->CT->execute('fake:choiceQ');
 
 		$this->assertContains('The answer you selected is invalid', $this->CT->getOutput());
 	}
@@ -94,7 +95,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_customError()
 	{
 		$this->CT->setInput("\n");
-		$this->CT->execute('Fake:choice', Array('This is a custom error'));
+		$this->CT->execute('fake:choiceQ', Array('This is a custom error'));
 
 		$this->assertContains('This is a custom error', $this->CT->getOutput());
 	}
@@ -108,7 +109,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_multipleChoice()
 	{
 		$this->CT->setInput("one, five\n");
-		$this->CT->execute('Fake:multiChoice');
+		$this->CT->execute('fake:multiChoice');
 
 		$this->assertContains("Selected one", $this->CT->getOutput());
 		$this->assertContains("Selected five", $this->CT->getOutput());	
@@ -123,7 +124,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 	public function test_exceptionOnFalseMultipleChoiceAnswers()
 	{
 		$this->CT->setInput("answer, fake\n");
-		$this->CT->execute("Fake:multiChoice");
+		$this->CT->execute("fake:multiChoice");
 
 		$this->assertContains("The answer you selected is invalid", $this->CT->getOutput());
 	}

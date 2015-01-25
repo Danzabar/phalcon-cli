@@ -1,8 +1,6 @@
 <?php
 
-use Danzabar\CLI\CommandTester,
-	Danzabar\CLI\Application,
-	Phalcon\DI\FactoryDefault\CLI;
+use Danzabar\CLI\CommandTester;
 
 /**
  * Test case for the input classes
@@ -29,6 +27,7 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->CT = new CommandTester();
+		$this->CT->add(new InputTask);
 	}
 
 	/**
@@ -68,19 +67,6 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute('Input:required', Array('email' => 'danzabar@gmail.com'));
 
 		$this->assertContains('danzabar@gmail.com', $this->CT->getOutput());
-	}
-
-	/**
-	 * Test that the exception action throws an exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_throwInvalidValidationException()
-	{
-		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException');
-
-		$this->CT->execute('Input:exception');
 	}
 
 	/**
@@ -135,6 +121,30 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains('No argument passed', $this->CT->getOutput());
 	}
 
+	/**
+	 * Test that option values are correctly extracted
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_optionValues()
+	{
+		$this->CT->execute('Input:options', Array('--name' => 'myname'));
 
+		$this->assertContains('myname', $this->CT->getOutput());
+	}
+
+	/**
+	 * Test the exception being thrown if i just pass this option as a flag
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_optionValuesFail()
+	{
+		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\RequiredValueMissingException');
+
+		$this->CT->execute('Input:options', Array('--name'));
+	}
 
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase

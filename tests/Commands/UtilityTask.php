@@ -1,7 +1,6 @@
 <?php
 
-use Danzabar\CLI\Command,
-	Danzabar\CLI\Traits;
+use Danzabar\CLI\Tasks\Task;
 
 /**
  * The utility task
@@ -10,16 +9,14 @@ use Danzabar\CLI\Command,
  * @subpackage Test
  * @author Dan Cox
  */
-class UtilityTask extends Command
+class UtilityTask extends Task
 {
-	use Traits\Table;
-
 	/**
 	 * The task name
 	 *
 	 * @var string
 	 */
-	protected $name = 'Utility';
+	protected $name = 'utility';
 	
 	/**
 	 * Description
@@ -34,7 +31,7 @@ class UtilityTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function mainAction()
+	public function main()
 	{
 		$this->output->writeln("The main action of the utility task");
 	}
@@ -45,13 +42,15 @@ class UtilityTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function tableAction()
+	public function table()
 	{
+		$table = $this->helpers->load('table');
+
 		$data = Array();
 		$data[] = Array('Header1' => 'Value', 'Header2' => 'Value2');
 		$data[] = Array('Header1' => 'Longer value', 'Header2' => '');	
 
-		$this->drawTable($data);
+		$table->draw($data);
 	}
 	
 } // END class UtilityTask extends Command

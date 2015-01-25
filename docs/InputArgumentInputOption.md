@@ -1,27 +1,21 @@
 Input Arguments and Input Options
 =================================
 
-As well as using a param variable in the action you can now define arguments and options. This is currently a work in progress so there maybe some bugs with it and its implemented in a very basic form.
+You can specify argument and option parameters in each task, you can add validation rules for these params. As mentioned in the previous DOC file you can make specific setup rules by including the action name in the setup, you can just use the generic `setup` method too, which gets passed an string with the action name called in.
 
 ## Arguments
 
 The `InputArgument` class allows you to set expected and get given arguments, arguments are defined as any parameter after the `task:action` text. Your task classes can define expected arguments, by using a method called `setup` like so
 
-	Class Task extends Command
+	Class Argument extends Task
 	{
 	
 		public function setup($action)
 		{
 			$this->argument->addExpected('name', InputArgument::Required);	
-
-			// You can also specify via actions
-			if($action == 'listAction')
-			{
-				$this->argument->addExpected('format', InputArgument::Optional);
-			}
 		}
 
-		public function mainAction()
+		public function main()
 		{
 			// To use the name argument, simply
 			$this->output->writeln($this->argument->name);
@@ -30,16 +24,16 @@ The `InputArgument` class allows you to set expected and get given arguments, ar
 
 ## Options
 
-Very similar process to arguments, only we use `option`. An option must be preceeded with -- for example `--verbose` is an option, currently they can have no values and are used only as flags or switches:
+Very similar process to arguments, only we use `option`. An option must be preceeded with -- or - for example `--verbose or -verbose` is an option, Options can also contain values, for example --name="my name" or -name="my name" 
 
-	Class Task extends Command
+	Class Option extends Task
 	{
-		public function setup()
+		public function setupMain()
 		{
 			$this->option->addExpected('verbose', InputOption::Optional);
 		}
 
-		public function mainAction()
+		public function main()
 		{
 			if(isset($this->option->verbose))
 			{
@@ -56,7 +50,15 @@ Adding an expected option or argument means you can add validation to them, you 
 
 Current validation rules are;-
 
- - Optional, the option/argument is only optional
- - Required, the option/argument is required and will throw an exception if its not set
- - Alpha, the option/argument can only consist of alpha characters
+#### Arguments
+
+ - Optional, the argument is only optional
+ - Required, the argument is required and will throw an exception if its not set
+ - Alpha, the argument can only consist of alpha characters
+
+#### Options
+
+ - Optional
+ - Required, this means that the option must be set, whether value or flag
+ - ValueRequired, this means that the option must contain a value
 

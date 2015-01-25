@@ -1,12 +1,12 @@
 <?php namespace Danzabar\CLI;
 
-use Phalcon\CLI\Console,
+use Phalcon\CLI\Dispatcher,
 	Danzabar\CLI\Output\Output,
 	Danzabar\CLI\Input\Input,
 	Danzabar\CLI\Tasks\TaskPrepper,
 	Danzabar\CLI\Tasks\TaskLibrary,
-	Phalcon\DI\FactoryDefault\CLI;
-
+	Danzabar\CLI\Tasks\Helpers,
+	Phalcon\DI;
 
 /**
  * The Application class for CLI commands
@@ -15,7 +15,7 @@ use Phalcon\CLI\Console,
  * @subpackage Application
  * @author Dan Cox
  */
-class Application extends Console
+class Application
 {
 	/**
 	 * The Dependancy object
@@ -25,18 +25,25 @@ class Application extends Console
 	protected $di;
 
 	/**
+	 * Instance of the dispatcher
+	 *
+	 * @var Object
+	 */
+	protected $dispatcher;
+
+	/**
+	 * Instance of the Helpers class
+	 *
+	 * @var Object
+	 */
+	protected $helpers;
+
+	/**
 	 * The raw set of arguments from the CLI
 	 *
 	 * @var Array
 	 */
 	protected $arguments;
-
-	/**
-	 * The instance of the console
-	 *
-	 * @var Object
-	 */
-	protected $console;
 
 	/**
 	 * The task Prepper instance
@@ -66,38 +73,49 @@ class Application extends Console
 	 */
 	protected $version;
 
-
 	/**
 	 * The phalcon console object
 	 *
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function __construct($console = NULL, $library = NULL)
+	public function __construct($DI = NULL, $dispatcher = NULL, $library = NULL)
 	{
-		$this->console = (!is_null($console) ? $console : new Console);
+		$this->di = (!is_null($DI) ? $DI : new DI);
+		$this->dispatcher = (!is_null($dispatcher) ? $dispatcher : new Dispatcher);
 		$this->library = (!is_null($library) ? $library : new TaskLibrary);
-	}
+		
+		// Set the defaults for the dispatcher
+		$this->dispatcher->setDefaultTask('Help');
+		$this->dispatcher->setDefaultAction('list');
 
-	/**
-	 * Set the dependency injector
-	 *
-	 * @return Application
-	 * @author Dan Cox
-	 */
-	public function setDI($di)
-	{
-		$this->di = $di;
-
+		// Set no suffixes
+		$this->dispatcher->setTaskSuffix('');
+		$this->dispatcher->setActionSuffix('');
+	
 		// Add the output and input streams to the DI
 		$this->di->setShared('output', new Output);
 		$this->di->setShared('input', new Input);
-
-		$this->console->setDI($di);
-
+		$this->di->setShared('console', $this);
+		
 		$this->prepper = new TaskPrepper($this->di);
+		$this->helpers = new Helpers($this->di);
+		$this->registerDefaultHelpers();
 
-		return $this;
+		$this->di->setShared('helpers', $this->helpers);
+	}
+
+	/**
+	 * Registers the question, confirmation and table helpers
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function registerDefaultHelpers()
+	{
+		$this->helpers->registerHelper('question', 'Danzabar\CLI\Tasks\Helpers\Question');
+		$this->helpers->registerHelper('confirm', 'Danzabar\CLI\Tasks\Helpers\Confirmation');
+		$this->helpers->registerHelper('table', 'Danzabar\CLI\Tasks\Helpers\Table');
 	}
 
 	/**
@@ -108,19 +126,24 @@ class Application extends Console
 	 */
 	public function start($args = Array())
 	{
-		$arguments = $this->formatArgs($args);
+		$arg = $this->formatArgs($args);
 
 		/**
 		 * Arguments and Options
 		 *
 		 */
 		$this->prepper
-			 ->load($arguments['task']."Task")
-			 ->loadParams($arguments['params'])
-			 ->prep($arguments['action']."Action");
-
+			 ->load($arg['task'])
+			 ->loadParams($arg['params'])
+			 ->prep($arg['action']);
 	
-		return $this->console->handle($arguments);		
+		$this->dispatcher->setTaskName($arg['task']);
+		$this->dispatcher->setActionName($arg['action']);
+		$this->dispatcher->setParams($arg['params']);
+
+		$this->dispatcher->setDI($this->di);
+
+		return $this->dispatcher->dispatch();
 	}
 
 	/**
@@ -132,8 +155,8 @@ class Application extends Console
 	public function add($command)
 	{
 		$tasks = $this->prepper
-					  ->load(get_class($command))
-					  ->describe();
+					->load(get_class($command))
+					->describe();
 
 		$this->library->add(['task' => $tasks, 'class' => $command]);
 
@@ -151,7 +174,6 @@ class Application extends Console
 		return $this->library->find($name);
 	}
 
-
 	/**
 	 * Format the arguments into a useable state
 	 *
@@ -163,16 +185,53 @@ class Application extends Console
 		// The first argument is always the file
 		unset($args[0]);
 
-		// The second argument will be the task:action
 		$command = explode(':', $args[1]);
 		unset($args[1]);
-		
-		// Anything that remains are params
+
+		$action = (isset($command[1]) ? $command[1] : 'main');
+		$cmd = $this->library->find($command[0].':'.$action);
+		$task = get_class($cmd);
+
 		return Array(
-			'task'		=> $command[0],
-			'action'	=> (isset($command[1]) ? $command[1] : 'main'),
-			'params'	=> array_values($args)
-		);		
+			'task'		=> $task,
+			'action' 	=> $action,
+			'params'	=> $args
+		);
+	}
+
+	/**
+	 * Returns the helpers object
+	 *
+	 * @return Object
+	 * @author Dan Cox
+	 */
+	public function helpers()
+	{
+		return $this->helpers;
+	}
+
+	/**
+	 * Sets the suffix for task classes
+	 *
+	 * @return Application
+	 * @author Dan Cox
+	 */
+	public function setTaskSuffix($suffix = '')
+	{
+		$this->dispatcher->setTaskSuffix($suffix);
+		return $this;	
+	}
+
+	/**
+	 * Sets the action suffix
+	 *
+	 * @return Application
+	 * @author Dan Cox
+	 */
+	public function setActionSuffix($suffix = '')
+	{
+		$this->dispatcher->setActionSuffix($suffix);
+		return $this;
 	}
 
 	/**
@@ -184,17 +243,6 @@ class Application extends Console
 	public function getDI()
 	{
 		return $this->di;
-	}
-
-	/**
-	 * Returns the console object
-	 *
-	 * @return Object
-	 * @author Dan Cox
-	 */
-	public function getConsole()
-	{
-		return $this->console;
 	}
 
 	/**
@@ -243,4 +291,4 @@ class Application extends Console
 		return $this;
 	}
 
-} // END class Application extends 
+} // END class Application 

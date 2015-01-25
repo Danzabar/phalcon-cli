@@ -27,6 +27,8 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->CT = new CommandTester();
+
+		$this->CT->add(new FakeTask);
 	}
 
 	/**
@@ -38,7 +40,7 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function test_confirmationAction()
 	{
 		$this->CT->setInput("Y\n");
-		$this->CT->execute('Fake:confirmation');
+		$this->CT->execute('fake:confirmation');
 
 		$this->assertContains('Thanks for confirming', $this->CT->getOutput());
 	}
@@ -52,7 +54,7 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function test_confirmationDecline()
 	{
 		$this->CT->setInput("N\n");
-		$this->CT->execute('Fake:confirmation');
+		$this->CT->execute('fake:confirmation');
 
 		$this->assertContains("Action cancelled", $this->CT->getOutput());
 	}
@@ -66,7 +68,7 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function test_implicitAction()
 	{
 		$this->CT->setInput("P\n");
-		$this->CT->execute('Fake:confirmation');
+		$this->CT->execute('fake:confirmation');
 
 		$this->assertContains("Action cancelled", $this->CT->getOutput());
 	}
@@ -80,7 +82,7 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function test_confirmationError()
 	{
 		$this->CT->setInput("P\n");
-		$this->CT->execute('Fake:explicitConfirm');
+		$this->CT->execute('fake:explicitConfirm');
 
 		$this->assertContains("Unexpected confirmation", $this->CT->getOutput());
 	}
@@ -94,7 +96,7 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function test_customConfirmationError()
 	{
 		$this->CT->setInput("P\n");
-		$this->CT->execute('Fake:explicitConfirm', Array('Invalid'));
+		$this->CT->execute('fake:explicitConfirm', Array('Invalid'));
 
 		$this->assertContains("Invalid", $this->CT->getOutput());
 	}
@@ -108,11 +110,9 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
 	public function test_acceptedExplicitConfirmation()
 	{
 		$this->CT->setInput("yes\n");
-		$this->CT->execute('Fake:explicitConfirm');
+		$this->CT->execute('fake:explicitConfirm');
 
 		$this->assertContains("Confirmed", $this->CT->getOutput());
 	}
-
-
 
 } // END class ConfirmationTest extends \PHPUnit_Framework_TestCase

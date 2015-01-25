@@ -1,7 +1,7 @@
 <?php
 
 use Danzabar\CLI\CommandTester,
-	Danzabar\CLI\Traits\Table;
+	Danzabar\CLI\Tasks\Helpers\Table;
 
 /**
  * Test case for the table trait
@@ -12,40 +12,38 @@ use Danzabar\CLI\CommandTester,
  */
 class TableTest extends \PHPUnit_Framework_TestCase
 {
-	use Table;
 
 	/**
-	 * The command tester class
+	 * The command tester instance
 	 *
 	 * @var Object
 	 */
 	protected $CT;
 
 	/**
-	 * Set up the command tester
+	 * Set up test vars
 	 *
 	 * @return void
 	 * @author Dan Cox
 	 */
 	public function setUp()
 	{
-		$this->CT = new CommandTester;
+		$this->CT = new CommandTester();
+		$this->CT->add(new UtilityTask);
 	}
 
 	/**
-	 * Test drawing functions
+	 * Test the table drawing functionality.
 	 *
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function test_draw()
+	public function test_table()
 	{
-		$this->CT->execute('Utility:table');
+		$this->CT->execute('utility:table');
 
-		// Assert that all our data is there
-		$this->assertContains('Value', $this->CT->getOutput());	
-		$this->assertContains('Value2', $this->CT->getOutput());
-		$this->assertContains('Longer value', $this->CT->getOutput());
+		$this->assertContains('Header1', $this->CT->getOutput());
+		$this->assertContains('Header2', $this->CT->getOutput());
 	}
 
 	/**
@@ -56,18 +54,18 @@ class TableTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test_calculateLength()
 	{	
+		$table = new Table;
+
 		$testArr = Array(
 			0 => Array('Header1' => 'value', 'LongerHeader2' => 'value2'),
 			1 => Array('Header1' => 'longer val', 'LongerHeader2' => ''),
 			2 => Array('Header1' => 'value', 'LongerHeader2' => 'testvalue')
 		);
 
-		$lengths = $this->calcLength($testArr);
+		$lengths = $table->calcLength($testArr);
 
 		$this->assertEquals(10, $lengths['Header1']);
 		$this->assertEquals(13, $lengths['LongerHeader2']);
 	}
-
-
 	
 } // END class TableTest extends \PHPUnit_Framework_Testcase

@@ -1,7 +1,6 @@
 <?php
 
-use Danzabar\CLI\Command,
-	Danzabar\CLI\Traits,
+use Danzabar\CLI\Tasks\Task,
 	Danzabar\CLI\Input\InputArgument,
 	Danzabar\CLI\Input\InputOption;
 
@@ -12,8 +11,23 @@ use Danzabar\CLI\Command,
  * @subpackage Tests
  * @author Dan Cox
  */
-class InputTask extends Command
+class InputTask extends Task
 {
+	
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	protected $name = 'Input';
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	protected $description = 'Command to help test input arguments and options';
+
 	/**
 	 * Setup required arguments and options
 	 *
@@ -24,22 +38,26 @@ class InputTask extends Command
 	{
 		switch($action)
 		{
-			case 'mainAction':
-				$this->option->addExpected('verbose', InputOption::Optional);
-				break;
-			case 'requiredAction':
+			case 'required':
 				$this->argument->addExpected('email', InputArgument::Required);
 				break;
-			case 'exceptionAction':
-				$this->argument->addExpected('value', 'string');
-				break;
-			case 'validationAction':
+			case 'validation':
 				$this->argument->addExpected('value', Array(InputArgument::Optional, InputArgument::Alpha));
 				break;
 		}
-	
-
 	}
+
+	/**
+	 * Setup function specifically for the main action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setupMain()
+	{
+		$this->option->addExpected('verbose', InputOption::Optional);
+	}
+		
 
 	/**
 	 * The main action
@@ -47,7 +65,7 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function mainAction()
+	public function main()
 	{
 		if(isset($this->option->verbose))
 		{
@@ -64,7 +82,7 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function requiredAction()
+	public function required()
 	{
 		$this->output->writeln($this->argument->email);
 	}
@@ -75,7 +93,7 @@ class InputTask extends Command
 	 * @return void
 	 * @author Dan Cox
 	 */
-	public function validationAction()
+	public function validation()
 	{
 		if(isset($this->argument->value))
 		{
@@ -85,6 +103,27 @@ class InputTask extends Command
 		$this->output->writeln('No argument passed');
 	}
 
+	/**
+	 * Setup function specific to options action
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setupOptions()
+	{
+		$this->option->addExpected('name', InputOption::ValueRequired);
+	}
+
+	/**
+	 * Action to test options
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function options()
+	{
+		$this->output->writeln($this->option->name);
+	}
 
 } // END class InputTask extends Command
 

@@ -97,12 +97,19 @@ class TaskPrepper
 
 		foreach($this->reflection->getMethods() as $method)
 		{
-			$methods[] = str_replace('Action', '', $method->getName());
+			$methods[] = $method->getName();
 		}
 
-		$name = str_replace('Task', '', $this->className);
+		$name = $this->className;
 
-		return Array('name' => $name, 'actions'  => $methods);
+		if($this->reflection->hasProperty('name'))
+		{
+			$prop = $this->reflection->getProperty('name');
+			$prop->setAccessible(TRUE);
+			$name = $prop->getValue($this->reflection->newInstance());
+		}
+
+		return Array('name' => $name, 'class' => $this->className, 'actions'  => $methods);
 	}
 
 	/**
@@ -113,15 +120,34 @@ class TaskPrepper
 	 */
 	public function prep($action = NULL)
 	{		
-		if($this->reflection->hasMethod('setup'))
+		$method = $this->getSetupMethod($action);
+
+		if(!is_null($method))
 		{
-			$method = $this->reflection->getMethod('setup');	
-			$task = $this->reflection->newInstance();
-			
-			$method->invokeArgs($task, Array('action' => $action));
+			$method->invokeArgs($this->reflection->newInstance(), Array('action' => $action));
 		}
-		
+
 		$this->sortParams();
+	}
+
+	/**
+	 * Gets the setup method used by the task
+	 *
+	 * @return ReflectionMethod|NULL
+	 * @author Dan Cox
+	 */
+	public function getSetupMethod($action)
+	{	
+		if($this->reflection->hasMethod('setup'.ucwords($action)))
+		{	
+			return $this->reflection->getMethod('setup'.ucwords($action));
+
+		} elseif($this->reflection->hasMethod('setup'))
+		{
+			return $this->reflection->getMethod('setup');
+		}
+
+		return NULL;
 	}
 
 	/**
@@ -133,12 +159,22 @@ class TaskPrepper
 	 */
 	public function sortParams()
 	{
+		$this->sortArguments();
+		$this->sortOptions();
+	}
+
+	/**
+	 * Sorts out arguments into their correct orders
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function sortArguments()
+	{
 		$arguments = Array();
-		$options = Array();
 
 		$expectedArguments = $this->di->get('argument')->getExpectedOrder();
-		$expectedOptions = $this->di->get('option')->getExpectedOrder();
-			
+
 		foreach($expectedArguments as $pos => $key)
 		{
 			if(array_key_exists($pos, $this->arguments))
@@ -150,6 +186,21 @@ class TaskPrepper
 			}
 		}
 
+		$this->di->get('argument')->load($arguments);
+	}
+
+	/**
+	 * Sorts out options into correct orders
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function sortOptions()
+	{
+		$options = Array();
+		
+		$expectedOptions = $this->di->get('option')->getExpectedOrder();
+
 		foreach($expectedOptions as $pos => $key)
 		{
 			if(array_key_exists($pos, $this->options))
@@ -159,10 +210,8 @@ class TaskPrepper
 			{
 				$this->di->get('option')->validate($key, NULL);
 			}
-		}		
+		}	
 
-		// Load these
-		$this->di->get('argument')->load($arguments);
 		$this->di->get('option')->load($options);
 	}
 
@@ -179,9 +228,9 @@ class TaskPrepper
 
 		foreach($params as $param)
 		{
-			if(strpos($param, '--') !== false)
+			if(strpos($param, '-') !== false)
 			{
-				$this->options[] = str_replace('--', '', $param);
+				$this->options[] = $this->extractOption($param);
 			} else
 			{
 				$this->arguments[] = $param;
@@ -189,6 +238,25 @@ class TaskPrepper
 		}
 
 		return $this;
+	}
+
+	/**
+	 * extracts the option value from an option, or boolean
+	 *
+	 * @return String|Boolean
+	 * @author Dan Cox
+	 */
+	public function extractOption($str)
+	{
+		// If this has an = it has a value, else its a flag.
+		if(strpos($str, '='))
+		{
+			$extraction = explode('=', $str);
+			
+			return trim(str_replace(Array('\'', '"'), '', $extraction[1]));
+		}
+
+		return true;	
 	}
 
 
