@@ -134,4 +134,17 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains('myname', $this->CT->getOutput());
 	}
 
+	/**
+	 * Test the exception being thrown if i just pass this option as a flag
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_optionValuesFail()
+	{
+		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\RequiredValueMissingException');
+
+		$this->CT->execute('Input:options', Array('--name'));
+	}
+
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase
