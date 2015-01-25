@@ -1,6 +1,8 @@
 <?php
 
 use Danzabar\CLI\Tasks\Helpers,
+	Danzabar\CLI\Output\Output,
+	Danzabar\CLI\Input\Input,
 	Phalcon\DI;
 
 /**
@@ -29,6 +31,9 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$di = new DI;
+		$di->setShared('output', new Output);
+		$di->setShared('input', new Input);
+
 		$this->helpers = new Helpers($di);
 	}
 
@@ -43,6 +48,33 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 		$this->helpers->registerHelper('utility.question', 'ClassName');
 
 		$this->assertEquals('ClassName', $this->helpers->getRegisteredHelper('utility.question'));
+	}
+
+	/**
+	 * Test a real case of loading a helpe
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_registerRealHelperReturnRealValues()
+	{
+		$this->helpers->registerHelper('question', 'Danzabar\CLI\Tasks\Helpers\Question');
+		$q = $this->helpers->load('question');
+
+		$this->assertInstanceOf('Phalcon\DI', $q->getDI());
+	}
+
+	/**
+	 * Test that the helpers throw an exception when it cant find the helper
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_throwexceptionOnUnknownHelper()
+	{
+		$this->setExpectedException('Danzabar\CLI\Tasks\Exceptions\RegisteredHelperClassNotFoundException');
+
+		$this->helpers->load('unknown');
 	}
 
 } // END class HelperTest extends \PHPUnit_Framework_TestCase

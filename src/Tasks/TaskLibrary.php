@@ -2,7 +2,6 @@
 
 use Danzabar\CLI\Tasks\Exceptions;
 
-
 /**
  * The task library is used by the application class to store and fetch tasks
  *

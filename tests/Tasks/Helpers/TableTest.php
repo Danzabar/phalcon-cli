@@ -14,6 +14,39 @@ class TableTest extends \PHPUnit_Framework_TestCase
 {
 
 	/**
+	 * The command tester instance
+	 *
+	 * @var Object
+	 */
+	protected $CT;
+
+	/**
+	 * Set up test vars
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setUp()
+	{
+		$this->CT = new CommandTester();
+		$this->CT->add(new UtilityTask);
+	}
+
+	/**
+	 * Test the table drawing functionality.
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_table()
+	{
+		$this->CT->execute('utility:table');
+
+		$this->assertContains('Header1', $this->CT->getOutput());
+		$this->assertContains('Header2', $this->CT->getOutput());
+	}
+
+	/**
 	 * Test the function that calculates the length of the headers, if this is correct our display will always be ok
 	 *
 	 * @return void
