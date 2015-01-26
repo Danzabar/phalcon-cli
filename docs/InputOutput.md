@@ -36,4 +36,7 @@ The output writes your strings to the console, it only has 2 methods and works i
 	// Write a line
 	$this->output->writeln("This will have a new line at the end");
 
+	// Draw a horizontal line
+	$this->output->hr($length, '-');
+
 You can replace your own Output class by using the DI in the same fashion as the Input, if you are doing this though, just remember to include the format class unless you dont need/want it. 

@@ -14,12 +14,18 @@ As if you was using regular Phalcon CLI tools the tasks must have Task appended 
 		 * Every task should have a main method, it will be the default
 		 * action that is called if no other is specified.
 		 *
+		 * We use the Annotation engine to specify which commands are actions. Make sure you include it on every action!
+		 *
+		 * @Action
 		 */
 		public function main() 
 		{
 			$this->output->writeln("This is the main action");	
 		}
 
+		/**
+		 * @Action
+		 */
 		public function other()
 		{
 			$this->output->writeln("This is the other action");

@@ -28,6 +28,7 @@ class UtilityTask extends Task
 	/**
 	 * The main action
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -39,6 +40,7 @@ class UtilityTask extends Task
 	/**
 	 * Draws a table
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */

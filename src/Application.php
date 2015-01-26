@@ -169,6 +169,7 @@ class Application
 			$this->dispatcher->setParams($arg['params']);
 		}
 
+		$this->di->setShared('library', $this->library);
 		$this->dispatcher->setDI($this->di);
 
 		return $this->dispatcher->dispatch();

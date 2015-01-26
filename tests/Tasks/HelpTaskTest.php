@@ -28,6 +28,9 @@ class HelpTaskTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->CT = new CommandTester;
+
+		// Add some tasks to play with
+		$this->CT->add(new FakeTask);
 	}
 
 	/**
@@ -42,6 +45,21 @@ class HelpTaskTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute();
 
 		$this->assertInstanceOf('Danzabar\CLI\Tasks\Utility\Help', $this->CT->getTask());
+	}
+
+	/**
+	 * Test the help list format is correct
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_helpFormat()
+	{
+		$this->CT->execute();
+
+		$this->assertContains('Help', $this->CT->getOutput());
+		$this->assertContains('Fake', $this->CT->getOutput());
+		$this->assertContains('confirmation', $this->CT->getOutput());
 	}
 
 } // END class HelpTaskTest extends \PHPUnit_Framework_TestCase

@@ -112,6 +112,9 @@ class FormatCollection
 		// Comments
 		$this->add('comment', Array('foreground' => 'yellow'));
 
+		// Info
+		$this->add('info', Array('foreground' => 'cyan'));
+
 		// Errors
 		$this->add('error', Array('foreground' => 'white', 'background' => 'red'));
 	}

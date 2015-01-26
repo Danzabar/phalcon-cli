@@ -1,6 +1,7 @@
 <?php namespace Danzabar\CLI\Tasks;
 
 use Danzabar\CLI\Input\InputArgument,
+	Phalcon\Annotations\Adapter\Memory,
 	Danzabar\CLI\Input\InputOption;
 
 
@@ -33,6 +34,20 @@ class TaskPrepper
 	 * @var Object
 	 */
 	protected $di;
+
+	/**
+	 * Instance of the Memory Annotation Engine
+	 *
+	 * @var Object
+	 */
+	protected $annotation;
+
+	/**
+	 * Current instance of the annotation reader
+	 *
+	 * @var Object
+	 */
+	protected $reader;
 	
 	/**
 	 * An Array of arguments given
@@ -59,6 +74,9 @@ class TaskPrepper
 		// DI
 		$this->di = $di;
 
+		// Annotations
+		$this->annotation = new Memory;
+
 		// Add input class to the di
 		$this->di->setShared('argument', new InputArgument);
 	   	$this->di->setShared('option', new InputOption);
@@ -79,6 +97,9 @@ class TaskPrepper
 		// Create reflection
 		$this->reflection = new \ReflectionClass($className);
 
+		// Read annotations
+		$this->reader = $this->annotation->get($className);
+
 		// Save the class name
 		$this->className = $className;
 
@@ -94,13 +115,23 @@ class TaskPrepper
 	public function describe()
 	{
 		$methods = Array();
+		$methodAnnotations = $this->reader->getMethodsAnnotations();
 
 		foreach($this->reflection->getMethods() as $method)
 		{
-			$methods[] = $method->getName();
+			$name = $method->getName();
+
+			if(isset($methodAnnotations[$name]))
+			{
+				if($methodAnnotations[$name]->has('Action') || $methodAnnotations[$name]->has('action'))
+				{
+					$methods[] = $method->getName();
+				}
+			}
 		}
 
 		$name = $this->className;
+		$description = '';
 
 		if($this->reflection->hasProperty('name'))
 		{
@@ -109,7 +140,14 @@ class TaskPrepper
 			$name = $prop->getValue($this->reflection->newInstance());
 		}
 
-		return Array('name' => $name, 'class' => $this->className, 'actions'  => $methods);
+		if($this->reflection->hasProperty('description'))
+		{
+			$prop = $this->reflection->getProperty('description');
+			$prop->setAccessible(TRUE);
+			$description = $prop->getValue($this->reflection->newInstance());
+		}
+
+		return Array('name' => $name, 'description' => $description, 'class' => $this->className, 'actions'  => $methods);
 	}
 
 	/**

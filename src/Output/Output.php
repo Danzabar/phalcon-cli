@@ -54,6 +54,17 @@ class Output implements OutputInterface
 	}
 
 	/**
+	 * Draws a line with a given length and character
+	 *
+	 * @return String
+	 * @author Dan Cox
+	 */
+	public function hr($length, $char = '_')
+	{
+		$this->writeln(str_pad('', $length, $char));
+	}
+
+	/**
 	 * Read the output
 	 *
 	 * @return void

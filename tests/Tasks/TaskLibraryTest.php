@@ -39,6 +39,7 @@ class TaskLibraryTest extends \PHPUnit_Framework_TestCase
 	{	
 		$arr = Array('task' => Array(
 			'name'	=> 'Command',
+			'description' => '',
 			'actions' => ['main', 'run'],
 		), 'class' => 'TEST');
 

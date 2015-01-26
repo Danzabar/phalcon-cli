@@ -31,6 +31,7 @@ class InputTask extends Task
 	/**
 	 * Setup required arguments and options
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -50,6 +51,7 @@ class InputTask extends Task
 	/**
 	 * Setup function specifically for the main action
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -62,6 +64,7 @@ class InputTask extends Task
 	/**
 	 * The main action
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -79,6 +82,7 @@ class InputTask extends Task
 	/**
 	 * Another action
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -90,6 +94,7 @@ class InputTask extends Task
 	/**
 	 * Action to test validation
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -106,6 +111,7 @@ class InputTask extends Task
 	/**
 	 * Setup function specific to options action
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -117,6 +123,7 @@ class InputTask extends Task
 	/**
 	 * Action to test options
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -126,4 +133,3 @@ class InputTask extends Task
 	}
 
 } // END class InputTask extends Command
-

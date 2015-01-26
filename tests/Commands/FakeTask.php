@@ -41,6 +41,7 @@ class FakeTask extends Task
 	/**
 	 * The main action for this command
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -52,6 +53,7 @@ class FakeTask extends Task
 	/**
 	 * Test action, no output
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -62,6 +64,7 @@ class FakeTask extends Task
 	/**
 	 * Task that tests basic question
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -76,6 +79,7 @@ class FakeTask extends Task
 	/**
 	 * A double question task
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -95,6 +99,7 @@ class FakeTask extends Task
 	/**
 	 * Task that asks a choice question
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -120,6 +125,7 @@ class FakeTask extends Task
 	/**
 	 * Multiple Choice question
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -143,6 +149,7 @@ class FakeTask extends Task
 	/**
 	 * The confirmation test action
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -164,6 +171,7 @@ class FakeTask extends Task
 	/**
 	 * A confirmation with explicit set and values changed
 	 *
+	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */

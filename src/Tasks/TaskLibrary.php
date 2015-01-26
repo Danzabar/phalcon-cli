@@ -37,7 +37,11 @@ class TaskLibrary
 	 */
 	public function add($tasks)
 	{
-		$this->library[$tasks['task']['name']] = Array('actions' => $tasks['task']['actions'], 'class' => $tasks['class']);		
+		$this->library[$tasks['task']['name']] = Array(
+			'actions' => $tasks['task']['actions'], 
+			'description' => $tasks['task']['description'],
+			'class' => $tasks['class']
+		);		
 	}
 
 	/**
@@ -62,6 +66,17 @@ class TaskLibrary
 
 		// Not sure whether to throw an exception here?
 		throw new Exceptions\CommandNotFoundException($name);
+	}
+
+	/**
+	 * Returns all the registered commands
+	 *
+	 * @return Array
+	 * @author Dan Cox
+	 */
+	public function getAll()
+	{
+		return $this->library;
 	}
 
 
