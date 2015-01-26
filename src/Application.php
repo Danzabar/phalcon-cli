@@ -213,9 +213,13 @@ class Application
 	{
 		// The first argument is always the file
 		unset($args[0]);
+		$command = '';
 
-		$command = explode(':', $args[1]);
-		unset($args[1]);
+		if(isset($args[1]))
+		{
+			$command = explode(':', $args[1]);
+			unset($args[1]);
+		}
 
 		try {
 			
