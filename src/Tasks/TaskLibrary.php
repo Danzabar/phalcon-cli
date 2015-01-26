@@ -37,7 +37,7 @@ class TaskLibrary
 	 */
 	public function add($tasks)
 	{
-		$this->library[$tasks['task']['name']] = Array(
+		$this->library[strtolower($tasks['task']['name'])] = Array(
 			'actions' => $tasks['task']['actions'], 
 			'description' => $tasks['task']['description'],
 			'class' => $tasks['class']
@@ -53,7 +53,7 @@ class TaskLibrary
 	public function find($name)
 	{
 		$exp = explode(':', $name);
-		$task = $exp[0];
+		$task = strtolower($exp[0]);
 		$action = $exp[1];
 
 		if(array_key_exists($task, $this->library))

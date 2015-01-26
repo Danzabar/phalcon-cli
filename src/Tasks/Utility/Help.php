@@ -49,8 +49,10 @@ class Help extends Task
 		
 		foreach($commands as $name => $details)
 		{
-			$this->output->writeln(ucwords($name) .' - '.$details['description']);		
-			$this->output->hr(strlen($name . ' - '. $details['description']), '-');
+			$this->output->writeln(ucwords($name));
+			$this->output->hr(strlen($details['description']), '-');
+			$this->output->writeln($details['description']);
+			$this->output->hr(strlen($details['description']), '-');
 			
 			foreach($details['actions'] as $action)
 			{
