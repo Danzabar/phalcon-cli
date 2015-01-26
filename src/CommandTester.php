@@ -29,6 +29,13 @@ class CommandTester
 	protected $command;
 
 	/**
+	 * The task class that gets returned by the application
+	 *
+	 * @var Object
+	 */
+	protected $task;
+
+	/**
 	 * The command params
 	 *
 	 * @var Array
@@ -102,13 +109,10 @@ class CommandTester
 			$args[] = $this->formatArgument($key, $param);
 		}
 
-		$this->application->start($args);
+		$this->task = $this->application->start($args);
 
 		// Get the output
-		$di = $this->application->getDI();
-
-		$this->output = $di->get('output')->read();
-
+		$this->output = $this->application->getDI()->get('output')->read();
 	}
 
 	/**
@@ -184,5 +188,15 @@ class CommandTester
 		return $this->application;
 	}
 
+	/**
+	 * Returns the task object
+	 *
+	 * @return Object
+	 * @author Dan Cox
+	 */
+	public function getTask()
+	{
+		return $this->task;
+	}
 
 } // END class CommandTester

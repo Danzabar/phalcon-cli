@@ -42,6 +42,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
 		
 		$this->assertContains('The main action', $this->CT->getOutput());
 		$this->assertInstanceOf('\Danzabar\CLI\Application', $this->CT->getApplication());
+		$this->assertInstanceOf('\UtilityTask', $this->CT->getTask());
 	}
 
 	/**

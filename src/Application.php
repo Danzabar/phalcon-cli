@@ -6,6 +6,7 @@ use Phalcon\CLI\Dispatcher,
 	Danzabar\CLI\Tasks\TaskPrepper,
 	Danzabar\CLI\Tasks\TaskLibrary,
 	Danzabar\CLI\Tasks\Helpers,
+	Danzabar\CLI\Tasks\Utility\Help,
 	Phalcon\DI;
 
 /**
@@ -84,15 +85,9 @@ class Application
 		$this->di = (!is_null($DI) ? $DI : new DI);
 		$this->dispatcher = (!is_null($dispatcher) ? $dispatcher : new Dispatcher);
 		$this->library = (!is_null($library) ? $library : new TaskLibrary);
-		
-		// Set the defaults for the dispatcher
-		$this->dispatcher->setDefaultTask('Help');
-		$this->dispatcher->setDefaultAction('list');
 
-		// Set no suffixes
-		$this->dispatcher->setTaskSuffix('');
-		$this->dispatcher->setActionSuffix('');
-	
+		$this->setUpDispatcherDefaults();
+
 		// Add the output and input streams to the DI
 		$this->di->setShared('output', new Output);
 		$this->di->setShared('input', new Input);
@@ -103,6 +98,36 @@ class Application
 		$this->registerDefaultHelpers();
 
 		$this->di->setShared('helpers', $this->helpers);
+
+		$this->addDefaultCommands();
+	}
+
+	/**
+	 * Adds the default commands like Help and List
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function addDefaultCommands()
+	{
+		$this->add(new Help);
+	}
+
+	/**
+	 * Sets up the default settings for the dispatcher
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setUpDispatcherDefaults()
+	{
+		// Set the defaults for the dispatcher
+		$this->dispatcher->setDefaultTask('Danzabar\CLI\Tasks\Utility\Help');
+		$this->dispatcher->setDefaultAction('main');
+
+		// Set no suffixes
+		$this->dispatcher->setTaskSuffix('');
+		$this->dispatcher->setActionSuffix('');
 	}
 
 	/**
@@ -132,14 +157,17 @@ class Application
 		 * Arguments and Options
 		 *
 		 */
-		$this->prepper
-			 ->load($arg['task'])
-			 ->loadParams($arg['params'])
-			 ->prep($arg['action']);
+		if(!empty($arg))
+		{
+			$this->prepper
+				 ->load($arg['task'])
+				 ->loadParams($arg['params'])
+				 ->prep($arg['action']);
 	
-		$this->dispatcher->setTaskName($arg['task']);
-		$this->dispatcher->setActionName($arg['action']);
-		$this->dispatcher->setParams($arg['params']);
+			$this->dispatcher->setTaskName($arg['task']);
+			$this->dispatcher->setActionName($arg['action']);
+			$this->dispatcher->setParams($arg['params']);
+		}
 
 		$this->dispatcher->setDI($this->di);
 
@@ -188,15 +216,22 @@ class Application
 		$command = explode(':', $args[1]);
 		unset($args[1]);
 
-		$action = (isset($command[1]) ? $command[1] : 'main');
-		$cmd = $this->library->find($command[0].':'.$action);
-		$task = get_class($cmd);
+		try {
+			
+			$action = (isset($command[1]) ? $command[1] : 'main');
+			$cmd = $this->library->find($command[0].':'.$action);
+			$task = get_class($cmd);
 
-		return Array(
-			'task'		=> $task,
-			'action' 	=> $action,
-			'params'	=> $args
-		);
+			return Array(
+				'task'		=> $task,
+				'action' 	=> $action,
+				'params'	=> $args
+			);
+
+		} catch(\Exception $e) {
+		
+			return Array();
+		}
 	}
 
 	/**
