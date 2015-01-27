@@ -29,6 +29,11 @@ class HelpTaskTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->CT = new CommandTester;
 
+		// Setup some fake app details
+		$app = $this->CT->getApplication();
+		$app->setName('Test CLI');
+		$app->setVersion('1.0.0');
+
 		// Add some tasks to play with
 		$this->CT->add(new FakeTask);
 	}
@@ -57,9 +62,21 @@ class HelpTaskTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->CT->execute();
 
+		// Application Detail Assertions
+		$this->assertContains('Test CLI', $this->CT->getOutput());
+		$this->assertContains('version 1.0.0', $this->CT->getOutput());
+
+		// Random detail assertions
 		$this->assertContains('Help', $this->CT->getOutput());
 		$this->assertContains('Fake', $this->CT->getOutput());
 		$this->assertContains('confirmation', $this->CT->getOutput());
+
+		// Instruction Assertions
+		$this->assertContains('php [file] [command] [arguments] [options]', $this->CT->getOutput());
+
+		// Example commands Assertions
+		$this->assertContains('php [file] fake [params]', $this->CT->getOutput());
+		$this->assertContains('php [file] fake:askMe [params]', $this->CT->getOutput());
 	}
 
 } // END class HelpTaskTest extends \PHPUnit_Framework_TestCase

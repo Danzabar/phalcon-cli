@@ -34,7 +34,43 @@ class Help extends Task
 	 */
 	public function main()
 	{
+		// App Details
+		$this->printApplicationDetails();
+
+		// Instructions
+		$this->printApplicationInstructions();
+
+		// Command List
 		$this->listCommands();	
+	}
+
+	/**
+	 * Prints the app name and version
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function printApplicationDetails()
+	{
+		$this->output->writeln($this->console->getName());
+		$this->output->writeln('version '.$this->console->getVersion());
+
+		// New line padding
+		$this->output->writeln('');
+	}
+
+	/**
+	 * Prints the application instructions
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function printApplicationInstructions()
+	{
+		$this->output->writeln('php [file] [command] [arguments] [options]');
+
+		// Padding
+		$this->output->writeln('');
 	}
 
 	/**
@@ -56,7 +92,7 @@ class Help extends Task
 			
 			foreach($details['actions'] as $action)
 			{
-				$this->output->writeln($action);	
+				$this->output->writeln($action . " - php [file] $name".($action !== 'main' ? ":$action" : '')." [params]");	
 			}
 			
 			// Just for padding
