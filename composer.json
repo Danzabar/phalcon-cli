@@ -16,7 +16,6 @@
 		"satooshi/php-coveralls": "dev-master",
 		"mockery/mockery": "dev-master"
 	},
-	"minimum-stability": "dev",
 	"autoload": {
 		"psr-4": {
 			"Danzabar\\CLI\\": "src/"
