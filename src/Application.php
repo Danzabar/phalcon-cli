@@ -213,13 +213,16 @@ class Application
 	{
 		// The first argument is always the file
 		unset($args[0]);
-		$command = Array();
 
 		if(isset($args[1]))
 		{
 			$command = explode(':', $args[1]);
 			unset($args[1]);
-		}	
+		} else
+		{
+			// No Command Specified.
+			return Array();
+		}		
 
 		try {
 			
@@ -234,7 +237,8 @@ class Application
 			);
 
 		} catch(\Exception $e) {
-		
+			
+			// No Command FOUND
 			return Array();
 		}
 	}
