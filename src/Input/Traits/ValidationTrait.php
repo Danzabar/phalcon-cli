@@ -110,4 +110,20 @@ Trait ValidationTrait
 		throw new Exceptions\ValidationFailException($value, 'Alpha');
 	}
 
+	/**
+	 * Value can only be an int
+	 *
+	 * @return Mixed
+	 * @author Dan Cox
+	 */
+	public function validate_int($value)
+	{
+		if(is_numeric($value))
+		{
+			return $value;
+		}
+
+		throw new Exceptions\ValidationFailException($value, 'Numeric');
+	}
+
 }

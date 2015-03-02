@@ -19,9 +19,10 @@ class InputOption extends ParamBag
 	 * Constants for validation
 	 *
 	 */
-	const Required	= 'required';
-	const Optional	= 'optional';
-	const ValueRequired = 'valueRequired';
+	const Required			= 'required';
+	const Optional			= 'optional';
+	const ValueRequired 	= 'valueRequired';
+	const Int				= 'int';
 
 	/**
 	 * An array of expected options

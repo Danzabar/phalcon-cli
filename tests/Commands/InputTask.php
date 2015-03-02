@@ -51,7 +51,6 @@ class InputTask extends Task
 	/**
 	 * Setup function specifically for the main action
 	 *
-	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -111,7 +110,6 @@ class InputTask extends Task
 	/**
 	 * Setup function specific to options action
 	 *
-	 * @Action
 	 * @return void
 	 * @author Dan Cox
 	 */
@@ -130,6 +128,29 @@ class InputTask extends Task
 	public function options()
 	{
 		$this->output->writeln($this->option->name);
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function setupIntTest()
+	{
+		$this->argument->addExpected('int', [InputArgument::Required, InputArgument::Int]);
+	}
+
+	/**
+	 * Testing int validation
+	 *
+	 * @Action
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function intTest()
+	{
+		$this->output->writeln('Passed');
 	}
 
 } // END class InputTask extends Command

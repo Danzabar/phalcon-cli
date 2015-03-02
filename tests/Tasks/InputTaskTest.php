@@ -147,4 +147,30 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
 		$this->CT->execute('Input:options', Array('--name'));
 	}
 
+	/**
+	 * Test passing an int to the int validator
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_intOptionPass()
+	{
+		$this->CT->execute('Input:intTest', Array('int' => 10));
+
+		$this->assertContains('Passed', $this->CT->getOutput());
+	}
+
+	/**
+	 * Same as above but a fail
+	 *
+	 * @return void
+	 * @author Dan Cox
+	 */
+	public function test_intOptionFail()
+	{	
+		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\ValidationFailException');
+
+		$this->CT->execute('Input:intTest', Array('int' => 'skjkd'));
+	}
+
 } // END class InputTaskTest extends \PHPUnit_Framework_TestCase
