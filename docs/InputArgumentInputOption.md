@@ -46,7 +46,7 @@ Very similar process to arguments, only we use `option`. An option must be prece
 
 Adding an expected option or argument means you can add validation to them, you can pass a single rule or multiple in an array like so:
 
-	$this->argument->addExpected('argument', Array(InputArgument::Required, InputArgument::Alpha));
+	$this->argument->addExpected('argument', Array(InputArgument::REQUIRED, InputArgument::ALPHA));
 
 Current validation rules are;-
 
