@@ -67,7 +67,7 @@ class Input implements InputInterface
     public function read()
     {
         $this->input = fgets($this->inputStream);
-        
+
         return true;
     }
 

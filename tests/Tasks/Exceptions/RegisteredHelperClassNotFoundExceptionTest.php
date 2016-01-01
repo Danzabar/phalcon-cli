@@ -11,7 +11,7 @@ use Danzabar\CLI\Tasks\Exceptions\RegisteredHelperClassNotFoundException;
  */
 class RegisteredHelperClassNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * Fire the exception
      *
@@ -21,7 +21,7 @@ class RegisteredHelperClassNotFoundExceptionTest extends \PHPUnit_Framework_Test
     public function test_fireException()
     {
         try {
-            
+
             throw new RegisteredHelperClassNotFoundException('TestClass');
 
         } catch (\Exception $e) {

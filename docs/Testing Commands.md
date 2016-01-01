@@ -15,7 +15,7 @@ You can mock the input for a question using the setInput method, lets look at a 
 	$ct = new CommandTester;
 	$ct->setInput("Y\n");
 	$ct->execute('task:question');
-	
+
 	$ct->getOutput();
 
 The above will answer `Y` to the first question thats asked, you can add more answers for more confirmations or questions, just seperate them with `\n`

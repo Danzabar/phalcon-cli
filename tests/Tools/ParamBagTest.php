@@ -11,7 +11,7 @@ use Danzabar\CLI\Tools\ParamBag;
  */
 class ParamBagTest extends \PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * Instance of the param bag class
      *
@@ -97,7 +97,7 @@ class ParamBagTest extends \PHPUnit_Framework_TestCase
 
         $this->params->test = 'value';
         $this->assertTrue(isset($this->params->test));
-        
+
         $this->params->clear();
         $this->assertFalse(isset($this->params->test));
     }

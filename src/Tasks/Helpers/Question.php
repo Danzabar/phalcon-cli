@@ -17,7 +17,7 @@ class Question extends Helper
      * @var string
      */
     protected $wrongChoiceErrorMessage = 'The answer you selected is invalid.';
-    
+
     /**
      * Asks a basic question and returns the response.
      *
@@ -41,7 +41,7 @@ class Question extends Helper
     {
         $this->wrongChoiceErrorMessage = $error;
     }
-    
+
     /**
      * The choice question, pick a single choice.
      *
@@ -117,7 +117,7 @@ class Question extends Helper
     public function validateMultipleChoice($answer, $choice)
     {
         $answers = explode(',', $answer);
-        
+
         foreach ($answers as $ans) {
             if (!in_array(trim($ans), $choice)) {
                 return false;

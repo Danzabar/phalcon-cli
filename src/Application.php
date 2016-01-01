@@ -92,7 +92,7 @@ class Application
         $this->di->setShared('output', new Output);
         $this->di->setShared('input', new Input);
         $this->di->setShared('console', $this);
-        
+
         $this->prepper = new TaskPrepper($this->di);
         $this->helpers = new Helpers($this->di);
         $this->registerDefaultHelpers();
@@ -162,7 +162,7 @@ class Application
                  ->load($arg['task'])
                  ->loadParams($arg['params'])
                  ->prep($arg['action']);
-    
+
             $this->dispatcher->setTaskName($arg['task']);
             $this->dispatcher->setActionName($arg['action']);
             $this->dispatcher->setParams($arg['params']);
@@ -222,7 +222,7 @@ class Application
         }
 
         try {
-            
+
             $action = (isset($command[1]) ? $command[1] : 'main');
             $cmd = $this->library->find($command[0].':'.$action);
             $task = get_class($cmd);
@@ -234,7 +234,7 @@ class Application
             );
 
         } catch (\Exception $e) {
-            
+
             // No Command FOUND
             return array();
         }

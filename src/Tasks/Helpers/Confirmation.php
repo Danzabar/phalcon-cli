@@ -74,7 +74,7 @@ class Confirmation extends Helper
 
         $this->output->writeln($this->invalidConfirmationError);
     }
-    
+
     /**
      * Sets the value of the confirmation
      *

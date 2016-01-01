@@ -78,7 +78,7 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
     public function test_missingRequiredArgument()
     {
         $this->setExpectedException('Danzabar\CLI\Input\Exceptions\RequiredValueMissingException');
-        
+
         $this->CT->execute('Input:required');
     }
 
@@ -91,7 +91,7 @@ class InputTaskTest extends \PHPUnit_Framework_TestCase
     public function test_validationActionCorrectValue()
     {
         $this->CT->execute('Input:validation', array('value' => 'abcd'));
-        
+
         $this->assertContains('abcd', $this->CT->getOutput());
     }
 

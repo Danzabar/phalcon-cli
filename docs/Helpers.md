@@ -5,7 +5,7 @@ Helpers are addons that provide some functionality to commands. By default the h
 
 	class MyHelper extends Danzabar\CLI\Tasks\Helpers\Helper
 	{
-		// Add your functionality.	
+		// Add your functionality.
 	}
 
 	// When you are setting up the app, register your helper

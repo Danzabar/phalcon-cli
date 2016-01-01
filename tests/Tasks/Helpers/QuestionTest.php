@@ -17,7 +17,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
      * @var Object
      */
     protected $CT;
-    
+
     /**
      * Setup the test environment for commands
      *
@@ -68,7 +68,7 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
     {
         $this->CT->setInput("two\n");
         $this->CT->execute('fake:choiceQ');
-        
+
         $this->assertContains('You have selected two', $this->CT->getOutput());
     }
 

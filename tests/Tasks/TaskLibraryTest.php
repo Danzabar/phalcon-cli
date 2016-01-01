@@ -17,7 +17,7 @@ class TaskLibraryTest extends \PHPUnit_Framework_TestCase
      * @var Object
      */
     protected $library;
-    
+
     /**
      * Set up test vars
      *

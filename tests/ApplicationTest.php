@@ -68,11 +68,11 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Application;
         $app->add(new FakeTask);
-    
+
         ob_start();
-            
+
             $command = $app->start(array('cli', 'fake'));
-            
+
             $content = ob_get_contents();
 
             ob_end_clean();
@@ -108,7 +108,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $app = new Application;
         $app->add(new FakeTask);
-        
+
         $command = $app->find('fake:output');
 
         $this->assertInstanceOf('FakeTask', $command);

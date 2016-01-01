@@ -9,7 +9,7 @@
  */
 interface OutputInterface
 {
-    
+
     /**
      * The write function to simply write a string
      *

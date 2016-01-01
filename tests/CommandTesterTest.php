@@ -17,7 +17,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
      * @var Object
      */
     protected $CT;
-    
+
     /**
      * Set up test vars
      *
@@ -39,7 +39,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
     public function test_basic()
     {
         $this->CT->execute('utility:main');
-        
+
         $this->assertContains('The main action', $this->CT->getOutput());
         $this->assertInstanceOf('\Danzabar\CLI\Application', $this->CT->getApplication());
         $this->assertInstanceOf('\UtilityTask', $this->CT->getTask());

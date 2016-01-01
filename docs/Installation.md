@@ -27,11 +27,11 @@ You will first need an application to use the CLI tools with. The following is a
 	$app->add(new Task);
 
 	try {
-		
+
 		$app->start($argv);
 
 	} catch (\Exception $e) {
-		
+
 		echo $e->getMessage();
 		exit(255);
 	}
@@ -57,5 +57,5 @@ Once its loaded into the apps command library you can access it by using the `fi
 By default there is no longer any suffix for tasks or actions, so if your calling the main action it will look for the method `main` - Although if you prefered the old way, or even a different way, then you can change it:
 
 	$app->setActionSuffix('Action');
-	
-Bare in mind with tasks, you are specifically adding that class.. So there is no need to edit the suffix.  
+
+Bare in mind with tasks, you are specifically adding that class.. So there is no need to edit the suffix.

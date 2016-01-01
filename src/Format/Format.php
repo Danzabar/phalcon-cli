@@ -50,7 +50,7 @@ class Format
     public static function format($str)
     {
         preg_match('/<[A-Za-z0-9]+?>/', $str, $matches);
-        
+
         foreach ($matches as $match) {
             $keyword = str_replace(array('<', '>'), '', $match);
 

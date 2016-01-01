@@ -45,7 +45,7 @@ class Table extends Helper
      * @var string
      */
     protected $table_connectorHeader = '+';
-    
+
     /**
      * Draws a table from the array passed to it.
      *
@@ -130,7 +130,7 @@ class Table extends Helper
     public function calcLength(array $data)
     {
         $lengths = array();
-        
+
         foreach ($data as $table) {
             foreach ($table as $key => $value) {
                 $len = strlen($value);

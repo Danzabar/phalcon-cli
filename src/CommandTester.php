@@ -13,7 +13,7 @@ use Danzabar\CLI\Output\Output;
  */
 class CommandTester
 {
-    
+
     /**
      * An Instance of the console application
      *
@@ -102,7 +102,7 @@ class CommandTester
         }
 
         $args = array('cli', $this->command);
-    
+
         foreach ($params as $key => $param) {
             $args[] = $this->formatArgument($key, $param);
         }

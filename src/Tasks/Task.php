@@ -11,14 +11,14 @@ use \Phalcon\CLI\Task as PhalTask;
  */
 class Task extends PhalTask
 {
-    
+
     /**
      * The command name
      *
      * @var string
      */
     protected $name;
-    
+
     /**
      * The command description
      *

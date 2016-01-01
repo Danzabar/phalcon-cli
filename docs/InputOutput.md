@@ -14,10 +14,10 @@ The input class is very simple to use, and can be replaced by your own input cla
 	$this->input->getInput();
 
 Simple as that! There might also be a time where you want to Mock the input to test a question, to do this we need to change the source of the input:
-	
+
 	// change the source to memory
 	$this->input = new Input('php://memory');
-	
+
 	// Set your mocked answer/answers (for multiple questions seperate with \n);
 	$this->input->mock("Y\nN\n");
 
@@ -39,4 +39,4 @@ The output writes your strings to the console, it only has 2 methods and works i
 	// Draw a horizontal line
 	$this->output->hr($length, '-');
 
-You can replace your own Output class by using the DI in the same fashion as the Input, if you are doing this though, just remember to include the format class unless you dont need/want it. 
+You can replace your own Output class by using the DI in the same fashion as the Input, if you are doing this though, just remember to include the format class unless you dont need/want it.

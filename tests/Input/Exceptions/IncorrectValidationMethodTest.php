@@ -20,10 +20,10 @@ class IncorrectValidationMethodTest extends \PHPUnit_Framework_TestCase
     public function test_fireException()
     {
         try {
-    
+
             throw new IncorrectValidationMethodException("numeric");
         } catch (\Exception $e) {
-            
+
             $this->assertEquals("numeric", $e->getMethod());
         }
     }

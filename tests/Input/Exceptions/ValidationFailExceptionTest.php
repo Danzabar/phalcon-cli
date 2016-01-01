@@ -11,7 +11,7 @@ use Danzabar\CLI\Input\Exceptions\ValidationFailException;
  */
 class ValidationFailExceptionTest extends \PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * fire the exception
      *
@@ -21,11 +21,11 @@ class ValidationFailExceptionTest extends \PHPUnit_Framework_TestCase
     public function test_fire()
     {
         try {
-        
+
             throw new ValidationFailException('eheud', 'Email');
 
         } catch (\Exception $e) {
-            
+
             $this->assertEquals('eheud', $e->getValue());
             $this->assertEquals('Email', $e->getMethod());
         }

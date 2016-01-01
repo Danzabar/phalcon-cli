@@ -5,8 +5,8 @@ As if you was using regular Phalcon CLI tools the tasks must have Task appended 
 
 	Class BasicTask extends \Danzabar\CLI\Tasks\Tasks
 	{
-		// This will be the task name defined in the library.	
-		protected $name = 'basic'; 
+		// This will be the task name defined in the library.
+		protected $name = 'basic';
 
 		protected $description = 'A basic task that does pretty much nothing';
 
@@ -18,9 +18,9 @@ As if you was using regular Phalcon CLI tools the tasks must have Task appended 
 		 *
 		 * @Action
 		 */
-		public function main() 
+		public function main()
 		{
-			$this->output->writeln("This is the main action");	
+			$this->output->writeln("This is the main action");
 		}
 
 		/**

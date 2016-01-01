@@ -14,7 +14,7 @@ use Phalcon\DI;
  */
 class HelperTest extends \PHPUnit_Framework_TestCase
 {
-    
+
     /**
      * Instance of the helper class
      *
