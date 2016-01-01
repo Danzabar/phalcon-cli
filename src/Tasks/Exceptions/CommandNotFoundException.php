@@ -1,6 +1,5 @@
 <?php namespace Danzabar\CLI\Tasks\Exceptions;
 
-
 /**
  * Exception class for when a command isnt found
  *
@@ -11,35 +10,34 @@
 class CommandNotFoundException extends \Exception
 {
 
-	/**
-	 * The command name
-	 *
-	 * @var string
-	 */
-	protected $command;
+    /**
+     * The command name
+     *
+     * @var string
+     */
+    protected $command;
 
 
-	/**
-	 * Fire command
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function __construct($command, $code = 0, \Exception $previous = NULL)
-	{
-		$this->command = $command;
-		parent::__construct("The command was not found $command", $code, $previous);
-	}
+    /**
+     * Fire command
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function __construct($command, $code = 0, \Exception $previous = null)
+    {
+        $this->command = $command;
+        parent::__construct("The command was not found $command", $code, $previous);
+    }
 
-	/**
-	 * Returns the command
-	 *
-	 * @return String
-	 * @author Dan Cox
-	 */
-	public function getCommand()
-	{
-		return $this->command;
-	}
-
+    /**
+     * Returns the command
+     *
+     * @return String
+     * @author Dan Cox
+     */
+    public function getCommand()
+    {
+        return $this->command;
+    }
 } // END class CommandNotFoundException extends \Exception

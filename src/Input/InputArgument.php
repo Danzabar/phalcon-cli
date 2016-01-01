@@ -1,9 +1,8 @@
 <?php namespace Danzabar\CLI\Input;
 
-use Danzabar\CLI\Tools\ParamBag,
-	Danzabar\CLI\Input\Traits\ExpectationTrait,
-	Danzabar\CLI\Input\Traits\ValidationTrait;
-
+use Danzabar\CLI\Tools\ParamBag;
+use Danzabar\CLI\Input\Traits\ExpectationTrait;
+use Danzabar\CLI\Input\Traits\ValidationTrait;
 
 /**
  * The input argument class is a param bag that contains arguments from the user
@@ -14,36 +13,35 @@ use Danzabar\CLI\Tools\ParamBag,
  */
 class InputArgument extends ParamBag
 {
-	use ExpectationTrait, ValidationTrait;
+    use ExpectationTrait, ValidationTrait;
 
-	/**
-	 * Class constants for validation
-	 *
-	 */
-	const Required 		= 'required';
-	const Optional 		= 'optional';
-	const Alpha			= 'alpha';
-	const Int			= 'int';
+    /**
+     * Class constants for validation
+     *
+     */
+    const REQUIRED      = 'required';
+    const OPTIONAL      = 'optional';
+    const ALPHA         = 'alpha';
+    const INT           = 'int';
 
-	/**
-	 * An array of expected arguments
-	 *
-	 * @var Array
-	 */
-	protected static $expected = Array();
+    /**
+     * An array of expected arguments
+     *
+     * @var Array
+     */
+    protected static $expected = array();
 
-	/**
-	 * An array of argument positions
-	 *
-	 * @var string
-	 */
-	protected static $varPosition = Array();
+    /**
+     * An array of argument positions
+     *
+     * @var string
+     */
+    protected static $varPosition = array();
 
-	/**
-	 * For validation types
-	 *
-	 * @var string
-	 */
-	protected $v_type = 'argument';
-
+    /**
+     * For validation types
+     *
+     * @var string
+     */
+    protected $v_type = 'argument';
 } // END class InputArgument

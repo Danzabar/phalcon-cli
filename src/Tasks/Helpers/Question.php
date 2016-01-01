@@ -11,128 +11,121 @@ use Danzabar\CLI\Tasks\Helpers\Helper;
  */
 class Question extends Helper
 {
-	/**
-	 * The error message displayed when the user selects the wrong choices. 
-	 *
-	 * @var string
-	 */
-	protected $wrongChoiceErrorMessage = 'The answer you selected is invalid.';
-	
-	/**
-	 * Asks a basic question and returns the response.
-	 *
-	 * @return String
-	 * @author Dan Cox
-	 */
-	public function ask($question)
-	{
-		$this->output->writeln($question);
+    /**
+     * The error message displayed when the user selects the wrong choices.
+     *
+     * @var string
+     */
+    protected $wrongChoiceErrorMessage = 'The answer you selected is invalid.';
+    
+    /**
+     * Asks a basic question and returns the response.
+     *
+     * @return String
+     * @author Dan Cox
+     */
+    public function ask($question)
+    {
+        $this->output->writeln($question);
 
-		return $this->input->getInput();		
-	}
+        return $this->input->getInput();
+    }
 
-	/**
-	 * Sets the error message that displays when a user picks the wrong answer
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function setChoiceError($error)
-	{
-		$this->wrongChoiceErrorMessage = $error;
-	}
-	
-	/**
-	 * The choice question, pick a single choice.
-	 *
-	 * @return String
-	 * @author Dan Cox
-	 */
-	public function choice($question, $choices = Array(), $allowedMultiple = FALSE)
-	{
-		$this->output->writeln($question);
+    /**
+     * Sets the error message that displays when a user picks the wrong answer
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function setChoiceError($error)
+    {
+        $this->wrongChoiceErrorMessage = $error;
+    }
+    
+    /**
+     * The choice question, pick a single choice.
+     *
+     * @return String
+     * @author Dan Cox
+     */
+    public function choice($question, $choices = array(), $allowedMultiple = false)
+    {
+        $this->output->writeln($question);
 
-		$this->output->writeln(join(',', $choices));
+        $this->output->writeln(join(',', $choices));
 
-		$answer = $this->input->getInput();
+        $answer = $this->input->getInput();
 
-		$valid = $this->validateChoices($answer, $choices, $allowedMultiple);
+        $valid = $this->validateChoices($answer, $choices, $allowedMultiple);
 
-		if($valid !== FALSE)
-		{
-			return $valid;
-		}
+        if ($valid !== false) {
+            return $valid;
+        }
 
-		$this->output->writeln($this->wrongChoiceErrorMessage);
+        $this->output->writeln($this->wrongChoiceErrorMessage);
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * A quick function to allow multiple answers on a choice question
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function multipleChoice($question, $choices = Array())
-	{
-		return $this->choice($question, $choices, TRUE);
-	}
+    /**
+     * A quick function to allow multiple answers on a choice question
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function multipleChoice($question, $choices = array())
+    {
+        return $this->choice($question, $choices, true);
+    }
 
-	/**
-	 * Checks that the answer is present in the list of choices
-	 *
-	 * @return Boolean
-	 * @author Dan Cox
-	 */
-	public function validateChoices($answer, $choices, $allowedMultiple = FALSE)
-	{
-		if($allowedMultiple)
-		{
-			return $this->validateMultipleChoice($answer, $choices);
-		} else
-		{
-			return $this->validateSingleChoice($answer, $choices);
-		}
-	}
+    /**
+     * Checks that the answer is present in the list of choices
+     *
+     * @return Boolean
+     * @author Dan Cox
+     */
+    public function validateChoices($answer, $choices, $allowedMultiple = false)
+    {
+        if ($allowedMultiple) {
+            return $this->validateMultipleChoice($answer, $choices);
+        } else {
+            return $this->validateSingleChoice($answer, $choices);
+        }
+    }
 
-	/**
-	 * Validates a single answer
-	 *
-	 * @return Boolean|String
-	 * @author Dan Cox
-	 */
-	public function validateSingleChoice($answer, $choice)
-	{
-		if(!in_array(trim($answer), $choice))
-		{
-			return false;
-		}
+    /**
+     * Validates a single answer
+     *
+     * @return Boolean|String
+     * @author Dan Cox
+     */
+    public function validateSingleChoice($answer, $choice)
+    {
+        if (!in_array(trim($answer), $choice)) {
+            return false;
+        }
 
-		return $answer;
-	}
+        return $answer;
+    }
 
-	/**
-	 * Validates multiple answers
-	 *
-	 * @return Boolean|String
-	 * @author Dan Cox
-	 */
-	public function validateMultipleChoice($answer, $choice)
-	{
-		$answers = explode(',', $answer);
-		
-		foreach($answers as $ans)
-		{
-			if(!in_array(trim($ans), $choice))
-			{
-				return false;
-			}
+    /**
+     * Validates multiple answers
+     *
+     * @return Boolean|String
+     * @author Dan Cox
+     */
+    public function validateMultipleChoice($answer, $choice)
+    {
+        $answers = explode(',', $answer);
+        
+        foreach ($answers as $ans) {
+            if (!in_array(trim($ans), $choice)) {
+                return false;
+            }
 
-			$formatedAnswers[] = trim($ans);
-		}		
+            $formatedAnswers[] = trim($ans);
+        }
 
-		return $formatedAnswers;
-	}
-
+        return $formatedAnswers;
+    }
 } // END class Question extends Helper

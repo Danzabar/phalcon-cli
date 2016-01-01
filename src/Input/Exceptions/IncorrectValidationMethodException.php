@@ -9,35 +9,34 @@
  */
 class IncorrectValidationMethodException extends \Exception
 {
-	/**
-	 * The attempted method
-	 *
-	 * @var string
-	 */
-	protected $method;
+    /**
+     * The attempted method
+     *
+     * @var string
+     */
+    protected $method;
 
-	/**
-	 * Fire the exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function __construct($method, $code = 0, \Exception $previous = NULL)
-	{
-		$this->method = $method;
+    /**
+     * Fire the exception
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function __construct($method, $code = 0, \Exception $previous = null)
+    {
+        $this->method = $method;
 
-		parent::__construct("The $method validation method could not be found", $code, $previous);
-	}
+        parent::__construct("The $method validation method could not be found", $code, $previous);
+    }
 
-	/**
-	 * Returns the method
-	 *
-	 * @return String
-	 * @author Dan Cox
-	 */
-	public function getMethod()
-	{
-		return $this->method;
-	}
-
+    /**
+     * Returns the method
+     *
+     * @return String
+     * @author Dan Cox
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
 } // END class IncorrectValidationMethodException extends \Exception

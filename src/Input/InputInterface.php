@@ -9,13 +9,11 @@
 interface InputInterface
 {
 
-	/**
-	 * The get input function should return the input string
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function getInput();
-
-
+    /**
+     * The get input function should return the input string
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function getInput();
 }

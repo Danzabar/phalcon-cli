@@ -11,54 +11,52 @@ use Danzabar\CLI\Input\InputArgument;
  */
 class InputArgumentTest extends \PHPUnit_Framework_TestCase
 {
-	
-	/**
-	 * Instance of the input argument class
-	 *
-	 * @var Object
-	 */
-	protected $inputArgument;
 
-	/**
-	 * Set up the test vars
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function setUp()
-	{
-		$this->inputArgument = new InputArgument;
-	}
+    /**
+     * Instance of the input argument class
+     *
+     * @var Object
+     */
+    protected $inputArgument;
 
-	/**
-	 * Test adding and getting expectations
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_addGetExpectations()
-	{
-		$this->inputArgument->addExpected('name', InputArgument::Required);
+    /**
+     * Set up the test vars
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function setUp()
+    {
+        $this->inputArgument = new InputArgument;
+    }
 
-		$expectations = $this->inputArgument->getExpected();
+    /**
+     * Test adding and getting expectations
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_addGetExpectations()
+    {
+        $this->inputArgument->addExpected('name', InputArgument::REQUIRED);
 
-		$this->assertTrue(array_key_exists('name', $expectations));
-		$this->assertEquals(InputArgument::Required, $expectations['name']);
-	}
+        $expectations = $this->inputArgument->getExpected();
 
-	/**
-	 * Test that an exception is thrown when you pass an invalid rule
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_exceptionOnInvalidRequirement()
-	{
-		$this->setExpectedException('Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException');
+        $this->assertTrue(array_key_exists('name', $expectations));
+        $this->assertEquals(InputArgument::REQUIRED, $expectations['name']);
+    }
 
-		$this->inputArgument->addExpected('name', 'fakerule');
-		$this->inputArgument->validate('name', '');
-	}
+    /**
+     * Test that an exception is thrown when you pass an invalid rule
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_exceptionOnInvalidRequirement()
+    {
+        $this->setExpectedException('Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException');
 
-
+        $this->inputArgument->addExpected('name', 'fakerule');
+        $this->inputArgument->validate('name', '');
+    }
 } // END class InputArgumentTest extends \PHPUnit_Framework_TestCase

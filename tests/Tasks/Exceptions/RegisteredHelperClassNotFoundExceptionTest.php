@@ -11,23 +11,22 @@ use Danzabar\CLI\Tasks\Exceptions\RegisteredHelperClassNotFoundException;
  */
 class RegisteredHelperClassNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
 {
-	
-	/**
-	 * Fire the exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_fireException()
-	{
-		try {
-			
-			throw new RegisteredHelperClassNotFoundException('TestClass');
+    
+    /**
+     * Fire the exception
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_fireException()
+    {
+        try {
+            
+            throw new RegisteredHelperClassNotFoundException('TestClass');
 
-		} catch (\Exception $e) {
+        } catch (\Exception $e) {
 
-			$this->assertEquals('TestClass', $e->getClass());
-		}
-	}
-
+            $this->assertEquals('TestClass', $e->getClass());
+        }
+    }
 } // END class RegisteredHelperClassNotFoundExceptionTest extends \PHPUnit_Framework_TestCase

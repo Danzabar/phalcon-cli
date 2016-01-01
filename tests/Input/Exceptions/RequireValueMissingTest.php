@@ -11,24 +11,23 @@ use Danzabar\CLI\Input\Exceptions\RequiredValueMissingException;
  */
 class RequiredValueMissingTest extends \PHPUnit_Framework_TestCase
 {
-	
-	/**
-	 * Test firing exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_fireException()
-	{
-		try {
-	
-			throw new RequiredValueMissingException('option', 'verbose');
+    
+    /**
+     * Test firing exception
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_fireException()
+    {
+        try {
+    
+            throw new RequiredValueMissingException('option', 'verbose');
 
-		} catch (\Exception $e) {
-			
-			$this->assertEquals('option', $e->getType());
-			$this->assertEquals('verbose', $e->getKey());
-		}
-	}
-
+        } catch (\Exception $e) {
+            
+            $this->assertEquals('option', $e->getType());
+            $this->assertEquals('verbose', $e->getKey());
+        }
+    }
 } // END class RequiredValueMissingTest extends \PHPUnit_Framework_TestCase

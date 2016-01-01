@@ -14,11 +14,13 @@
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master",
-		"mockery/mockery": "dev-master"
+		"mockery/mockery": "dev-master",
+        "squizlabs/php_codesniffer": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
-			"Danzabar\\CLI\\": "src/"
+			"Danzabar\\CLI\\": "src/",
+            "Danzabar\\CLI\\Tests": "tests/"
 		}
 	}
 }

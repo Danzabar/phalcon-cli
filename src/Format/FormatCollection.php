@@ -12,111 +12,105 @@ use Danzabar\CLI\Format\Colors;
 class FormatCollection
 {
 
-	/**
-	 * An associative array of formats
-	 *
-	 * @var Array
-	 */
-	protected $formats;
+    /**
+     * An associative array of formats
+     *
+     * @var Array
+     */
+    protected $formats;
 
-	/**
-	 * An instance of the Colors class
-	 *
-	 * @var string
-	 */
-	protected $color;
+    /**
+     * An instance of the Colors class
+     *
+     * @var string
+     */
+    protected $color;
 
-	/**
-	 * Set up the basic formats
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function __construct()
-	{
-		$this->formats = Array();
+    /**
+     * Set up the basic formats
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function __construct()
+    {
+        $this->formats = array();
 
-		$this->color = new Colors;
+        $this->color = new Colors;
 
-		$this->addGeneric();
-	}
+        $this->addGeneric();
+    }
 
-	/**
-	 * Adds a format entry
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function add($name, Array $details)
-	{
-		$this->formats[$name] = $this->textToCode($details);
-	}
+    /**
+     * Adds a format entry
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function add($name, array $details)
+    {
+        $this->formats[$name] = $this->textToCode($details);
+    }
 
-	/**
-	 * Turns a text color ie "Blue" into a color code.
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function textToCode(Array $details)
-	{
-		$formatted = Array();
+    /**
+     * Turns a text color ie "Blue" into a color code.
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function textToCode(array $details)
+    {
+        $formatted = array();
 
-		if(isset($details['foreground']))
-		{
-			$formatted['foreground'] = $this->color->getForeground($details['foreground']);
-		}
+        if (isset($details['foreground'])) {
+            $formatted['foreground'] = $this->color->getForeground($details['foreground']);
+        }
 
-		if(isset($details['background']))
-		{
-			$formatted['background'] = $this->color->getBackground($details['background']);
-		}
+        if (isset($details['background'])) {
+            $formatted['background'] = $this->color->getBackground($details['background']);
+        }
 
-		return $formatted;
-	}
+        return $formatted;
+    }
 
-	/**
-	 * Gets either a single or all formats depending on the var that is passed
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function get($name = NULL)
-	{
-		if(!is_null($name))
-		{
-			if(array_key_exists($name, $this->formats))
-			{
-				return $this->formats[$name];
-			}
+    /**
+     * Gets either a single or all formats depending on the var that is passed
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function get($name = null)
+    {
+        if (!is_null($name)) {
+            if (array_key_exists($name, $this->formats)) {
+                return $this->formats[$name];
+            }
 
-			return false;
+            return false;
 
-		} else
-		{
-			return $this->formats;
-		}
-	}
+        } else {
+            return $this->formats;
+        }
+    }
 
-	/**
-	 * Adds a generic set of formats.
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function addGeneric()
-	{
-		// Questions
-		$this->add('question', Array('foreground' => 'cyan'));
+    /**
+     * Adds a generic set of formats.
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function addGeneric()
+    {
+        // Questions
+        $this->add('question', array('foreground' => 'cyan'));
 
-		// Comments
-		$this->add('comment', Array('foreground' => 'yellow'));
+        // Comments
+        $this->add('comment', array('foreground' => 'yellow'));
 
-		// Info
-		$this->add('info', Array('foreground' => 'cyan'));
+        // Info
+        $this->add('info', array('foreground' => 'cyan'));
 
-		// Errors
-		$this->add('error', Array('foreground' => 'white', 'background' => 'red'));
-	}
-
+        // Errors
+        $this->add('error', array('foreground' => 'white', 'background' => 'red'));
+    }
 } // END class FormatCollection

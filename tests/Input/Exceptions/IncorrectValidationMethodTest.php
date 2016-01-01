@@ -11,22 +11,20 @@ use Danzabar\CLI\Input\Exceptions\IncorrectValidationMethodException;
  */
 class IncorrectValidationMethodTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * Test firing the exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_fireException()
-	{
-		try {
-	
-			throw new IncorrectValidationMethodException("numeric");
-		} catch(\Exception $e) {
-			
-			$this->assertEquals("numeric", $e->getMethod());
-		}
-	}
-
-
+    /**
+     * Test firing the exception
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_fireException()
+    {
+        try {
+    
+            throw new IncorrectValidationMethodException("numeric");
+        } catch (\Exception $e) {
+            
+            $this->assertEquals("numeric", $e->getMethod());
+        }
+    }
 } // END class IncorrectValidationMethodTest extends \PHPUnit_Framework_TestCase

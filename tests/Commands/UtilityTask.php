@@ -11,48 +11,47 @@ use Danzabar\CLI\Tasks\Task;
  */
 class UtilityTask extends Task
 {
-	/**
-	 * The task name
-	 *
-	 * @var string
-	 */
-	protected $name = 'utility';
-	
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	protected $description = 'This is the utility task.';
+    /**
+     * The task name
+     *
+     * @var string
+     */
+    protected $name = 'utility';
 
-	/**
-	 * The main action
-	 *
-	 * @Action
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function main()
-	{
-		$this->output->writeln("The main action of the utility task");
-	}
+    /**
+     * Description
+     *
+     * @var string
+     */
+    protected $description = 'This is the utility task.';
 
-	/**
-	 * Draws a table
-	 *
-	 * @Action
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function table()
-	{
-		$table = $this->helpers->load('table');
+    /**
+     * The main action
+     *
+     * @Action
+     * @return void
+     * @author Dan Cox
+     */
+    public function main()
+    {
+        $this->output->writeln("The main action of the utility task");
+    }
 
-		$data = Array();
-		$data[] = Array('Header1' => 'Value', 'Header2' => 'Value2');
-		$data[] = Array('Header1' => 'Longer value', 'Header2' => '');	
+    /**
+     * Draws a table
+     *
+     * @Action
+     * @return void
+     * @author Dan Cox
+     */
+    public function table()
+    {
+        $table = $this->helpers->load('table');
 
-		$table->draw($data);
-	}
-	
+        $data = array();
+        $data[] = array('Header1' => 'Value', 'Header2' => 'Value2');
+        $data[] = array('Header1' => 'Longer value', 'Header2' => '');
+
+        $table->draw($data);
+    }
 } // END class UtilityTask extends Command

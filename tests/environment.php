@@ -2,7 +2,6 @@
 
 use Phalcon\Loader;
 
-
 /**
  * The Test environment...
  * We just need composer autoloader.
@@ -15,5 +14,5 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
  *
  */
 $loader = new Loader;
-$loader->registerDirs(Array(__DIR__.'/Commands'));
+$loader->registerDirs(array(__DIR__.'/Commands'));
 $loader->register();

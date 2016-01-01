@@ -11,73 +11,69 @@ use Danzabar\CLI\Tasks\Exceptions;
  */
 class TaskLibrary
 {
-	/**
-	 * An Associative array of tasks
-	 *
-	 * @var Array
-	 */
-	protected $library;
+    /**
+     * An Associative array of tasks
+     *
+     * @var Array
+     */
+    protected $library;
 
-	/**
-	 * Set up class vars
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function __construct()
-	{
-		$this->library = Array();
-	}
+    /**
+     * Set up class vars
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function __construct()
+    {
+        $this->library = array();
+    }
 
-	/**
-	 * Adds a record to the library
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function add($tasks)
-	{
-		$this->library[strtolower($tasks['task']['name'])] = Array(
-			'actions' => $tasks['task']['actions'], 
-			'description' => $tasks['task']['description'],
-			'class' => $tasks['class']
-		);		
-	}
+    /**
+     * Adds a record to the library
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function add($tasks)
+    {
+        $this->library[strtolower($tasks['task']['name'])] = array(
+            'actions' => $tasks['task']['actions'],
+            'description' => $tasks['task']['description'],
+            'class' => $tasks['class']
+        );
+    }
 
-	/**
-	 * Find a command by task:action name
-	 *
-	 * @return Object
-	 * @author Dan Cox
-	 */
-	public function find($name)
-	{
-		$exp = explode(':', $name);
-		$task = strtolower($exp[0]);
-		$action = $exp[1];
+    /**
+     * Find a command by task:action name
+     *
+     * @return Object
+     * @author Dan Cox
+     */
+    public function find($name)
+    {
+        $exp = explode(':', $name);
+        $task = strtolower($exp[0]);
+        $action = $exp[1];
 
-		if(array_key_exists($task, $this->library))
-		{
-			if(in_array($action, $this->library[$task]['actions']))
-			{
-				return $this->library[$task]['class'];
-			}
-		}
+        if (array_key_exists($task, $this->library)) {
+            if (in_array($action, $this->library[$task]['actions'])) {
+                return $this->library[$task]['class'];
+            }
+        }
 
-		// Not sure whether to throw an exception here?
-		throw new Exceptions\CommandNotFoundException($name);
-	}
+        // Not sure whether to throw an exception here?
+        throw new Exceptions\CommandNotFoundException($name);
+    }
 
-	/**
-	 * Returns all the registered commands
-	 *
-	 * @return Array
-	 * @author Dan Cox
-	 */
-	public function getAll()
-	{
-		return $this->library;
-	}
-
-
+    /**
+     * Returns all the registered commands
+     *
+     * @return Array
+     * @author Dan Cox
+     */
+    public function getAll()
+    {
+        return $this->library;
+    }
 } // END class TaskLibrary

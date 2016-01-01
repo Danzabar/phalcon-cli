@@ -11,44 +11,43 @@ use Danzabar\CLI\Tasks\TaskLibrary;
  */
 class TaskLibraryTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * Instance of the library
-	 *
-	 * @var Object
-	 */
-	protected $library;
-	
-	/**
-	 * Set up test vars
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function setUp()
-	{
-		$this->library = new TaskLibrary();
-	}
+    /**
+     * Instance of the library
+     *
+     * @var Object
+     */
+    protected $library;
+    
+    /**
+     * Set up test vars
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function setUp()
+    {
+        $this->library = new TaskLibrary();
+    }
 
-	/**
-	 * Test adding and getting back class
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_addGet()
-	{	
-		$arr = Array('task' => Array(
-			'name'	=> 'Command',
-			'description' => '',
-			'actions' => ['main', 'run'],
-		), 'class' => 'TEST');
+    /**
+     * Test adding and getting back class
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_addGet()
+    {
+        $arr = array('task' => array(
+            'name'  => 'Command',
+            'description' => '',
+            'actions' => ['main', 'run'],
+        ), 'class' => 'TEST');
 
-		$this->library->add($arr);
+        $this->library->add($arr);
 
-		// Now find this by its command name
-		$val = $this->library->find('Command:run');
+        // Now find this by its command name
+        $val = $this->library->find('Command:run');
 
-		$this->assertEquals('TEST', $val);
-	}
-
+        $this->assertEquals('TEST', $val);
+    }
 } // END class TaskLibraryTest extends \PHPUnit_Framework_TestCase

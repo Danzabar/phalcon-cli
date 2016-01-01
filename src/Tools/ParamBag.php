@@ -9,102 +9,99 @@
  */
 class ParamBag
 {
-	/**
-	 * Array of parameters
-	 *
-	 * @var Array
-	 */
-	protected $params = Array();
+    /**
+     * Array of parameters
+     *
+     * @var Array
+     */
+    protected $params = array();
 
-	/**
-	 * Returns the param by name
-	 *
-	 * @return Mixed
-	 * @author Dan Cox
-	 */
-	public function __get($name)
-	{
-		if(array_key_exists($name, $this->params))
-		{
-			return $this->params[$name];	
-		}
+    /**
+     * Returns the param by name
+     *
+     * @return Mixed
+     * @author Dan Cox
+     */
+    public function __get($name)
+    {
+        if (array_key_exists($name, $this->params)) {
+            return $this->params[$name];
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * Bulk load values
-	 *
-	 * @return $this
-	 * @author Dan Cox
-	 */
-	public function load(Array $values)
-	{
-		$this->params = $values;
+    /**
+     * Bulk load values
+     *
+     * @return $this
+     * @author Dan Cox
+     */
+    public function load(array $values)
+    {
+        $this->params = $values;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Sets a value
-	 *
-	 * @return $this
-	 * @author Dan Cox
-	 */
-	public function __set($name, $value)
-	{
-		$this->params[$name] = $value;
+    /**
+     * Sets a value
+     *
+     * @return $this
+     * @author Dan Cox
+     */
+    public function __set($name, $value)
+    {
+        $this->params[$name] = $value;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Check if var isset
-	 *
-	 * @return Boolean
-	 * @author Dan Cox
-	 */
-	public function __isset($name)
-	{
-		return array_key_exists($name, $this->params);
-	}
+    /**
+     * Check if var isset
+     *
+     * @return Boolean
+     * @author Dan Cox
+     */
+    public function __isset($name)
+    {
+        return array_key_exists($name, $this->params);
+    }
 
-	/**
-	 * Unset a variable
-	 *
-	 * @return $this
-	 * @author Dan Cox
-	 */
-	public function __unset($name)
-	{
-		unset($this->params[$name]);
+    /**
+     * Unset a variable
+     *
+     * @return $this
+     * @author Dan Cox
+     */
+    public function __unset($name)
+    {
+        unset($this->params[$name]);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Clears all the params
-	 *
-	 * @return $this
-	 * @author Dan Cox
-	 */
-	public function clear()
-	{
-		$this->params = Array();
+    /**
+     * Clears all the params
+     *
+     * @return $this
+     * @author Dan Cox
+     */
+    public function clear()
+    {
+        $this->params = array();
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Returns all the params
-	 *
-	 * @return Array
-	 * @author Dan Cox
-	 */
-	public function all()
-	{
-		return $this->params;
-	}
-
-
+    /**
+     * Returns all the params
+     *
+     * @return Array
+     * @author Dan Cox
+     */
+    public function all()
+    {
+        return $this->params;
+    }
 } // END class ParamBag

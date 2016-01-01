@@ -12,19 +12,18 @@ use Danzabar\CLI\Tasks\Exceptions\CommandNotFoundException;
 class CommandNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
 {
 
-	/**
-	 * Test fire exception
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_fireException()
-	{
-		try {
-			throw new CommandNotFoundException('task:action');
-		} catch (\Exception $e) {
-			$this->assertEquals('task:action', $e->getCommand());
-		}
-	}
-
+    /**
+     * Test fire exception
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_fireException()
+    {
+        try {
+            throw new CommandNotFoundException('task:action');
+        } catch (\Exception $e) {
+            $this->assertEquals('task:action', $e->getCommand());
+        }
+    }
 } // END class CommandNotFoundExceptionTest extends \PHPUnit_Framework_TestCase

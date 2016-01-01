@@ -11,38 +11,36 @@ use Danzabar\CLI\Input\InputOption;
  */
 class InputOptionTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * The input option instance
-	 *
-	 * @var Object
-	 */
-	protected $inputOption;
+    /**
+     * The input option instance
+     *
+     * @var Object
+     */
+    protected $inputOption;
 
-	/**
-	 * Set up test vars
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function setUp()
-	{
-		$this->inputOption = new InputOption;
-	}
+    /**
+     * Set up test vars
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function setUp()
+    {
+        $this->inputOption = new InputOption;
+    }
 
-	/**
-	 * Test the expectation trait
-	 *
-	 * @return void
-	 * @author Dan Cox
-	 */
-	public function test_addGetExpectation()
-	{
-		$this->inputOption->addExpected('test', InputOption::Optional);
-		$expectations = $this->inputOption->getExpected();
+    /**
+     * Test the expectation trait
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_addGetExpectation()
+    {
+        $this->inputOption->addExpected('test', InputOption::OPTIONAL);
+        $expectations = $this->inputOption->getExpected();
 
-		$this->assertTrue(array_key_exists('test', $expectations));
-		$this->assertEquals(InputOption::Optional, $expectations['test']);
-	}
-
-	
+        $this->assertTrue(array_key_exists('test', $expectations));
+        $this->assertEquals(InputOption::OPTIONAL, $expectations['test']);
+    }
 } // END class InputOptionTest extends \PHPUnit_Framework_TestCase
