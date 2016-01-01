@@ -56,8 +56,9 @@ class Help extends Task
     {
         $this->output->writeln($this->console->getName());
 
-        if (!is_null($this->console->getVersion()))
+        if (!is_null($this->console->getVersion())) {
             $this->output->writeln('version '.$this->console->getVersion());
+        }
 
         // New line padding
         $this->output->writeln('');
