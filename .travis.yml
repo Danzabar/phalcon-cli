@@ -15,7 +15,7 @@ install:
     - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-    - ./vendor/bin/phpcs . --standard=PSR2 --ignore=vendor/*,tests/* --extensions=php --report=full -s
+    - ./vendor/bin/phpcs src/* --standard=PSR2 --extensions=php --report=full -s
     - mkdir -p build/logs
     - phpunit --coverage-clover build/logs/clover.xml
 
