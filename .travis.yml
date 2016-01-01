@@ -11,7 +11,7 @@ before_install:
 
 install:
     - cd ../../
-    - ./vendor/bin/phpcs . --standard=PSR2 --ignore=vendor/* --extensions=php --report=full -s
+    - ./vendor/bin/phpcs . --standard=PSR2 --ignore=vendor/*,tests/* --extensions=php --report=full -s
     - travis_retry composer self-update
     - travis_retry composer install --no-interaction --prefer-source --dev
 
