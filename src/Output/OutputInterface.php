@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Output;
+<?php
+
+namespace Danzabar\CLI\Output;
 
 /**
  * The output interface governs output classes for the CLI,

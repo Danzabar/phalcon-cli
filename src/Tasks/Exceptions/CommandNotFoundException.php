@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks\Exceptions;
+<?php
+
+namespace Danzabar\CLI\Tasks\Exceptions;
 
 /**
  * Exception class for when a command isnt found

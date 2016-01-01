@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Output;
+<?php
+
+namespace Danzabar\CLI\Output;
 
 use Danzabar\CLI\Output\OutputInterface;
 use Danzabar\CLI\Format\Format;

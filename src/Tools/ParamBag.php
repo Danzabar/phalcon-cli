@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tools;
+<?php
+
+namespace Danzabar\CLI\Tools;
 
 /**
  * The param bag acts as a base for param bag type classes

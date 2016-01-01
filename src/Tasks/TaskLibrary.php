@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks;
+<?php
+
+namespace Danzabar\CLI\Tasks;
 
 use Danzabar\CLI\Tasks\Exceptions;
 

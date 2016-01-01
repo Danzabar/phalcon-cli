@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Format;
+<?php
+
+namespace Danzabar\CLI\Format;
 
 use Danzabar\CLI\Format\FormatCollection;
 

@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Input\Exceptions;
+<?php
+
+namespace Danzabar\CLI\Input\Exceptions;
 
 /**
  * Exception class for validation of arguments and options

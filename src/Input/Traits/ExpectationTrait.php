@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Input\Traits;
+<?php
+
+namespace Danzabar\CLI\Input\Traits;
 
 /**
  * The expectation trait adds functionality for classes that have expected variables/arguments

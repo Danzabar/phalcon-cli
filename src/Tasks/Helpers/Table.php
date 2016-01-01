@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks\Helpers;
+<?php
+
+namespace Danzabar\CLI\Tasks\Helpers;
 
 use Danzabar\CLI\Tasks\Helpers\Helper;
 

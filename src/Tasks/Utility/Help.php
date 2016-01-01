@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks\Utility;
+<?php
+
+namespace Danzabar\CLI\Tasks\Utility;
 
 use Danzabar\CLI\Tasks\Task;
 

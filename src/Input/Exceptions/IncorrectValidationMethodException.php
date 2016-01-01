@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Input\Exceptions;
+<?php
+
+namespace Danzabar\CLI\Input\Exceptions;
 
 /**
  * The exception fired when an incorrect validation method is given.

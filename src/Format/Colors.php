@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Format;
+<?php
+
+namespace Danzabar\CLI\Format;
 
 /**
  * The colors class stores and fetches color codes for the cl

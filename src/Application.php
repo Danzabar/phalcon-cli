@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI;
+<?php
+
+namespace Danzabar\CLI;
 
 use Phalcon\CLI\Dispatcher;
 use Danzabar\CLI\Output\Output;

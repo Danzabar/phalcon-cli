@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks\Exceptions;
+<?php
+
+namespace Danzabar\CLI\Tasks\Exceptions;
 
 /**
  * The exception class for when a registered helper is called but not defined

@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks\Helpers;
+<?php
+
+namespace Danzabar\CLI\Tasks\Helpers;
 
 /**
  * The helper base class to give basic functionality to any extending helpers

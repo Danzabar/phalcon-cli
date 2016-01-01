@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI;
+<?php
+
+namespace Danzabar\CLI;
 
 use Danzabar\CLI\Application;
 use Danzabar\CLI\Input\Input;

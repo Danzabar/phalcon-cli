@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Tasks;
+<?php
+
+namespace Danzabar\CLI\Tasks;
 
 use \Phalcon\CLI\Task as PhalTask;
 

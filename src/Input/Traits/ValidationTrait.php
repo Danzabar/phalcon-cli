@@ -1,4 +1,6 @@
-<?php namespace Danzabar\CLI\Input\Traits;
+<?php
+
+namespace Danzabar\CLI\Input\Traits;
 
 use Danzabar\CLI\Input\Exceptions;
 
