@@ -13,6 +13,11 @@
 		"symfony/process": "2.7.*@dev"
 	},
 	"require-dev": {
+        "symfony/yaml": "2.7",
+        "symfony/config": "2.7",
+        "symfony/console": "2.7",
+        "symfony/filesystem": "2.7",
+        "symfony/stopwatch": "2.7",
 		"satooshi/php-coveralls": "v1.0.0",
 		"mockery/mockery": "dev-master",
         "squizlabs/php_codesniffer": "dev-master"
