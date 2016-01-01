@@ -7,14 +7,14 @@ You specify expected arguments and options in `setup` methods, there are current
 
 	public function setup($action)
 	{
-		$this->argument->addExpected('name', InputArgument::Required);
+		$this->argument->addExpected('name', InputArgument::REQUIRED);
 	}
 
 While this is quicker, if you have an action that requires a set of different arguments, you can use a setup method specific to that action, lets pretend we call the 'output' action, our setup for this would be like:
 
 	public function setupOutput()
 	{
-		$this->option->addExpected('verbose', InputOption::Optional);
+		$this->option->addExpected('verbose', InputOption::OPTIONAL);
 	}
 
 This gives you control over your actions arguments and options, but also where needed allows you to generalise and not rewrite code.

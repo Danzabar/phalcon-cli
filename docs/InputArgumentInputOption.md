@@ -9,10 +9,10 @@ The `InputArgument` class allows you to set expected and get given arguments, ar
 
 	Class Argument extends Task
 	{
-	
+
 		public function setup($action)
 		{
-			$this->argument->addExpected('name', InputArgument::Required);	
+			$this->argument->addExpected('name', InputArgument::REQUIRED);
 		}
 
 		public function main()
@@ -24,13 +24,13 @@ The `InputArgument` class allows you to set expected and get given arguments, ar
 
 ## Options
 
-Very similar process to arguments, only we use `option`. An option must be preceeded with -- or - for example `--verbose or -verbose` is an option, Options can also contain values, for example --name="my name" or -name="my name" 
+Very similar process to arguments, only we use `option`. An option must be preceeded with -- or - for example `--verbose or -verbose` is an option, Options can also contain values, for example --name="my name" or -name="my name"
 
 	Class Option extends Task
 	{
 		public function setupMain()
 		{
-			$this->option->addExpected('verbose', InputOption::Optional);
+			$this->option->addExpected('verbose', InputOption::OPTIONAL);
 		}
 
 		public function main()
@@ -52,13 +52,13 @@ Current validation rules are;-
 
 #### Arguments
 
- - Optional, the argument is only optional
- - Required, the argument is required and will throw an exception if its not set
- - Alpha, the argument can only consist of alpha characters
+ - OPTIONAL, the argument is only optional
+ - REQUIRED, the argument is required and will throw an exception if its not set
+ - ALPHA, the argument can only consist of alpha characters
 
 #### Options
 
- - Optional
- - Required, this means that the option must be set, whether value or flag
- - ValueRequired, this means that the option must contain a value
+ - OPTIONAL
+ - REQUIRED, this means that the option must be set, whether value or flag
+ - VALUEREQUIRED, this means that the option must contain a value
 
