@@ -55,7 +55,9 @@ class Help extends Task
     public function printApplicationDetails()
     {
         $this->output->writeln($this->console->getName());
-        $this->output->writeln('version '.$this->console->getVersion());
+
+        if (!is_null($this->console->getVersion()))
+            $this->output->writeln('version '.$this->console->getVersion());
 
         // New line padding
         $this->output->writeln('');
