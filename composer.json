@@ -13,14 +13,13 @@
 		"symfony/process": "2.7.*@dev"
 	},
 	"require-dev": {
-		"satooshi/php-coveralls": "dev-master",
+		"satooshi/php-coveralls": "v1.0.0",
 		"mockery/mockery": "dev-master",
         "squizlabs/php_codesniffer": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
-			"Danzabar\\CLI\\": "src/",
-            "Danzabar\\CLI\\Tests": "tests/"
+			"Danzabar\\CLI\\": "src/"
 		}
 	}
 }
