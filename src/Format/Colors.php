@@ -30,7 +30,6 @@ class Colors
      * Set up the colors array
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct()
     {
@@ -43,7 +42,6 @@ class Colors
      * Gets a foreground color code by its name
      *
      * @return void
-     * @author Dan Cox
      */
     public function getForeground($name)
     {
@@ -58,7 +56,6 @@ class Colors
      * Gets a background color code by its name
      *
      * @return void
-     * @author Dan Cox
      */
     public function getBackground($name)
     {
@@ -73,7 +70,6 @@ class Colors
      * Adds colors to the foreground array
      *
      * @return void
-     * @author Dan Cox
      */
     public function populateForeground()
     {
@@ -101,7 +97,6 @@ class Colors
      * Adds background color entries
      *
      * @return void
-     * @author Dan Cox
      */
     public function populateBackground()
     {

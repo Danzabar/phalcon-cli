@@ -32,7 +32,6 @@ class Task extends PhalTask
      * Returns the output instance
      *
      * @return Output
-     * @author Dan Cox
      */
     public function getOutput()
     {
@@ -43,7 +42,6 @@ class Task extends PhalTask
      * Returns the input instance
      *
      * @return Input
-     * @author Dan Cox
      */
     public function getInput()
     {

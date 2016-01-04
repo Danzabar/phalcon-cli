@@ -22,7 +22,6 @@ class RegisteredHelperClassNotFoundException extends \Exception
      * Fire exception
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($className, $code = 0, \Exception $previous = null)
     {
@@ -35,7 +34,6 @@ class RegisteredHelperClassNotFoundException extends \Exception
      * Returns the class name
      *
      * @return String
-     * @author Dan Cox
      */
     public function getClass()
     {

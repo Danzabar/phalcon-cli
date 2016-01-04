@@ -32,7 +32,6 @@ class Help extends Task
      *
      * @Action
      * @return void
-     * @author Dan Cox
      */
     public function main()
     {
@@ -50,7 +49,6 @@ class Help extends Task
      * Prints the app name and version
      *
      * @return void
-     * @author Dan Cox
      */
     public function printApplicationDetails()
     {
@@ -68,7 +66,6 @@ class Help extends Task
      * Prints the application instructions
      *
      * @return void
-     * @author Dan Cox
      */
     public function printApplicationInstructions()
     {
@@ -82,7 +79,6 @@ class Help extends Task
      * Lists out command names and descriptions
      *
      * @return void
-     * @author Dan Cox
      */
     public function listCommands()
     {

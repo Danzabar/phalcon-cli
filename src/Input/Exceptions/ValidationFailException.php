@@ -29,7 +29,6 @@ class ValidationFailException extends \Exception
      * Fire exception
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($value, $method, $code = 0, \Exception $previous = null)
     {
@@ -43,7 +42,6 @@ class ValidationFailException extends \Exception
      * Returns the value
      *
      * @return String
-     * @author Dan Cox
      */
     public function getValue()
     {
@@ -54,7 +52,6 @@ class ValidationFailException extends \Exception
      * Returns the method
      *
      * @return String
-     * @author Dan Cox
      */
     public function getMethod()
     {

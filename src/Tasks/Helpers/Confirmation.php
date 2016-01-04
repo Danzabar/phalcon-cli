@@ -48,7 +48,6 @@ class Confirmation extends Helper
      * Request basic confirmation returns a boolean value depending on the answer
      *
      * @return Boolean
-     * @author Dan Cox
      */
     public function confirm($text = 'Do you wish to continue?')
     {
@@ -61,7 +60,6 @@ class Confirmation extends Helper
      * Converts the input to a boolean value depending on its answer
      *
      * @return Boolean
-     * @author Dan Cox
      */
     public function convertToBool($answer)
     {
@@ -81,7 +79,6 @@ class Confirmation extends Helper
      * Sets the value of the confirmation
      *
      * @return void
-     * @author Dan Cox
      */
     public function setConfirmationYes($value)
     {
@@ -92,7 +89,6 @@ class Confirmation extends Helper
      * Sets the reject value for confirmation
      *
      * @return void
-     * @author Dan Cox
      */
     public function setConfirmationNo($value)
     {
@@ -103,7 +99,6 @@ class Confirmation extends Helper
      * Sets the explicit variable which controlls how answers are returned
      *
      * @return void
-     * @author Dan Cox
      */
     public function setConfirmExplicit($switch)
     {
@@ -114,7 +109,6 @@ class Confirmation extends Helper
      * Set the error message that shows on an invalid answer in explicit mode
      *
      * @return void
-     * @author Dan Cox
      */
     public function setInvalidConfirmationError($error)
     {

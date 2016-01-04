@@ -36,7 +36,6 @@ class Helper
      * Set up the helper class
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($di = null)
     {
@@ -51,7 +50,6 @@ class Helper
      * Returns the di
      *
      * @return DI
-     * @author Dan Cox
      */
     public function getDI()
     {

@@ -12,7 +12,6 @@ trait ExpectationTrait
      * Adds an expected argument to the expected array
      *
      * @return InputArgument
-     * @author Dan Cox
      */
     public function addExpected($name, $requirements)
     {
@@ -28,7 +27,6 @@ trait ExpectationTrait
      * Clear the expected array
      *
      * @return void
-     * @author Dan Cox
      */
     public function clearExpected()
     {
@@ -40,7 +38,6 @@ trait ExpectationTrait
      * Returns the expected Array
      *
      * @return Array
-     * @author Dan Cox
      */
     public function getExpected()
     {
@@ -51,7 +48,6 @@ trait ExpectationTrait
      * Returns the var position array
      *
      * @return void
-     * @author Dan Cox
      */
     public function getExpectedOrder()
     {

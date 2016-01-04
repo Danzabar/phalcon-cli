@@ -24,7 +24,6 @@ class Question extends Helper
      * Asks a basic question and returns the response.
      *
      * @return String
-     * @author Dan Cox
      */
     public function ask($question)
     {
@@ -37,7 +36,6 @@ class Question extends Helper
      * Sets the error message that displays when a user picks the wrong answer
      *
      * @return void
-     * @author Dan Cox
      */
     public function setChoiceError($error)
     {
@@ -48,7 +46,6 @@ class Question extends Helper
      * The choice question, pick a single choice.
      *
      * @return String
-     * @author Dan Cox
      */
     public function choice($question, $choices = array(), $allowedMultiple = false)
     {
@@ -73,7 +70,6 @@ class Question extends Helper
      * A quick function to allow multiple answers on a choice question
      *
      * @return void
-     * @author Dan Cox
      */
     public function multipleChoice($question, $choices = array())
     {
@@ -84,7 +80,6 @@ class Question extends Helper
      * Checks that the answer is present in the list of choices
      *
      * @return Boolean
-     * @author Dan Cox
      */
     public function validateChoices($answer, $choices, $allowedMultiple = false)
     {
@@ -99,7 +94,6 @@ class Question extends Helper
      * Validates a single answer
      *
      * @return Boolean|String
-     * @author Dan Cox
      */
     public function validateSingleChoice($answer, $choice)
     {
@@ -114,7 +108,6 @@ class Question extends Helper
      * Validates multiple answers
      *
      * @return Boolean|String
-     * @author Dan Cox
      */
     public function validateMultipleChoice($answer, $choice)
     {

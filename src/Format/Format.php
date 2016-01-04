@@ -25,7 +25,6 @@ class Format
      * Set up class
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($collection = null)
     {
@@ -36,7 +35,6 @@ class Format
      * Adds a format to the collection object
      *
      * @return void
-     * @author Dan Cox
      */
     public static function addFormat($name, array $details)
     {
@@ -47,7 +45,6 @@ class Format
      * Checks a string for format codes and replaces it with its background/foreground color codes
      *
      * @return String
-     * @author Dan Cox
      */
     public static function format($str)
     {

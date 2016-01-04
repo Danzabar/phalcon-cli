@@ -22,7 +22,6 @@ class ParamBag
      * Returns the param by name
      *
      * @return Mixed
-     * @author Dan Cox
      */
     public function __get($name)
     {
@@ -37,7 +36,6 @@ class ParamBag
      * Bulk load values
      *
      * @return $this
-     * @author Dan Cox
      */
     public function load(array $values)
     {
@@ -50,7 +48,6 @@ class ParamBag
      * Sets a value
      *
      * @return $this
-     * @author Dan Cox
      */
     public function __set($name, $value)
     {
@@ -63,7 +60,6 @@ class ParamBag
      * Check if var isset
      *
      * @return Boolean
-     * @author Dan Cox
      */
     public function __isset($name)
     {
@@ -74,7 +70,6 @@ class ParamBag
      * Unset a variable
      *
      * @return $this
-     * @author Dan Cox
      */
     public function __unset($name)
     {
@@ -87,7 +82,6 @@ class ParamBag
      * Clears all the params
      *
      * @return $this
-     * @author Dan Cox
      */
     public function clear()
     {
@@ -100,7 +94,6 @@ class ParamBag
      * Returns all the params
      *
      * @return Array
-     * @author Dan Cox
      */
     public function all()
     {

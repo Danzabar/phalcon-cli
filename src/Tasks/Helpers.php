@@ -38,7 +38,6 @@ class Helpers
      * Set up class vars
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($DI)
     {
@@ -52,7 +51,6 @@ class Helpers
      * Registers a helper class that can be activated on a command
      *
      * @return Helper
-     * @author Dan Cox
      */
     public function registerHelper($name, $className)
     {
@@ -64,7 +62,6 @@ class Helpers
      * Returns the class name specified against a registered helper class
      *
      * @return String
-     * @author Dan Cox
      */
     public function getRegisteredHelper($name)
     {
@@ -79,7 +76,6 @@ class Helpers
      * Creates and returns an instance of the helper
      *
      * @return Object
-     * @author Dan Cox
      */
     public function load($name)
     {

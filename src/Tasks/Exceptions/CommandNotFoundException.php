@@ -24,7 +24,6 @@ class CommandNotFoundException extends \Exception
      * Fire command
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($command, $code = 0, \Exception $previous = null)
     {
@@ -36,7 +35,6 @@ class CommandNotFoundException extends \Exception
      * Returns the command
      *
      * @return String
-     * @author Dan Cox
      */
     public function getCommand()
     {

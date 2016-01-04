@@ -25,7 +25,6 @@ class Output implements OutputInterface
      * Build the output
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($source = 'php://output')
     {
@@ -37,7 +36,6 @@ class Output implements OutputInterface
      * Output a string
      *
      * @return void
-     * @author Dan Cox
      */
     public function write($str)
     {
@@ -48,7 +46,6 @@ class Output implements OutputInterface
      * Write a single line
      *
      * @return void
-     * @author Dan Cox
      */
     public function writeln($str)
     {
@@ -59,7 +56,6 @@ class Output implements OutputInterface
      * Draws a line with a given length and character
      *
      * @return String
-     * @author Dan Cox
      */
     public function hr($length, $char = '_')
     {
@@ -70,7 +66,6 @@ class Output implements OutputInterface
      * Read the output
      *
      * @return void
-     * @author Dan Cox
      */
     public function read()
     {

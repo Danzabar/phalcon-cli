@@ -32,7 +32,6 @@ class FormatCollection
      * Set up the basic formats
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct()
     {
@@ -47,7 +46,6 @@ class FormatCollection
      * Adds a format entry
      *
      * @return void
-     * @author Dan Cox
      */
     public function add($name, array $details)
     {
@@ -58,7 +56,6 @@ class FormatCollection
      * Turns a text color ie "Blue" into a color code.
      *
      * @return void
-     * @author Dan Cox
      */
     public function textToCode(array $details)
     {
@@ -79,7 +76,6 @@ class FormatCollection
      * Gets either a single or all formats depending on the var that is passed
      *
      * @return void
-     * @author Dan Cox
      */
     public function get($name = null)
     {
@@ -99,7 +95,6 @@ class FormatCollection
      * Adds a generic set of formats.
      *
      * @return void
-     * @author Dan Cox
      */
     public function addGeneric()
     {

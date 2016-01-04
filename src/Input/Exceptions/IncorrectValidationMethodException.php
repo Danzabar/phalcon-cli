@@ -22,7 +22,6 @@ class IncorrectValidationMethodException extends \Exception
      * Fire the exception
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($method, $code = 0, \Exception $previous = null)
     {
@@ -35,7 +34,6 @@ class IncorrectValidationMethodException extends \Exception
      * Returns the method
      *
      * @return String
-     * @author Dan Cox
      */
     public function getMethod()
     {

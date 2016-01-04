@@ -80,7 +80,6 @@ class Application
      * The phalcon console object
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($DI = null, $dispatcher = null, $library = null)
     {
@@ -108,7 +107,6 @@ class Application
      * Adds the default commands like Help and List
      *
      * @return void
-     * @author Dan Cox
      */
     public function addDefaultCommands()
     {
@@ -119,7 +117,6 @@ class Application
      * Sets up the default settings for the dispatcher
      *
      * @return void
-     * @author Dan Cox
      */
     public function setUpDispatcherDefaults()
     {
@@ -136,7 +133,6 @@ class Application
      * Registers the question, confirmation and table helpers
      *
      * @return void
-     * @author Dan Cox
      */
     public function registerDefaultHelpers()
     {
@@ -149,7 +145,6 @@ class Application
      * Start the app
      *
      * @return Output
-     * @author Dan Cox
      */
     public function start($args = array())
     {
@@ -180,7 +175,6 @@ class Application
      * Adds a command to the library
      *
      * @return Application
-     * @author Dan Cox
      */
     public function add($command)
     {
@@ -197,7 +191,6 @@ class Application
      * Find a command by name
      *
      * @return Object
-     * @author Dan Cox
      */
     public function find($name)
     {
@@ -208,7 +201,6 @@ class Application
      * Format the arguments into a useable state
      *
      * @return Array
-     * @author Dan Cox
      */
     public function formatArgs($args)
     {
@@ -246,7 +238,6 @@ class Application
      * Returns the helpers object
      *
      * @return Object
-     * @author Dan Cox
      */
     public function helpers()
     {
@@ -257,7 +248,6 @@ class Application
      * Sets the suffix for task classes
      *
      * @return Application
-     * @author Dan Cox
      */
     public function setTaskSuffix($suffix = '')
     {
@@ -269,7 +259,6 @@ class Application
      * Sets the action suffix
      *
      * @return Application
-     * @author Dan Cox
      */
     public function setActionSuffix($suffix = '')
     {
@@ -281,7 +270,6 @@ class Application
      * Returns the DI
      *
      * @return Object
-     * @author Dan Cox
      */
     public function getDI()
     {

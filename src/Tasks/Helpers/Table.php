@@ -52,7 +52,6 @@ class Table extends Helper
      * Draws a table from the array passed to it.
      *
      * @return void
-     * @author Dan Cox
      */
     public function draw(array $data)
     {
@@ -69,7 +68,6 @@ class Table extends Helper
      * Writes the table
      *
      * @return void
-     * @author Dan Cox
      */
     public function writeData(array $data, array $lengths)
     {
@@ -88,7 +86,6 @@ class Table extends Helper
      * Writes a decorative footer
      *
      * @return void
-     * @author Dan Cox
      */
     public function writeFooter(array $headers)
     {
@@ -105,7 +102,6 @@ class Table extends Helper
      * Outputs the headers with padding previously calculated
      *
      * @return void
-     * @author Dan Cox
      */
     public function writeHeaders(array $headers)
     {
@@ -127,7 +123,6 @@ class Table extends Helper
      * Calculate the length of the table
      *
      * @return Array
-     * @author Dan Cox
      */
     public function calcLength(array $data)
     {

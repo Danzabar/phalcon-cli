@@ -24,7 +24,6 @@ class TaskLibrary
      * Set up class vars
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct()
     {
@@ -35,7 +34,6 @@ class TaskLibrary
      * Adds a record to the library
      *
      * @return void
-     * @author Dan Cox
      */
     public function add($tasks)
     {
@@ -50,7 +48,6 @@ class TaskLibrary
      * Find a command by task:action name
      *
      * @return Object
-     * @author Dan Cox
      */
     public function find($name)
     {
@@ -72,7 +69,6 @@ class TaskLibrary
      * Returns all the registered commands
      *
      * @return Array
-     * @author Dan Cox
      */
     public function getAll()
     {

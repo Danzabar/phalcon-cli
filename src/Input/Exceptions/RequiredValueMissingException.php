@@ -30,7 +30,6 @@ class RequiredValueMissingException extends \Exception
      * Fire exception
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($type, $key, $code = 0, \Exception $previous = null)
     {
@@ -44,7 +43,6 @@ class RequiredValueMissingException extends \Exception
      * Returns the type
      *
      * @return String
-     * @author Dan Cox
      */
     public function getType()
     {
@@ -55,7 +53,6 @@ class RequiredValueMissingException extends \Exception
      * Returns the key
      *
      * @return String
-     * @author Dan Cox
      */
     public function getKey()
     {

@@ -55,7 +55,6 @@ class CommandTester
      * Load the application
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($application = null)
     {
@@ -67,7 +66,6 @@ class CommandTester
      * Sets the new input and output classes
      *
      * @return void
-     * @author Dan Cox
      */
     public function setInputOutput()
     {
@@ -83,7 +81,6 @@ class CommandTester
      * Sets an input for questions and confirmation
      *
      * @return void
-     * @author Dan Cox
      */
     public function setInput($str)
     {
@@ -95,7 +92,6 @@ class CommandTester
      * Execute the command
      *
      * @return void
-     * @author Dan Cox
      */
     public function execute($command = null, $params = array())
     {
@@ -119,7 +115,6 @@ class CommandTester
      * Formats arguments and options
      *
      * @return String
-     * @author Dan Cox
      */
     public function formatArgument($key, $param)
     {
@@ -134,7 +129,6 @@ class CommandTester
      * Adds a command to the app
      *
      * @return void
-     * @author Dan Cox
      */
     public function add($command)
     {
@@ -145,7 +139,6 @@ class CommandTester
      * Returns the output
      *
      * @return void
-     * @author Dan Cox
      */
     public function getOutput()
     {
@@ -156,7 +149,6 @@ class CommandTester
      * Sets the task:action command
      *
      * @return $this
-     * @author Dan Cox
      */
     public function setCommand($command)
     {
@@ -169,7 +161,6 @@ class CommandTester
      * Returns the current command
      *
      * @return String
-     * @author Dan Cox
      */
     public function getCommand()
     {
@@ -180,7 +171,6 @@ class CommandTester
      * Returns the application class
      *
      * @return Object
-     * @author Dan Cox
      */
     public function getApplication()
     {
@@ -191,7 +181,6 @@ class CommandTester
      * Returns the task object
      *
      * @return Object
-     * @author Dan Cox
      */
     public function getTask()
     {

@@ -16,7 +16,6 @@ interface OutputInterface
      * The write function to simply write a string
      *
      * @return void
-     * @author Dan Cox
      */
     public function write($str);
 
@@ -24,7 +23,6 @@ interface OutputInterface
      * Write a line
      *
      * @return void
-     * @author Dan Cox
      */
     public function writeln($str);
 }

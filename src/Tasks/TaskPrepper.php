@@ -68,7 +68,6 @@ class TaskPrepper
      * Create class vars
      *
      * @return void
-     * @author Dan Cox
      */
     public function __construct($di)
     {
@@ -91,7 +90,6 @@ class TaskPrepper
      * Loads the command and creates a reflection entity for it.
      *
      * @return TaskPrepper
-     * @author Dan Cox
      */
     public function load($className)
     {
@@ -111,7 +109,6 @@ class TaskPrepper
      * Describes a task for the library
      *
      * @return Array
-     * @author Dan Cox
      */
     public function describe()
     {
@@ -155,7 +152,6 @@ class TaskPrepper
      * Looks for defined arguments and options and validates them
      *
      * @return void
-     * @author Dan Cox
      */
     public function prep($action = null)
     {
@@ -172,7 +168,6 @@ class TaskPrepper
      * Gets the setup method used by the task
      *
      * @return ReflectionMethod|NULL
-     * @author Dan Cox
      */
     public function getSetupMethod($action)
     {
@@ -191,7 +186,6 @@ class TaskPrepper
      * them to expected arguments in order to give them a key value
      *
      * @return void
-     * @author Dan Cox
      */
     public function sortParams()
     {
@@ -203,7 +197,6 @@ class TaskPrepper
      * Sorts out arguments into their correct orders
      *
      * @return void
-     * @author Dan Cox
      */
     public function sortArguments()
     {
@@ -226,7 +219,6 @@ class TaskPrepper
      * Sorts out options into correct orders
      *
      * @return void
-     * @author Dan Cox
      */
     public function sortOptions()
     {
@@ -249,7 +241,6 @@ class TaskPrepper
      * Loads params and splits them into arguments and options
      *
      * @return void
-     * @author Dan Cox
      */
     public function loadParams(array $params)
     {
@@ -271,7 +262,6 @@ class TaskPrepper
      * extracts the option value from an option, or boolean
      *
      * @return String|Boolean
-     * @author Dan Cox
      */
     public function extractOption($str)
     {

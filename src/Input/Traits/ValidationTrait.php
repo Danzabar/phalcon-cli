@@ -18,7 +18,6 @@ trait ValidationTrait
      * undocumented function
      *
      * @return void
-     * @author Dan Cox
      */
     public function validate($key, $value)
     {
@@ -52,7 +51,6 @@ trait ValidationTrait
      * Just so theres a method for it, returns the value in all cases
      *
      * @return Mixed
-     * @author Dan Cox
      */
     public function optional($value)
     {
@@ -63,7 +61,6 @@ trait ValidationTrait
      * Validation for required elements
      *
      * @return Mixed
-     * @author Dan Cox
      */
     public function required($value)
     {
@@ -78,7 +75,6 @@ trait ValidationTrait
      * Validation for options to specify that a value is required and not just flag
      *
      * @return Mixed
-     * @author Dan Cox
      */
     public function valueRequired($value)
     {
@@ -93,7 +89,6 @@ trait ValidationTrait
      * Checks that the string contains only alpha characters
      *
      * @return Mixed
-     * @author Dan Cox
      */
     public function alpha($value)
     {
@@ -108,7 +103,6 @@ trait ValidationTrait
      * Value can only be an int
      *
      * @return Mixed
-     * @author Dan Cox
      */
     public function int($value)
     {
