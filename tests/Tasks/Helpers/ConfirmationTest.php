@@ -46,6 +46,20 @@ class ConfirmationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that the confirmation help accepts lowercase answers
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_caseSensitive()
+    {
+        $this->CT->setInput("y\n");
+        $this->CT->execute('fake:confirmation');
+
+        $this->assertContains('Thanks for confirming', $this->CT->getOutput());
+    }
+
+    /**
      * Same as above, but we say no.
      *
      * @return void

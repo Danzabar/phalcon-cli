@@ -28,6 +28,13 @@ class Confirmation extends Helper
     protected $confirmNo = 'N';
 
     /**
+     * Specifies whether the answer should be case sensitive, Default false
+     *
+     * @var Boolean
+     */
+    protected $caseSensitive = false;
+
+    /**
      * The error message that returns in the explicit option is set
      * and the answer user gives does not match the confirm vars
      *
@@ -63,6 +70,10 @@ class Confirmation extends Helper
      */
     public function convertToBool($answer)
     {
+        if (!$this->caseSensitive) {
+            $answer = strtoupper($answer);
+        }
+
         // If it equals confirm yes
         if ($answer == $this->confirmYes) {
             return true;
@@ -103,6 +114,16 @@ class Confirmation extends Helper
     public function setConfirmExplicit($switch)
     {
         $this->explicit = $switch;
+    }
+
+    /**
+     * Sets whether the answer should be case sensitive
+     *
+     * @return void
+     */
+    public function setCaseSensitive($switch)
+    {
+        $this->caseSensitive = $switch;
     }
 
     /**

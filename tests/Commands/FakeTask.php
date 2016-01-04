@@ -174,6 +174,7 @@ class FakeTask extends Task
 
         $confirmation->setConfirmationNo('no');
         $confirmation->setConfirmationYes('yes');
+        $confirmation->setCaseSensitive(true);
         $confirmation->setConfirmExplicit(true);
 
         if (isset($this->argument->error)) {
