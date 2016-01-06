@@ -7,7 +7,7 @@ You can add color to your output with the `Danzabar\CLI\Format\Format` class, It
 
 To create a new format use the static `addFormat`:
 
-	Format::addStyle('name', Array('foreground' => 'black'));
+	Format::addFormat('name', Array('foreground' => 'black'));
 
 The above format can be used by wrapping your string in `<Name></Name>`, since there is no background specified this format will just make the text black. You use this along with the output class, so in your task you could output:
 
