@@ -2,6 +2,8 @@
 
 use Danzabar\CLI\Application;
 use Phalcon\Loader;
+use Phalcon\DI;
+use Phalcon\CLI\Dispatcher;
 use \Mockery as m;
 
 /**
@@ -178,5 +180,33 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Danzabar\CLI\Tasks\Helpers\Question', $helpers->load('question'));
         $this->assertInstanceOf('Danzabar\CLI\Tasks\Helpers\Confirmation', $helpers->load('confirm'));
         $this->assertInstanceOf('Danzabar\CLI\Tasks\Helpers\Table', $helpers->load('table'));
+    }
+
+    /**
+     * Test that the format args method in the application returns an empty array when an exception is thrown
+     *
+     * @return void
+     * @author Dan Cox
+     */
+    public function test_formatArgsReturnsEmptyOnException()
+    {
+        $library = m::mock('TaskLibrary');
+        $dispatch = m::mock('Dispatch');
+
+        $library->shouldReceive('add');
+        $library->shouldReceive('getAll')->andReturn([]);
+        $library->shouldReceive('find')->andThrow('Exception');
+
+        $dispatch->shouldReceive('setDefaultTask');
+        $dispatch->shouldReceive('setDefaultAction');
+        $dispatch->shouldReceive('setTaskSuffix');
+        $dispatch->shouldReceive('setActionSuffix');
+        $dispatch->shouldReceive('setDI');
+
+        $dispatch->shouldReceive('dispatch')->once();
+
+        $app = new Application(new DI, $dispatch, $library);
+
+        $app->start(['test', 'test']);
     }
 } // END class ApplicationTest extends \PHPUnit_Framework_TestCase
