@@ -38,7 +38,7 @@ class Format
      */
     public static function addFormat($name, array $details)
     {
-        static::$collection->add($name, $details);
+        static::$collection->add(strtolower($name), $details);
     }
 
     /**
