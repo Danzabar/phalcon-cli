@@ -73,7 +73,7 @@ class TaskLibrary
     public function get($task)
     {
         if (array_key_exists($task, $this->library)) {
-            return $this->library[$task];
+            return [$task => $this->library[$task]];
         }
 
         throw new Exceptions\CommandNotFoundException($task);
