@@ -3,6 +3,7 @@
 namespace Danzabar\CLI\Tasks\Utility;
 
 use Danzabar\CLI\Tasks\Task;
+use Danzabar\CLI\Input\InputArgument;
 
 /**
  * The Help task
