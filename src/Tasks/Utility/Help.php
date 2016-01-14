@@ -97,7 +97,7 @@ class Help extends Task
      *
      * @return void
      */
-    public function listCommands(Array $commands)
+    public function listCommands(array $commands)
     {
         foreach ($commands as $name => $details) {
             $this->output->writeln(ucwords($name));
