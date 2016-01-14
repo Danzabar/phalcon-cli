@@ -28,6 +28,16 @@ class Help extends Task
     protected $description = 'Returns a list of commands and helpful guide to running them.';
 
     /**
+     * Set up arguments and options for the main action
+     *
+     * @return void
+     */
+    public function setupMain()
+    {
+        $this->argument->addExpected('task', InputArgument::OPTIONAL);
+    }
+
+    /**
      * The main action
      *
      * @Action
@@ -41,8 +51,15 @@ class Help extends Task
         // Instructions
         $this->printApplicationInstructions();
 
-        // Command List
-        $this->listCommands();
+        if (!$this->argument->task) {
+
+            $this->listCommands($this->library->getAll());
+        } else {
+
+            $this->listCommands(
+                $this->library->get($this->argument->task)
+            );
+        }
     }
 
     /**
@@ -80,10 +97,8 @@ class Help extends Task
      *
      * @return void
      */
-    public function listCommands()
+    public function listCommands(Array $commands)
     {
-        $commands = $this->library->getAll();
-
         foreach ($commands as $name => $details) {
             $this->output->writeln(ucwords($name));
             $this->output->hr(strlen($details['description']), '-');

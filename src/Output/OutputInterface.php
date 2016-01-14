@@ -25,4 +25,11 @@ interface OutputInterface
      * @return void
      */
     public function writeln($str);
+
+    /**
+     * Reads the output stream
+     *
+     * @return String
+     */
+    public function read();
 }

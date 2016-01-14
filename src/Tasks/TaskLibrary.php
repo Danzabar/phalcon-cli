@@ -61,8 +61,22 @@ class TaskLibrary
             }
         }
 
-        // Not sure whether to throw an exception here?
         throw new Exceptions\CommandNotFoundException($name);
+    }
+
+    /**
+     * Returns the entry for a single task
+     *
+     * @param String $task - The task name
+     * @return Array
+     */
+    public function get($task)
+    {
+        if (array_key_exists($task, $this->library)) {
+            return $this->library[$task];
+        }
+
+        throw new Exceptions\CommandNotFoundException($task);
     }
 
     /**

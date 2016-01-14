@@ -65,7 +65,7 @@ class Output implements OutputInterface
     /**
      * Read the output
      *
-     * @return void
+     * @return String
      */
     public function read()
     {

@@ -38,7 +38,7 @@ class Input implements InputInterface
     /**
      * Create the stream
      *
-     * @return void
+     * @param String $source - The source of the input stream
      */
     public function __construct($source = 'php://stdin')
     {
@@ -48,6 +48,7 @@ class Input implements InputInterface
     /**
      * Mock an input string
      *
+     * @param String $str - The string to add to input
      * @return Input
      */
     public function mock($str)
@@ -61,7 +62,7 @@ class Input implements InputInterface
     /**
      * Read the input stream
      *
-     * @return void
+     * @return Boolean
      */
     public function read()
     {
@@ -73,7 +74,7 @@ class Input implements InputInterface
     /**
      * Returns the raw captured input
      *
-     * @return void
+     * @return String
      */
     public function getInput()
     {
